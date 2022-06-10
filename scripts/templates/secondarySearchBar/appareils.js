@@ -1,8 +1,23 @@
 class Appareils{
-    constructor(recipes){
+    constructor(recipes){    
         this.$wrapper = document.createElement('article')
-        this.$wrapper.setAttribute('id', 'appareils_search_bar') 
-        this._recipes = recipes   
+        this.$wrapper.setAttribute('id', 'appareils_search_bar')      
+        this.$recipes = document.getElementById('recipe_wrapper')
+        this._recipes = recipes  
+    }
+
+    handleAppareil() {
+        const recipes = this.$recipes.querySelectorAll('div[class = recipe_card]')
+        const input = this.$wrapper.querySelector('#input_appareils')
+        console.log(recipes);
+        console.log(this.$recipes);
+        input.addEventListener('keyup', e => {
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            if(elt.length >= 3) {
+                console.log(elt);        
+            }
+        })
+
     }
 
     
@@ -89,6 +104,7 @@ class Appareils{
                 
         });
 
+        that.handleAppareil()
         return that.$wrapper
     }
 

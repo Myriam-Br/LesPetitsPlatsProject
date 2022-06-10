@@ -2,10 +2,7 @@ class SecondarySearchBar{
     constructor(recipes){
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'secondary_search_bar')
-        
         this._recipes = recipes
-        //console.log(this._recipes);
-
     }
 
 

@@ -3,12 +3,38 @@ class Ingredients{
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'ingredients_search_bar')
         this.$recipe = document.getElementById('recipe_wrapper')
-        this.$main = document.getElementById('main')
-     
-        // console.log(this.$recipe);
-        // console.log(recipes);
         this._recipes  = recipes
    
+    }
+
+
+    handleIngredient() {
+        //console.log(this.$recipe);
+        const input = this.$wrapper.querySelector('#input_ingredients')
+        console.log(input);
+        input.addEventListener('keyup', e => {
+            if(input.value.length >= 3) {
+                console.log(e);
+                const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
+                const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
+                for(let i = 0; i < recipes.length; i++) {
+                    const ingredientsInRecipe = recipes[i].querySelector('ul').querySelectorAll('li')
+                    for(let j = 0; j < ingredientsInRecipe.length; j++ ){
+                     
+                        const ingredient =  ingredientsInRecipe[j].getAttribute('class')
+                        if(ingredient.includes(elt)) {  
+                            recipes[i].setAttribute('ingredientFilter', 'active')
+                            console.log(recipes[i]);
+                            break
+                        }else{
+                            recipes[i].removeAttribute('ingredientFilter')
+                        }
+                    }
+
+                }
+            }
+            
+        })
     }
 
     
@@ -32,8 +58,6 @@ class Ingredients{
             }     
         })
     }
-
-
     // add/remove ingredient to the sectionAddedIngredient 
     handleIngredientsAdded (id){
 
@@ -82,7 +106,6 @@ class Ingredients{
         })
     }
 
- 
     createSearchBar (){
         const that = this
         
@@ -156,7 +179,7 @@ class Ingredients{
         });
       
 
-         //that.handleIngredient()
+        that.handleIngredient()
         return that.$wrapper
     }
 
