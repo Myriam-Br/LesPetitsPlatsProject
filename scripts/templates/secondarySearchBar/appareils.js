@@ -1,7 +1,8 @@
 class Appareils{
-    constructor(){
+    constructor(recipes){
         this.$wrapper = document.createElement('article')
-        this.$wrapper.setAttribute('id', 'appareils_search_bar')    
+        this.$wrapper.setAttribute('id', 'appareils_search_bar') 
+        this._recipes = recipes   
     }
 
     
@@ -56,13 +57,37 @@ class Appareils{
         appareilsSection.setAttribute('class', 'list')
         appareilsSection.style.display = "none"
 
-
+        const appareilTab = []
+        for(let i = 0; i < this._recipes.length; i++) {
+            // console.log(this._recipes[i].ingredients);
+            let appliances = this._recipes[i].appliance     
+          //  console.log(appliances);
+            let appareilToLowerCase = appliances.toLowerCase()
+            let appareilSyntax = appareilToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            appareilTab.push(appareilSyntax)      
+        }
+        
+        that.$wrapper.appendChild(appareilsSection)
         that.$wrapper.appendChild(labelInputAppareils)
         that.$wrapper.appendChild(inputAppareils)
         that.$wrapper.appendChild(btnDropDown)
-        that.$wrapper.appendChild(appareilsSection)
+        
 
         that.dropDownSection()
+
+        let uniqueAppareilsTab = [...new Set(appareilTab)]
+        //console.log(uniqueIngredientTab);
+        uniqueAppareilsTab.forEach(element => {
+            //console.log(element);
+            const appareilItem = document.createElement('li')   
+            appareilItem.setAttribute('class', element)
+            appareilItem.setAttribute('id', element)        
+            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
+            appareilItem.innerHTML= elementSyntax  
+            appareilsSection.appendChild(appareilItem) 
+           // that.handleIngredients(element)   
+                
+        });
 
         return that.$wrapper
     }

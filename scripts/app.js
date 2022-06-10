@@ -28,7 +28,7 @@ class HomePage {
         //console.log(Recipes);
        this.$mainWrapper.appendChild(this.$wrapper)
 
-        const TemplateMainSearchBar = new MainSearchBar(RecipeTab)
+        const TemplateMainSearchBar = new MainSearchBar()
 
         const TemplateSecondarySearchBar = new SecondarySearchBar(RecipeTab)
 
@@ -49,7 +49,20 @@ class HomePage {
             )
         });
 
-        
+        console.log(document.querySelectorAll('input'));
+        const inputs = document.querySelectorAll('input')
+        inputs.forEach(input => {
+            console.log(input.value.length);
+            input.addEventListener('keyup', e => {
+                console.log(e);
+                if(input.value.length >= 3) {
+                    displayRecipes(this.$wrapper)
+                }  else {
+                    
+                }        
+            })    
+               
+        });       
     }
 }
 

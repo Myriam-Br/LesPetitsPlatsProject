@@ -4,6 +4,7 @@ class Ingredients{
         this.$wrapper.setAttribute('id', 'ingredients_search_bar')
         this.$recipe = document.getElementById('recipe_wrapper')
         this.$main = document.getElementById('main')
+     
         // console.log(this.$recipe);
         // console.log(recipes);
         this._recipes  = recipes
@@ -18,9 +19,6 @@ class Ingredients{
         const section = this.$wrapper.querySelector('.list')
         const icone = this.$wrapper.querySelector('i')
         el.addEventListener('click', () => {
-            //console.log('ingredients list');
-            //console.log(section.style);      
-            //console.log(section.getAttribute('opened'));
             if(section.getAttribute('opened')){
                 section.style.display='none'
                 section.removeAttribute('opened')  
@@ -37,7 +35,7 @@ class Ingredients{
 
 
     // add/remove ingredient to the sectionAddedIngredient 
-    handleIngredients (id){
+    handleIngredientsAdded (id){
 
     const sectionItemAdded = document.getElementById('items_added')
     const elt = this.$wrapper.querySelector('#ingredients_list').querySelector(`[id="${id}" ]`)
@@ -50,7 +48,6 @@ class Ingredients{
             if (elt.getAttribute('added')) {
                 elt.removeAttribute('added')
                 //console.log('removed',elt);
-
             }
             
             else{
@@ -75,8 +72,6 @@ class Ingredients{
                     elt.style.display='block'
 
                 })
-
-
                 // display none elt that has been added to sectionItemAdded 
                 elt.style.display='none'
      
@@ -87,63 +82,7 @@ class Ingredients{
         })
     }
 
-    searchIngredient() {
-  
-        const elt = this.$wrapper.querySelector('#input_ingredients')   
-        const recipeFromRecipeSection = this.$recipe.getElementsByClassName('recipe_card')
-        const ingredientFromRecipeSection = this.$recipe.getElementsByClassName('ingredient_recipe_list')
-       
-        elt.addEventListener('keyup', () => {
-
-            // console.log(elt.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
-            const ingredientSearched = elt.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-           // console.log(this.$recipe.querySelectorAll('[filter1=active]'));
-            for(let i = 0; i < recipeFromRecipeSection.length; i++ ) {
-          
-                const recipeCard = recipeFromRecipeSection[i] 
-                const ingredientsRecipe = recipeCard.querySelectorAll('ul')
-                
-                for(let j = 0; j < ingredientsRecipe.length; j++) {
-
-                    // get each ingredient of a recipe 
-                    const ingredientList = ingredientsRecipe[j].querySelectorAll('li')
-   
-                   
-                    // create new tab to use data
-                    const set = new Set(ingredientList)
-                    const array = Array.from(set)
-                    const compareIngredient = array.some(element => element.getAttribute('class').includes(ingredientSearched))
-                    //console.log(ingredientList);
-                      /*             
-                    if(ingredientSearched.length >=3) {
-
-                        if(compareIngredient) {
-                            //console.log(recipeCard);
-                            recipeCard.style.display = 'block'
-                            recipeCard.setAttribute('filter2', 'active')
-                            console.log(recipeCard);
-                            //console.log('true');
-                        }
-                        else{
-                            recipeCard.style.display = 'none'
-                            recipeCard.removeAttribute('filter2')
-                            //console.log(recipeCard);
-                            //console.log('false');
-                        }            
-                                      
-                    }
-                    else{
-                        recipeCard.style.display = 'block'
-                        recipeCard.removeAttribute('filter2')
-                       // console.log(recipeCard);
-                        //console.log('else');
-                    }*/
-                
-                }              
-            }
-        })
-    }
-
+ 
     createSearchBar (){
         const that = this
         
@@ -185,7 +124,7 @@ class Ingredients{
                 //console.log(ingredients[j]);
                 let ingredientsList = ingredients[j]
                 //console.log(ingredients[j]);
-                
+            
                 for (let k = 0; k < ingredientsList.length; k++) {
                     let ingredientToLowerCase = ingredientsList[k].ingredient.toLowerCase()
                     let ingredientSyntax = ingredientToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -212,13 +151,12 @@ class Ingredients{
             const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             ingredientItem.innerHTML= elementSyntax  
             ingredientsSection.appendChild(ingredientItem) 
-            that.handleIngredients(element)   
+            that.handleIngredientsAdded(element)   
               
         });
       
-          
-        that.searchIngredient()    
-                   
+
+         //that.handleIngredient()
         return that.$wrapper
     }
 

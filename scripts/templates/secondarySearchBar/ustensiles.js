@@ -1,7 +1,8 @@
 class Ustensiles{
-    constructor(){
+    constructor(recipes){
         this.$wrapper = document.createElement('article')
-        this.$wrapper.setAttribute('id', 'ustensiles_search_bar')    
+        this.$wrapper.setAttribute('id', 'ustensiles_search_bar') 
+        this._recipes = recipes   
     }
 
     dropDownSection() {
@@ -56,13 +57,41 @@ class Ustensiles{
         ustensilesSection.setAttribute('class', 'list')
         ustensilesSection.style.display = "none"
 
+        const ustensilsTab = []
+        for(let i = 0; i < this._recipes.length; i++) {
+            // console.log(this._recipes[i].ingredients);
+            let ustensils = this._recipes[i].ustensils      
+            for(let j = 0; j < ustensils.length; j ++ ) {
+              //  console.log(ustensils[j]);
+                let ustensilToLowerCase = ustensils[j].toLowerCase()
+                let ustensilSyntax = ustensilToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                ustensilsTab.push(ustensilSyntax)
+            }
+            
+        }
 
+        that.$wrapper.appendChild(ustensilesSection)
         that.$wrapper.appendChild(labelInputUstensiles)
         that.$wrapper.appendChild(inputUstensiles)
         that.$wrapper.appendChild(btnDropDown)
-        that.$wrapper.appendChild(ustensilesSection)
+        
 
         that.dropDownSection()
+
+        //retirer les doublons du tableau
+        let uniqueUstensilTab = [...new Set(ustensilsTab)]
+        //console.log(uniqueIngredientTab);
+        uniqueUstensilTab.forEach(element => {
+            //console.log(element);
+            const ustensiltItem = document.createElement('li')   
+            ustensiltItem.setAttribute('class', element)
+            ustensiltItem.setAttribute('id', element)        
+            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
+            ustensiltItem.innerHTML= elementSyntax  
+            ustensilesSection.appendChild(ustensiltItem) 
+           // that.handleIngredients(element)   
+                
+        });
 
         return that.$wrapper
     }
