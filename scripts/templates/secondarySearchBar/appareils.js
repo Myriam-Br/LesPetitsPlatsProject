@@ -2,19 +2,22 @@ class Appareils{
     constructor(recipes){    
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'appareils_search_bar')      
-        this.$recipes = document.getElementById('recipe_wrapper')
-        this._recipes = recipes  
+        this.$recipe = document.getElementById('recipe_wrapper')
+        this._recipes  = recipes
     }
 
     handleAppareil() {
-        const recipes = this.$recipes.querySelectorAll('div[class = recipe_card]')
+      
         const input = this.$wrapper.querySelector('#input_appareils')
-        console.log(recipes);
-        console.log(this.$recipes);
+        //console.log('LISTE RECETTE',this.$recipe);
+        //console.log(this.$recipe.querySelectorAll('.recipe_card'));
+        //console.log(document.querySelectorAll('.recipe_card'));
         input.addEventListener('keyup', e => {
+            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card]')
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+           // console.log(recipes);
             if(elt.length >= 3) {
-                console.log(elt);        
+                //console.log(elt);        
             }
         })
 

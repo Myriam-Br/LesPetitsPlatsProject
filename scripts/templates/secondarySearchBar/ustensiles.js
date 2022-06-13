@@ -2,7 +2,14 @@ class Ustensiles{
     constructor(recipes){
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'ustensiles_search_bar') 
-        this._recipes = recipes   
+        this.$recipe = document.getElementById('recipe_wrapper')
+        this._recipes  = recipes
+    }
+
+    handleUstensils() {
+        console.log(this.$recipe);
+        console.log(this.$recipe.querySelectorAll('div[class=recipe_card]'));
+        console.log(this.$recipe.querySelectorAll('.recipe_card'));
     }
 
     dropDownSection() {
@@ -93,6 +100,7 @@ class Ustensiles{
                 
         });
 
+        that.handleUstensils()
         return that.$wrapper
     }
 

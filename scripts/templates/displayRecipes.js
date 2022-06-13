@@ -6,7 +6,8 @@ const nameFilter = params.querySelectorAll('div[nameFilter = active]')
 const ingredientFilter = params.querySelectorAll('div[ingredientFilter = active]')
 console.log(ingredientFilter);
 console.log(nameFilter);
-// console.log(nameFilter);
+console.log(recipes);
+console.log(params);
     // filter through all the recipes
     for(let i = 0; i < recipes.length; i++) {
   

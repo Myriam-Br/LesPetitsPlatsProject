@@ -11,7 +11,7 @@ class Ingredients{
     handleIngredient() {
         //console.log(this.$recipe);
         const input = this.$wrapper.querySelector('#input_ingredients')
-        console.log(input);
+        //console.log(input);
         input.addEventListener('keyup', e => {
             if(input.value.length >= 3) {
                 console.log(e);
@@ -63,7 +63,6 @@ class Ingredients{
 
     const sectionItemAdded = document.getElementById('items_added')
     const elt = this.$wrapper.querySelector('#ingredients_list').querySelector(`[id="${id}" ]`)
-
 
         elt.addEventListener('click', () => {
            // console.log(elt);
@@ -174,10 +173,11 @@ class Ingredients{
             const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             ingredientItem.innerHTML= elementSyntax  
             ingredientsSection.appendChild(ingredientItem) 
-            that.handleIngredientsAdded(element)   
-              
+               
         });
       
+        //console.log(this.$recipe);
+        //console.log(this.$recipe.querySelectorAll('div[class=recipe_card]'));
 
         that.handleIngredient()
         return that.$wrapper

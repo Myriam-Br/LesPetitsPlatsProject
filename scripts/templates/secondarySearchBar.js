@@ -3,6 +3,7 @@ class SecondarySearchBar{
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'secondary_search_bar')
         this._recipes = recipes
+       // console.log(document.getElementById('recipe_wrapper'));
     }
 
 
