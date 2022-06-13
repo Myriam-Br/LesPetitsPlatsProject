@@ -7,9 +7,33 @@ class Ustensiles{
     }
 
     handleUstensils() {
-        console.log(this.$recipe);
-        console.log(this.$recipe.querySelectorAll('div[class=recipe_card]'));
-        console.log(this.$recipe.querySelectorAll('.recipe_card'));
+        const input = this.$wrapper.querySelector('#input_ustensiles')
+        
+       // console.log(input);      
+        input.addEventListener('keyup', e => {
+            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card]')
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+           // console.log(recipes);
+            if(elt.length >= 3) {
+                //console.log(elt); 
+                for(let i = 0; i < recipes.length; i++) {
+                   // console.log(recipes[i]. querySelector('.ustensil_list'));
+                    const ustensilList = recipes[i].querySelector('.ustensil_list').querySelectorAll('li')
+                    for(let j = 0; j < ustensilList.length; j++){
+                        console.log(ustensilList[j].innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+                        const ustensilItem = ustensilList[j].innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                        if(ustensilItem.includes(elt)){
+                            console.log(recipes[i]);
+                            recipes[i].setAttribute('ustensilFilter', 'active')
+                            break
+                        }else{
+                            recipes[i].removeAttribute('ustensilFilter')
+                        }
+                    }
+                }
+                  
+            }
+        })
     }
 
     dropDownSection() {

@@ -4,30 +4,38 @@ class Ingredients{
         this.$wrapper.setAttribute('id', 'ingredients_search_bar')
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-   
+        console.log(document.querySelectorAll('div[nameFilter = active]'));
+        this.$recipesActive = this.$recipe.querySelectorAll('div[nameFilter = active]')
     }
 
 
     handleIngredient() {
         //console.log(this.$recipe);
         const input = this.$wrapper.querySelector('#input_ingredients')
-        //console.log(input);
+        //console.log();
+        document.querySelector('#input_main_search_bar')
+        //console.log(document.querySelector('#input_main_search_bar').value);
+   
         input.addEventListener('keyup', e => {
+            const recipesActive = this.$recipe.querySelectorAll('div[nameFilter = active]')
+            console.log(recipesActive);
             if(input.value.length >= 3) {
-                console.log(e);
+                
+                //console.log(e);
                 const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
-                const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-                for(let i = 0; i < recipes.length; i++) {
-                    const ingredientsInRecipe = recipes[i].querySelector('ul').querySelectorAll('li')
+               // const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
+
+                for(let i = 0; i < recipesActive.length; i++) {
+                    const ingredientsInRecipe = recipesActive[i].querySelector('ul').querySelectorAll('li')
                     for(let j = 0; j < ingredientsInRecipe.length; j++ ){
-                     
+                        
                         const ingredient =  ingredientsInRecipe[j].getAttribute('class')
                         if(ingredient.includes(elt)) {  
-                            recipes[i].setAttribute('ingredientFilter', 'active')
-                            console.log(recipes[i]);
+                            recipesActive[i].setAttribute('ingredientFilter', 'active')
+                            //console.log(recipes[i]);
                             break
                         }else{
-                            recipes[i].removeAttribute('ingredientFilter')
+                            recipesActive[i].removeAttribute('ingredientFilter')
                         }
                     }
 
@@ -35,75 +43,15 @@ class Ingredients{
             }
             
         })
+     
+        
     }
 
     
     // drop down to display the ingredients list
-    dropDownSection() {
-       // console.log(this.$wrapper.querySelector('#drop_down_ingredients'));
-        const el = this.$wrapper.querySelector('.drop_down')
-        const section = this.$wrapper.querySelector('.list')
-        const icone = this.$wrapper.querySelector('i')
-        el.addEventListener('click', () => {
-            if(section.getAttribute('opened')){
-                section.style.display='none'
-                section.removeAttribute('opened')  
-                icone.removeAttribute('fa fa-chevron-up')
-                icone.setAttribute('class','fa fa-chevron-down')            
-            } else {
-                section.style.display='block'
-                section.setAttribute('opened', 'true')
-                icone.removeAttribute('fa fa-chevron-down')
-                icone.setAttribute('class','fa fa-chevron-up')
-            }     
-        })
-    }
+
     // add/remove ingredient to the sectionAddedIngredient 
-    handleIngredientsAdded (id){
 
-    const sectionItemAdded = document.getElementById('items_added')
-    const elt = this.$wrapper.querySelector('#ingredients_list').querySelector(`[id="${id}" ]`)
-
-        elt.addEventListener('click', () => {
-           // console.log(elt);
-
-            //set if elt is added or not
-            if (elt.getAttribute('added')) {
-                elt.removeAttribute('added')
-                //console.log('removed',elt);
-            }
-            
-            else{
-                //set added to true
-                elt.setAttribute('added', 'true')
-
-                // create eltHTML and add to item added section
-                    // create 'p'
-                let eltAddedDom = document.createElement('p')
-                eltAddedDom.setAttribute('class', elt.innerHTML.toLowerCase())
-                eltAddedDom.innerHTML = elt.innerHTML
-
-                    // create button
-                let btnDeleteElt = document.createElement('button')
-                btnDeleteElt.setAttribute('class', 'btn_delete_elt_added')
-                eltAddedDom.appendChild(btnDeleteElt)
-
-
-                // handle btnDeleteElt
-                btnDeleteElt.addEventListener('click', () => {  
-                    eltAddedDom.remove() 
-                    elt.style.display='block'
-
-                })
-                // display none elt that has been added to sectionItemAdded 
-                elt.style.display='none'
-     
-                // link eltAddedDom with sectionItemAdded
-                sectionItemAdded.appendChild(eltAddedDom)
-            }
-
-        })
-    }
 
     createSearchBar (){
         const that = this
@@ -131,6 +79,7 @@ class Ingredients{
         btnDropDown.appendChild(iconBtnDropDown)
    
 
+        /*
         // ingredients list
         const ingredientsSection = document.createElement('ul')
         ingredientsSection.setAttribute('id', 'ingredients_list')
@@ -139,6 +88,7 @@ class Ingredients{
 
         
        const ingredientsTab = []
+
         for(let i = 0; i < this._recipes.length; i++) {
             // console.log(this._recipes[i].ingredients);
             let ingredients = this._recipes[i].ingredients      
@@ -154,14 +104,15 @@ class Ingredients{
 
                 }        
             }
-        }
+        }*/
 
-        that.$wrapper.appendChild(ingredientsSection)
+        //that.$wrapper.appendChild(ingredientsSection)
         that.$wrapper.appendChild(labelInputIngredients)
         that.$wrapper.appendChild(inputIngredients)
         that.$wrapper.appendChild(btnDropDown)
-        that.dropDownSection()
-
+      
+       
+        /*
         //retirer les doublons du tableau
         let uniqueIngredientTab = [...new Set(ingredientsTab)]
         //console.log(uniqueIngredientTab);
@@ -174,7 +125,7 @@ class Ingredients{
             ingredientItem.innerHTML= elementSyntax  
             ingredientsSection.appendChild(ingredientItem) 
                
-        });
+        });*/
       
         //console.log(this.$recipe);
         //console.log(this.$recipe.querySelectorAll('div[class=recipe_card]'));

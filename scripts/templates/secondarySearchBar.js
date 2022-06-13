@@ -3,7 +3,6 @@ class SecondarySearchBar{
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'secondary_search_bar')
         this._recipes = recipes
-       // console.log(document.getElementById('recipe_wrapper'));
     }
 
 
@@ -11,6 +10,7 @@ class SecondarySearchBar{
     createSearchBar(){
         const that = this
       
+       
         const TemplateSearchIngredients = new Ingredients(this._recipes)
         const TemplateSearchAppareils = new Appareils(this._recipes)
         const TemplateSearchUstensiles= new Ustensiles(this._recipes)

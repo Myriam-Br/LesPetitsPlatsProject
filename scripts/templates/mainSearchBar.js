@@ -7,17 +7,17 @@ class MainSearchBar{
 
     handleRecipe(){
      
-        const recipes = this.$recipes.querySelectorAll('.recipe_card')
+       // const recipes = this.$recipes.querySelectorAll('.recipe_card')
         const input = this.$wrapper.querySelector('#input_main_search_bar')
 
-        console.log(recipes);
+      
         input.addEventListener('keyup', e => {
            
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            
+            const recipes = this.$recipes.querySelectorAll('div[class = recipe_card')
             if(elt.length >= 3) {
               
-               
+                 console.log(recipes);
                 for (let i = 0; i < recipes.length; i++) {
                    const recipeName = recipes[i].querySelector('.name_recipe').innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                    if(recipeName.includes(elt)){

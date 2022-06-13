@@ -17,22 +17,16 @@ class HomePage {
 
        
         const RecipeTab = recipesDataTab.map(recipe => {
-          // console.log(recipe);
-          // console.log(new Recipe(recipe));
            return new Recipe(recipe)
         });
   
 
-        //console.log(RecipeTab);
-       // const Recipes = new Recipe(recipesData)
-        //console.log(Recipes);
        this.$mainWrapper.appendChild(this.$wrapper)
 
         const TemplateMainSearchBar = new MainSearchBar()
-
         const TemplateSecondarySearchBar = new SecondarySearchBar(RecipeTab)
 
-      
+        console.log(TemplateSecondarySearchBar.$wrapper.querySelectorAll('article'));
         this.$mainWrapper.appendChild(
             TemplateMainSearchBar.createSearchBar()
         )
@@ -60,7 +54,24 @@ class HomePage {
                 }        
             })    
                
-        });       
+        });   
+        
+        const inputMain = document.querySelector('#input_main_search_bar')
+       // console.log(inputMain.value);
+        inputMain.addEventListener('keyup', e => {
+            //console.log(TemplateSecondarySearchBar.$wrapper.querySelectorAll('article'));
+            const secondaryInputs = TemplateSecondarySearchBar.$wrapper.querySelectorAll('article')
+            for (let i = 0; i < secondaryInputs.length; i++) {
+                //console.log(secondaryInputs[i].querySelector('button'));
+                if(inputMain.value.length >= 3) {
+                    dropDownList(this.$wrapper, secondaryInputs[i])
+                }else{
+                   // clearListContainer(secondaryInputs[i])
+                }
+            }
+        
+        } ) 
+       
     }
 }
 
