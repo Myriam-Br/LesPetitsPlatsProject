@@ -15,17 +15,12 @@ class HomePage {
        // console.log('DATA API', recipesData.recipes);
         const recipesDataTab = recipesData.recipes
 
-       
         const RecipeTab = recipesDataTab.map(recipe => {
           // console.log(recipe);
           // console.log(new Recipe(recipe));
            return new Recipe(recipe)
         });
   
-
-        //console.log(RecipeTab);
-       // const Recipes = new Recipe(recipesData)
-        //console.log(Recipes);
        this.$mainWrapper.appendChild(this.$wrapper)
 
         const TemplateMainSearchBar = new MainSearchBar()
@@ -48,21 +43,7 @@ class HomePage {
                 TemplateRecipe.createCard()
             )
         });
-
-        console.log(document.querySelectorAll('input'));
-        const inputs = document.querySelectorAll('input')
-        inputs.forEach(input => {
-            console.log(input.value.length);
-            input.addEventListener('keyup', e => {
-                console.log(e);
-                if(input.value.length >= 3) {
-                    displayRecipes(this.$wrapper)
-                }  else {
-                    
-                }        
-            })    
-               
-        });       
+  
     }
 }
 

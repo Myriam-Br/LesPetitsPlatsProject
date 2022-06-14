@@ -9,10 +9,11 @@ class Appareils{
     dropDownSection() {
        // console.log(this.$wrapper.querySelector('#drop_down_appareils'));
         const el = this.$wrapper.querySelector('#drop_down_appareils')
-        const section = this.$wrapper.querySelector('#appareils_list')
+        //const section = this.$wrapper.querySelector('#appareils_list')
        // console.log(this.$wrapper.querySelector('i'));
         const icone = this.$wrapper.querySelector('i')
         el.addEventListener('click', () => {
+            /*
             console.log(section.style);      
             console.log(section.getAttribute('opened'));
             if(section.getAttribute('opened')){
@@ -25,7 +26,7 @@ class Appareils{
                 section.setAttribute('opened', 'true')
                 icone.removeAttribute('fa fa-chevron-down')
                 icone.setAttribute('class','fa fa-chevron-up')
-            }     
+            }     */
         })
     }
 
@@ -51,43 +52,11 @@ class Appareils{
         btnDropDown.appendChild(iconBtnDropDown)
        
 
-        // ingredients list
-        const appareilsSection = document.createElement('ul')
-        appareilsSection.setAttribute('id', 'appareils_list')
-        appareilsSection.setAttribute('class', 'list')
-        appareilsSection.style.display = "none"
-
-        const appareilTab = []
-        for(let i = 0; i < this._recipes.length; i++) {
-            // console.log(this._recipes[i].ingredients);
-            let appliances = this._recipes[i].appliance     
-          //  console.log(appliances);
-            let appareilToLowerCase = appliances.toLowerCase()
-            let appareilSyntax = appareilToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            appareilTab.push(appareilSyntax)      
-        }
-        
-        that.$wrapper.appendChild(appareilsSection)
         that.$wrapper.appendChild(labelInputAppareils)
         that.$wrapper.appendChild(inputAppareils)
         that.$wrapper.appendChild(btnDropDown)
-        
 
         that.dropDownSection()
-
-        let uniqueAppareilsTab = [...new Set(appareilTab)]
-        //console.log(uniqueIngredientTab);
-        uniqueAppareilsTab.forEach(element => {
-            //console.log(element);
-            const appareilItem = document.createElement('li')   
-            appareilItem.setAttribute('class', element)
-            appareilItem.setAttribute('id', element)        
-            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
-            appareilItem.innerHTML= elementSyntax  
-            appareilsSection.appendChild(appareilItem) 
-           // that.handleIngredients(element)   
-                
-        });
 
         return that.$wrapper
     }

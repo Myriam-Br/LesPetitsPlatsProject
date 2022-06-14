@@ -8,10 +8,11 @@ class Ustensiles{
     dropDownSection() {
        // console.log(this.$wrapper.querySelector('#drop_down_ustensiles'));
         const el = this.$wrapper.querySelector('#drop_down_ustensiles')
-        const section = this.$wrapper.querySelector('#ustensiles_list')
+        //const section = this.$wrapper.querySelector('#ustensiles_list')
         const icone = this.$wrapper.querySelector('i')
         //console.log(this.$wrapper.querySelector('i'));
         el.addEventListener('click', () => {
+            /*
             console.log(section.style);      
             console.log(section.getAttribute('opened'));
             if(section.getAttribute('opened')){
@@ -25,7 +26,7 @@ class Ustensiles{
                 icone.removeAttribute('fa fa-chevron-down')
                 icone.setAttribute('class','fa fa-chevron-up')
                
-            }     
+            }     */
         })
     }
 
@@ -51,47 +52,14 @@ class Ustensiles{
         btnDropDown.appendChild(iconBtnDropDown)
         inputUstensiles.appendChild(btnDropDown)
 
-        // ingredients list
-        const ustensilesSection = document.createElement('ul')
-        ustensilesSection.setAttribute('id', 'ustensiles_list')
-        ustensilesSection.setAttribute('class', 'list')
-        ustensilesSection.style.display = "none"
-
-        const ustensilsTab = []
-        for(let i = 0; i < this._recipes.length; i++) {
-            // console.log(this._recipes[i].ingredients);
-            let ustensils = this._recipes[i].ustensils      
-            for(let j = 0; j < ustensils.length; j ++ ) {
-              //  console.log(ustensils[j]);
-                let ustensilToLowerCase = ustensils[j].toLowerCase()
-                let ustensilSyntax = ustensilToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                ustensilsTab.push(ustensilSyntax)
-            }
-            
-        }
-
-        that.$wrapper.appendChild(ustensilesSection)
+      
         that.$wrapper.appendChild(labelInputUstensiles)
         that.$wrapper.appendChild(inputUstensiles)
         that.$wrapper.appendChild(btnDropDown)
-        
 
         that.dropDownSection()
 
-        //retirer les doublons du tableau
-        let uniqueUstensilTab = [...new Set(ustensilsTab)]
-        //console.log(uniqueIngredientTab);
-        uniqueUstensilTab.forEach(element => {
-            //console.log(element);
-            const ustensiltItem = document.createElement('li')   
-            ustensiltItem.setAttribute('class', element)
-            ustensiltItem.setAttribute('id', element)        
-            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
-            ustensiltItem.innerHTML= elementSyntax  
-            ustensilesSection.appendChild(ustensiltItem) 
-           // that.handleIngredients(element)   
-                
-        });
+      
 
         return that.$wrapper
     }
