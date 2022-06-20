@@ -76,8 +76,10 @@ class RecipeCard{
         const ustensilList = document.createElement('ul')
         ustensilList.setAttribute('class', 'ustensil_list')
         this._recipe.ustensils.forEach(elt => {
+           // console.log(elt);
             const ustensilsRecipe = document.createElement('li')
-            ustensilsRecipe.setAttribute('class', 'ustensil_recipe')
+            const syntaxUstensilClassName = elt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            ustensilsRecipe.setAttribute('class', syntaxUstensilClassName)
             ustensilsRecipe.innerHTML = elt
             ustensilList.appendChild(ustensilsRecipe)
         })
@@ -85,7 +87,8 @@ class RecipeCard{
         // HANDLE APPAREIL LIST (DISPLAY NONE)
        //console.log(this._recipe.appliance);
        const applianceRecipe = document.createElement('h4')
-       applianceRecipe.setAttribute('class', 'appliance_recipe')
+       const syntaxApplianceClassName = this._recipe.appliance.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+       applianceRecipe.setAttribute('class', 'appliance_recipe' + ' ' + syntaxApplianceClassName)
        applianceRecipe.innerHTML = this._recipe.appliance
 
 

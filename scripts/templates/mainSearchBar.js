@@ -3,44 +3,39 @@ class MainSearchBar{
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'main_search_bar')
         this.$recipes = document.getElementById('recipe_wrapper')
+        
     }
 
     handleRecipe(){
      
        // const recipes = this.$recipes.querySelectorAll('.recipe_card')
         const input = this.$wrapper.querySelector('#input_main_search_bar')
+       
 
-      
-        input.addEventListener('keyup', e => {
-           
+        input.addEventListener('keyup', e => {   
+            const recipes = this.$recipes.querySelectorAll('div[class = recipe_card')  
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            const recipes = this.$recipes.querySelectorAll('div[class = recipe_card')
-            if(elt.length >= 3) {
-              
-                 console.log(recipes);
+            if(elt.length >= 3) {    
+                 //console.log(recipes);
                 for (let i = 0; i < recipes.length; i++) {
                    const recipeName = recipes[i].querySelector('.name_recipe').innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                    if(recipeName.includes(elt)){
                     recipes[i].setAttribute('nameFilter', 'active')    
-                    console.log(recipes[i]);
                    }
                    else{          
                     recipes[i].removeAttribute('nameFilter')
-                    
                    }
                 }
             }
             else{
-                console.log('cleared/tooshort');
-               // recipes[i].removeAttribute('nameFilter')
+                const attributeName = 'nameFilter'
+                removeAttributeFromRecipe(this.$recipes, attributeName)                
             }
+           
             
         })
 }
 
-
-
-  
 
     createSearchBar () {
 

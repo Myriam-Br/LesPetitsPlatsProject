@@ -48,14 +48,20 @@ class HomePage {
         inputs.forEach(input => {
             input.addEventListener('keyup', e => {
                 if(input.value.length >= 3) {
-                    displayRecipes(this.$wrapper)
-                }  else {
-                    
+                    displayRecipes(this.$wrapper, input)
+                }  
+                else {
+                    console.log('cleared');
+                    displayAllRecipes(this.$wrapper, input)
                 }        
-            })    
-               
+            })               
         });   
+
+
+        //function display recipe click tag
         
+
+        //HANDLE INPUT DROPDOWN
         const inputMain = document.querySelector('#input_main_search_bar')
        // console.log(inputMain.value);
         inputMain.addEventListener('keyup', e => {

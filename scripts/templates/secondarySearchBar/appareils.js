@@ -17,40 +17,23 @@ class Appareils{
             if(elt.length >= 3) {
                 console.log(elt); 
                 for(let i = 0; i < recipes.length; i++) {
+                   
                     const applianceRecipe = recipes[i].querySelector('.appliance_recipe').innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    console.log(applianceRecipe);
                     if(applianceRecipe.includes(elt)){
+                        console.log(recipes[i]);
                         recipes[i].setAttribute('applianceFilter', 'active')
                     }else{
                         recipes[i].removeAttribute('applianceFilter')
                     }
                 }       
             }
+            else{
+                const attributeName = 'applianceFilter'
+                removeAttributeFromRecipe(recipes, attributeName) 
+            }
         })
 
-    }
-
-    
-    dropDownSection() {
-       // console.log(this.$wrapper.querySelector('#drop_down_appareils'));
-        const el = this.$wrapper.querySelector('#drop_down_appareils')
-        const section = this.$wrapper.querySelector('#appareils_list')
-       // console.log(this.$wrapper.querySelector('i'));
-        const icone = this.$wrapper.querySelector('i')
-        el.addEventListener('click', () => {
-            console.log(section.style);      
-            console.log(section.getAttribute('opened'));
-            if(section.getAttribute('opened')){
-                section.style.display='none'
-                section.removeAttribute('opened')      
-                icone.removeAttribute('fa fa-chevron-up')
-                icone.setAttribute('class','fa fa-chevron-down')    
-            } else {
-                section.style.display='block'
-                section.setAttribute('opened', 'true')
-                icone.removeAttribute('fa fa-chevron-down')
-                icone.setAttribute('class','fa fa-chevron-up')
-            }     
-        })
     }
 
     createSearchBar (){
@@ -96,9 +79,6 @@ class Appareils{
         that.$wrapper.appendChild(inputAppareils)
         that.$wrapper.appendChild(btnDropDown)
         
-
-        that.dropDownSection()
-
         let uniqueAppareilsTab = [...new Set(appareilTab)]
         //console.log(uniqueIngredientTab);
         uniqueAppareilsTab.forEach(element => {
@@ -114,6 +94,7 @@ class Appareils{
         });
 
         that.handleAppareil()
+        dropDownList(btnDropDown, iconBtnDropDown,appareilsSection)
         return that.$wrapper
     }
 

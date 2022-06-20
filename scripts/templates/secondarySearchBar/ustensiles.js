@@ -7,56 +7,30 @@ class Ustensiles{
     }
 
     handleUstensils() {
-        const input = this.$wrapper.querySelector('#input_ustensiles')
-        
-       // console.log(input);      
+        const input = this.$wrapper.querySelector('#input_ustensiles')      
         input.addEventListener('keyup', e => {
-            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card]')
-            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-           // console.log(recipes);
+            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
             if(elt.length >= 3) {
-                //console.log(elt); 
                 for(let i = 0; i < recipes.length; i++) {
-                   // console.log(recipes[i]. querySelector('.ustensil_list'));
                     const ustensilList = recipes[i].querySelector('.ustensil_list').querySelectorAll('li')
-                    for(let j = 0; j < ustensilList.length; j++){
-                        console.log(ustensilList[j].innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
-                        const ustensilItem = ustensilList[j].innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                        if(ustensilItem.includes(elt)){
-                            console.log(recipes[i]);
+                    console.log(ustensilList);
+                   for(let j = 0; j < ustensilList.length; j++) {
+                    let ustensil = ustensilList[j].getAttribute('class')
+                        if(ustensil.includes(elt)) {
                             recipes[i].setAttribute('ustensilFilter', 'active')
                             break
-                        }else{
+                        }
+                        else{
                             recipes[i].removeAttribute('ustensilFilter')
                         }
-                    }
-                }
-                  
+                   }
+                }              
             }
-        })
-    }
-
-    dropDownSection() {
-       // console.log(this.$wrapper.querySelector('#drop_down_ustensiles'));
-        const el = this.$wrapper.querySelector('#drop_down_ustensiles')
-        const section = this.$wrapper.querySelector('#ustensiles_list')
-        const icone = this.$wrapper.querySelector('i')
-        //console.log(this.$wrapper.querySelector('i'));
-        el.addEventListener('click', () => {
-            console.log(section.style);      
-            console.log(section.getAttribute('opened'));
-            if(section.getAttribute('opened')){
-                section.style.display='none'
-                section.removeAttribute('opened')    
-                icone.removeAttribute('fa fa-chevron-up')
-                icone.setAttribute('class','fa fa-chevron-down')        
-            } else {
-                section.style.display='block'
-                section.setAttribute('opened', 'true')
-                icone.removeAttribute('fa fa-chevron-down')
-                icone.setAttribute('class','fa fa-chevron-up')
-               
-            }     
+            else{
+                const attributeName = 'ustensilFilter'
+                removeAttributeFromRecipe(this.$recipe, attributeName) 
+            }
         })
     }
 
@@ -105,13 +79,9 @@ class Ustensiles{
         that.$wrapper.appendChild(labelInputUstensiles)
         that.$wrapper.appendChild(inputUstensiles)
         that.$wrapper.appendChild(btnDropDown)
-        
-
-        that.dropDownSection()
 
         //retirer les doublons du tableau
         let uniqueUstensilTab = [...new Set(ustensilsTab)]
-        //console.log(uniqueIngredientTab);
         uniqueUstensilTab.forEach(element => {
             //console.log(element);
             const ustensiltItem = document.createElement('li')   
@@ -125,6 +95,7 @@ class Ustensiles{
         });
 
         that.handleUstensils()
+        dropDownList(btnDropDown, iconBtnDropDown,ustensilesSection)
         return that.$wrapper
     }
 

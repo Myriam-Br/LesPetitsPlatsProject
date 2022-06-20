@@ -144,7 +144,7 @@ input:focus{
     height: 300px;
     position: absolute;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     z-index: 6;
     height: fit-content; 
     margin-top: 42px;  

@@ -4,53 +4,47 @@ class Ingredients{
         this.$wrapper.setAttribute('id', 'ingredients_search_bar')
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-        console.log(document.querySelectorAll('div[nameFilter = active]'));
-        this.$recipesActive = this.$recipe.querySelectorAll('div[nameFilter = active]')
+        this.$tagContainer = document.getElementById('items_added')
     }
 
-
-    handleIngredient() {
-        //console.log(this.$recipe);
+    handleIngredient(ingredientsSection) {
         const input = this.$wrapper.querySelector('#input_ingredients')
-        //console.log();
-        document.querySelector('#input_main_search_bar')
-        //console.log(document.querySelector('#input_main_search_bar').value);
-   
         input.addEventListener('keyup', e => {
-            const recipesActive = this.$recipe.querySelectorAll('div[nameFilter = active]')
-            console.log(recipesActive);
-            if(input.value.length >= 3) {
-                
-                //console.log(e);
-                const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
-               // const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-
-                for(let i = 0; i < recipesActive.length; i++) {
-                    const ingredientsInRecipe = recipesActive[i].querySelector('ul').querySelectorAll('li')
-                    for(let j = 0; j < ingredientsInRecipe.length; j++ ){
-                        
-                        const ingredient =  ingredientsInRecipe[j].getAttribute('class')
-                        if(ingredient.includes(elt)) {  
-                            recipesActive[i].setAttribute('ingredientFilter', 'active')
-                            //console.log(recipes[i]);
+            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
+            const listIngredient = ingredientsSection.querySelectorAll('li')
+            if(elt.length >= 3) {            
+                for(let i = 0; i < recipes.length; i++) {
+                    const ingredientList = recipes[i].querySelector('.ingredient_recipe_list').querySelectorAll('li')
+                   for(let j = 0; j < ingredientList.length; j++) {
+                    let ingredient = ingredientList[j].getAttribute('class')
+                        if(ingredient.includes(elt)) {
+                            recipes[i].setAttribute('ingredientFilter', 'active')
                             break
-                        }else{
-                            recipesActive[i].removeAttribute('ingredientFilter')
                         }
-                    }
-
+                        else{
+                            recipes[i].removeAttribute('ingredientFilter')
+                            
+                        }
+                   }
                 }
+                handleDisplayItemList(elt, listIngredient)
             }
-            
+            else{
+                const attributeName = 'ingredientFilter'
+                removeAttributeFromRecipe(this.$recipe, attributeName) 
+                
+                displayAllIItemList(listIngredient)
+            } 
+         
         })
-     
+
         
+
+
+        handleTag(this.$recipe, this.$tagContainer, ingredientsSection)    
+
     }
-
-    
-    // drop down to display the ingredients list
-
-    // add/remove ingredient to the sectionAddedIngredient 
 
 
     createSearchBar (){
@@ -79,7 +73,7 @@ class Ingredients{
         btnDropDown.appendChild(iconBtnDropDown)
    
 
-        /*
+        
         // ingredients list
         const ingredientsSection = document.createElement('ul')
         ingredientsSection.setAttribute('id', 'ingredients_list')
@@ -104,20 +98,19 @@ class Ingredients{
 
                 }        
             }
-        }*/
+        }
 
-        //that.$wrapper.appendChild(ingredientsSection)
+        that.$wrapper.appendChild(ingredientsSection)
         that.$wrapper.appendChild(labelInputIngredients)
         that.$wrapper.appendChild(inputIngredients)
         that.$wrapper.appendChild(btnDropDown)
-      
+        
        
-        /*
+       
         //retirer les doublons du tableau
         let uniqueIngredientTab = [...new Set(ingredientsTab)]
         //console.log(uniqueIngredientTab);
         uniqueIngredientTab.forEach(element => {
-            //console.log(element);
             const ingredientItem = document.createElement('li')   
             ingredientItem.setAttribute('class', element)
             ingredientItem.setAttribute('id', element)        
@@ -125,12 +118,13 @@ class Ingredients{
             ingredientItem.innerHTML= elementSyntax  
             ingredientsSection.appendChild(ingredientItem) 
                
-        });*/
+        });
       
         //console.log(this.$recipe);
         //console.log(this.$recipe.querySelectorAll('div[class=recipe_card]'));
-
-        that.handleIngredient()
+       
+        that.handleIngredient(ingredientsSection)
+        dropDownList(btnDropDown, iconBtnDropDown,ingredientsSection, this.$tagContainer, this.$recipe)
         return that.$wrapper
     }
 
