@@ -6,7 +6,7 @@ class Appareils{
         this._recipes  = recipes
     }
 
-    handleAppareil() {
+    handleAppareil(button, icone, list) {
       
         const input = this.$wrapper.querySelector('#input_appareils')
         input.addEventListener('keyup', e => {
@@ -34,7 +34,19 @@ class Appareils{
             }
         })
 
+        input.addEventListener('click', e => {
+            input.value = ' ' 
+            list.style.display = "block"
+            dropDownList(button, icone, list)
+        })
     }
+
+    handleDropDown(button, icone, list) {
+        button.addEventListener('click', e => {
+            dropDownList(button, icone, list)
+        })
+    }
+
 
     createSearchBar (){
         const that = this
@@ -93,8 +105,9 @@ class Appareils{
                 
         });
 
-        that.handleAppareil()
-        dropDownList(btnDropDown, iconBtnDropDown,appareilsSection)
+
+        that.handleAppareil(btnDropDown, iconBtnDropDown, appareilsSection)
+        that.handleDropDown(btnDropDown, iconBtnDropDown,appareilsSection)
         return that.$wrapper
     }
 

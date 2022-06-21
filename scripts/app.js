@@ -48,35 +48,19 @@ class HomePage {
         inputs.forEach(input => {
             input.addEventListener('keyup', e => {
                 if(input.value.length >= 3) {
-                    displayRecipes(this.$wrapper, input)
+                    displayRecipes(this.$wrapper)
                 }  
                 else {
                     console.log('cleared');
-                    displayAllRecipes(this.$wrapper, input)
+                    displayAllRecipes(this.$wrapper)
                 }        
-            })               
+            })  
+            
         });   
 
 
         //function display recipe click tag
         
-
-        //HANDLE INPUT DROPDOWN
-        const inputMain = document.querySelector('#input_main_search_bar')
-       // console.log(inputMain.value);
-        inputMain.addEventListener('keyup', e => {
-            //console.log(TemplateSecondarySearchBar.$wrapper.querySelectorAll('article'));
-            const secondaryInputs = TemplateSecondarySearchBar.$wrapper.querySelectorAll('article')
-            for (let i = 0; i < secondaryInputs.length; i++) {
-                //console.log(secondaryInputs[i].querySelector('button'));
-                if(inputMain.value.length >= 3) {
-                    dropDownList(this.$wrapper, secondaryInputs[i])
-                }else{
-                   // clearListContainer(secondaryInputs[i])
-                }
-            }
-        
-        } ) 
        
     }
 }

@@ -5,7 +5,6 @@ const nameFilter = recipe.querySelectorAll('div[nameFilter = active]')
 const ingredientFilter = recipe.querySelectorAll('div[ingredientFilter = active]')
 const applianceFilter = recipe.querySelectorAll('div[applianceFilter = active]')
 const ustensilFitler =  recipe.querySelectorAll('div[ustensilFilter = active]')
-const ingredientsList = document.getElementById('ingredients_list').querySelectorAll('li')
     // check filtre actif 
     var nombreFiltreActif = 0
     if(nameFilter.length > 0) {
@@ -32,11 +31,9 @@ const ingredientsList = document.getElementById('ingredients_list').querySelecto
         if(recipes[i].getAttribute('nameFilter') ==='active') {
             ////console.log('NAME FILTER:',recipes[i]);
             recipes[i].style.display = 'block' 
-            nombreFiltreActiveRecette ++    
-            test(recipes[i].querySelector('.ingredient_recipe_list'), ingredientsList)  
-          
-            
-        }else{
+            nombreFiltreActiveRecette ++          
+        }
+        else{
             recipes[i].style.display = 'none'
         }
     
@@ -47,7 +44,8 @@ const ingredientsList = document.getElementById('ingredients_list').querySelecto
             nombreFiltreActiveRecette ++
             //test(recipes[i])
             
-        }else{
+        }
+        else{
             recipes[i].style.display = 'none'
         }
        
@@ -57,7 +55,8 @@ const ingredientsList = document.getElementById('ingredients_list').querySelecto
             recipes[i].style.display = 'block'
             nombreFiltreActiveRecette ++
             
-        }else{
+        }
+        else{
             recipes[i].style.display = 'none'
         } 
 
@@ -67,7 +66,8 @@ const ingredientsList = document.getElementById('ingredients_list').querySelecto
             recipes[i].style.display = 'block'
             nombreFiltreActiveRecette ++
             
-        }else{
+        }
+        else{
             recipes[i].style.display = 'none'
         }
   
@@ -75,7 +75,6 @@ const ingredientsList = document.getElementById('ingredients_list').querySelecto
 
         ///// CAS MULTIFILTRE
         //compare filter active site and filter active recipe
-
         if(nombreFiltreActiveRecette) {
             ////console.log(nombreFiltreActif);
             if(nombreFiltreActiveRecette === nombreFiltreActif) {
@@ -92,7 +91,8 @@ const ingredientsList = document.getElementById('ingredients_list').querySelecto
 
 
 function displayAllRecipes(recipe) {
-    const recipeList = recipe.querySelectorAll('.recipe_card')
+    console.log(recipe);
+    const recipeList = recipe.querySelectorAll('div[class = recipe_card]')
     const nameFilter = recipe.querySelectorAll('div[nameFilter = active]')
     const ingredientFilter = recipe.querySelectorAll('div[ingredientFilter = active]')
     const applianceFilter = recipe.querySelectorAll('div[applianceFilter = active]')
@@ -113,7 +113,6 @@ function displayAllRecipes(recipe) {
         nombreFiltreActif ++
     }
 
-   
     for(let i = 0; i < recipeList.length; i++) {
         ////console.log(recipeList[i]);
         //check filters
@@ -137,17 +136,24 @@ function displayAllRecipes(recipe) {
         }
 
         if(nombreFiltreActiveRecette === nombreFiltreActif) {
-            recipeList[i]. style.display = 'block'
-        } else{
-            recipeList[i]. style.display = 'none'
+            recipeList[i].style.display = 'block'
+            //console.log(recipeList[i]);
+        }
+        else{
+          
+            recipeList[i].style.display = 'none'
+            //console.log(recipeList[i]);
+           // console.log(nombreFiltreActif);
+           // console.log(recipeList[i],nombreFiltreActif);
+           // console.log(ingredientFilter);
         }
         
     }
 }
 
-
 //remove attribute when input cleared
 function removeAttributeFromRecipe(recipe, attribute) {
+    console.log(recipe);
     let recipes = recipe.querySelectorAll(`div[${attribute} = active]`)
     for (let i = 0; i < recipes.length; i++) {
         if(recipes[i].getAttribute(`${attribute}`)) {
@@ -158,64 +164,29 @@ function removeAttributeFromRecipe(recipe, attribute) {
     }
 }
 
-function handleDisplayItemList(input, list) {
-
-    for(let i = 0; i < list.length; i++) {
-        //console.log(list[i].getAttribute('class'));
+function handleItemList(input, list) {
+    for(let i = 0; i < list.length; i++) { 
         const item = list[i].getAttribute('class')
         if(item.includes(input)) {
-            console.log(item);
             list[i].style.display = 'block'
+            //break
         } else{
             list[i].style.display = 'none'
-        }
+        }          
     }
 }
 
-function displayAllIItemList(list) {
+function displayFullItemList(list) {
     for(let i = 0; i < list.length; i++) {
-     console.log(list[i]);
      list[i].style.display = 'block'
     }
 }
 
-function test(recipe, listIng) {
-    //console.log(recipe.querySelectorAll('li'));
-   
-    recipe = recipe.querySelectorAll('li')
-    //console.log(recipe);
-
-    for(let i = 0; i < recipe.length; i++) {
-      // console.log(recipe[i].getAttribute('class'));    
-       for(let j = 0; j < listIng.length; j++){
-            //console.log(listIng[j].getAttribute('class'));
-            if(recipe[i].getAttribute('class') === listIng[j].getAttribute('class') ) {
-               console.log(listIng[j]);
-               listIng[j].setAttribute('show', 'true') 
-               break   
-            }          
-            else{
-                console.log('HERE');
-                listIng[j].removeAttribute('show') 
-            }
-            display(listIng)
-        } 
+function handleDisplayListItem(itemsFromRecipe, itemsFromList) {
+    for(let i = 0; i < itemsFromRecipe.length; i++) {
+        handleItemList(itemsFromRecipe[i].getAttribute('class'), itemsFromList.querySelectorAll('li') )
     }
 }
 
 
-function display(list){
-    for(let j = 0; j < list.length; j++){
-        if(list[j].getAttribute('show'))  {
-            list[j].style.display = 'block'
-        }    
-        else{
-           // list[j].style.display = 'none'
-        }  
-    }
-}
-
-function onclickItem(param) {
-    //console.log(param);
-}
 

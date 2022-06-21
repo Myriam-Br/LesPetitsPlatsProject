@@ -7,12 +7,14 @@ class Ingredients{
         this.$tagContainer = document.getElementById('items_added')
     }
 
-    handleIngredient(ingredientsSection) {
+
+    handleIngredient(button, icone, list) {
+        //console.log(list.querySelectorAll('li'));
         const input = this.$wrapper.querySelector('#input_ingredients')
         input.addEventListener('keyup', e => {
             const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
-            const listIngredient = ingredientsSection.querySelectorAll('li')
+            const listIngredient = list.querySelectorAll('li')
             if(elt.length >= 3) {            
                 for(let i = 0; i < recipes.length; i++) {
                     const ingredientList = recipes[i].querySelector('.ingredient_recipe_list').querySelectorAll('li')
@@ -20,30 +22,41 @@ class Ingredients{
                     let ingredient = ingredientList[j].getAttribute('class')
                         if(ingredient.includes(elt)) {
                             recipes[i].setAttribute('ingredientFilter', 'active')
+                            
                             break
                         }
                         else{
-                            recipes[i].removeAttribute('ingredientFilter')
-                            
+                            recipes[i].removeAttribute('ingredientFilter')                    
                         }
                    }
                 }
-                handleDisplayItemList(elt, listIngredient)
+                handleItemList(elt, listIngredient)
             }
             else{
                 const attributeName = 'ingredientFilter'
-                removeAttributeFromRecipe(this.$recipe, attributeName) 
-                
-                displayAllIItemList(listIngredient)
+                removeAttributeFromRecipe(this.$recipe, attributeName)    
+                displayFullItemList(listIngredient)
             } 
          
         })
 
-        
+
+        input.addEventListener('click', e => {
+            const attributeName = 'ingredientFilter'
+            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
+            const ingredientContainer = document.getElementById('ingredients_list').querySelectorAll('li')
+            input.value = ' ' 
+            list.style.display = "block"
+            dropDownList(button, icone, list)
+            handleTag(recipes, this.$tagContainer, ingredientContainer, attributeName, this.$recipe)
+        })
+    }
 
 
-        handleTag(this.$recipe, this.$tagContainer, ingredientsSection)    
-
+    handleDropDown(button, icone, list) {
+        button.addEventListener('click', e => {
+            dropDownList(button, icone, list)
+        })
     }
 
 
@@ -105,8 +118,7 @@ class Ingredients{
         that.$wrapper.appendChild(inputIngredients)
         that.$wrapper.appendChild(btnDropDown)
         
-       
-       
+    
         //retirer les doublons du tableau
         let uniqueIngredientTab = [...new Set(ingredientsTab)]
         //console.log(uniqueIngredientTab);
@@ -119,12 +131,10 @@ class Ingredients{
             ingredientsSection.appendChild(ingredientItem) 
                
         });
-      
-        //console.log(this.$recipe);
-        //console.log(this.$recipe.querySelectorAll('div[class=recipe_card]'));
+    
        
-        that.handleIngredient(ingredientsSection)
-        dropDownList(btnDropDown, iconBtnDropDown,ingredientsSection, this.$tagContainer, this.$recipe)
+        that.handleIngredient(btnDropDown, iconBtnDropDown, ingredientsSection)
+        that.handleDropDown(btnDropDown, iconBtnDropDown,ingredientsSection)
         return that.$wrapper
     }
 

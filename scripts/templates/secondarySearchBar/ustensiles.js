@@ -6,7 +6,7 @@ class Ustensiles{
         this._recipes  = recipes
     }
 
-    handleUstensils() {
+    handleUstensils(button, icone, list) {
         const input = this.$wrapper.querySelector('#input_ustensiles')      
         input.addEventListener('keyup', e => {
             const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
@@ -31,6 +31,19 @@ class Ustensiles{
                 const attributeName = 'ustensilFilter'
                 removeAttributeFromRecipe(this.$recipe, attributeName) 
             }
+        })
+
+
+        input.addEventListener('click', e => {
+            input.value = ' ' 
+            list.style.display = "block"
+            dropDownList(button, icone, list)
+        })
+    }
+
+    handleDropDown(button, icone, list) {
+        button.addEventListener('click', e => {
+            dropDownList(button, icone, list)
         })
     }
 
@@ -94,8 +107,9 @@ class Ustensiles{
                 
         });
 
-        that.handleUstensils()
-        dropDownList(btnDropDown, iconBtnDropDown,ustensilesSection)
+    
+        that.handleUstensils(btnDropDown, iconBtnDropDown, ustensilesSection)
+        that.handleDropDown(btnDropDown, iconBtnDropDown, ustensilesSection)
         return that.$wrapper
     }
 
