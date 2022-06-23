@@ -5,8 +5,7 @@ class HomePage {
         this.$wrapper = document.createElement('div')
         this.$wrapper.setAttribute('id', 'recipe_wrapper')
         this.$sectionItemAdded = document.createElement('div')  
-        this.$sectionItemAdded.setAttribute('id', 'items_added')
-       // console.log(new Recipe());
+        this.$sectionItemAdded.setAttribute('id', 'items_added') 
     }
 
     async main () {

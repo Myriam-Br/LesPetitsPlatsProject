@@ -4,13 +4,16 @@ class Ustensiles{
         this.$wrapper.setAttribute('id', 'ustensiles_search_bar') 
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
+        this.$tagContainer = document.getElementById('items_added')
     }
 
     handleUstensils(button, icone, list) {
         const input = this.$wrapper.querySelector('#input_ustensiles')      
         input.addEventListener('keyup', e => {
             const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+            const listUstensiles = list.querySelectorAll('li')
+            console.log(listUstensiles); 
             if(elt.length >= 3) {
                 for(let i = 0; i < recipes.length; i++) {
                     const ustensilList = recipes[i].querySelector('.ustensil_list').querySelectorAll('li')
@@ -25,7 +28,8 @@ class Ustensiles{
                             recipes[i].removeAttribute('ustensilFilter')
                         }
                    }
-                }              
+                } 
+               handleItemList(elt, listUstensiles)        
             }
             else{
                 const attributeName = 'ustensilFilter'
@@ -37,13 +41,27 @@ class Ustensiles{
         input.addEventListener('click', e => {
             input.value = ' ' 
             list.style.display = "block"
-            dropDownList(button, icone, list)
+            dropDownList(button, icone, list)        
         })
+
+        //HANDLE TAGS ON CLICK
+        for(let i = 0; i < list.querySelectorAll('li').length; i++) {
+        let tag = list.querySelectorAll('li')[i]  
+        tag.addEventListener('click', e => {
+            const attributeName = 'ustensilFilter'
+            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
+            createHTMLTag(this.$tagContainer, list, tag, this.$recipe)
+            for(let i = 0; i < recipes.length; i++) {
+                handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.ustensil_list'), attributeName, this.$recipe)
+            } 
+            displayRecipes(this.$recipe)       
+        })
+    }
     }
 
     handleDropDown(button, icone, list) {
         button.addEventListener('click', e => {
-            dropDownList(button, icone, list)
+            dropDownList(button, icone, list)      
         })
     }
 

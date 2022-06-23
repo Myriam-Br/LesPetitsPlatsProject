@@ -5,8 +5,8 @@ function dropDownList(button, icone, list) {
             icone.removeAttribute('class')
             icone.setAttribute('class', 'fa fa-chevron-down' )
             list.style.display = 'none'
-           
-        }else{
+        }
+        else{
             button.setAttribute('open', 'true')
             icone.removeAttribute('class')
             icone.setAttribute('class', 'fa fa-chevron-up' )
@@ -18,99 +18,61 @@ function dropDownList(button, icone, list) {
 }
 
 
-function handleTag(recipe, container, list, attribute, recipeWrapper) {
-   // console.log(recipeWrapper);
-    for(let i = 0; i < list.length; i++) {
-        list[i].addEventListener('click', e => {
-            //console.log(list[i].getAttribute('class'));
-            for(let j = 0; j < recipe.length; j++) {
-                //console.log(recipe[j].querySelector('.ingredient_recipe_list').querySelectorAll('li'));
-                let ingredientInRecipe = recipe[j].querySelector('.ingredient_recipe_list').querySelectorAll('li')
-                for(let k = 0; k < ingredientInRecipe.length; k++) {
-                   // console.log(ingredientInRecipe[k].getAttribute('class'));
-                    if(list[i].getAttribute('class') === ingredientInRecipe[k].getAttribute('class')) {            
-                        recipe[j].setAttribute(attribute, 'active')
-                        test(recipe[j])
-                        createHTMLTag(recipe, container, list[i],recipeWrapper, attribute)
-                        displayRecipes(recipeWrapper)   
-                        break               
-                    }else{
-                        recipe[j].removeAttribute(attribute)                    
-                    }
-                }
-            }
-        })
-
-       
-    }
-  
-}
-
-
-function createHTMLTag(recipe, container, listItem, recipeWrapper, attribute) {
-    console.log(recipe);
-    console.log(attribute);
-   // console.log(recipe.querySelectorAll(`div[${attribute} = active]`));
-    //create tag html
-    for(let x = 0; x < recipe.length; x++){
-        
-        if(recipe[x].getAttribute(attribute)) {
-            console.log(recipe[x]);
-        }
-    }
+function createHTMLTag(container, list, tag, recipesAll) {
+ 
     let createTagHtml = document.createElement('p')
-    createTagHtml.setAttribute('class', listItem.getAttribute('class'))
-    createTagHtml.innerHTML = listItem.getAttribute('class')
+    createTagHtml.setAttribute('class', tag.getAttribute('id'))
+    createTagHtml.innerHTML = tag.getAttribute('id')
     //create button tag
     let createTagButton = document.createElement('button')
     createTagButton.setAttribute('class', 'tag_button')
     createTagButton.innerHTML = 'x' 
     createTagHtml.appendChild(createTagButton)
+
+    //verifier si existe deja
     container.appendChild(createTagHtml) 
-   
-   
+
+    
+
 
     //check if tag already exist          
     for(let i = 0; i < container.querySelectorAll('p').length; i++) {
-       // console.log(container.querySelectorAll('p')[i].getAttribute('class'));
         if(container.querySelectorAll('p')[i].getAttribute('class') === createTagHtml.getAttribute('class')) {
-            console.log('exist');
+            container.querySelectorAll('p')[i].setAttribute('match', 'true')
+            tag.style.display = 'none'
+            break
         }else{
+            container.querySelectorAll('p')[i].removeAttribute('match')
+            tag.style.display = 'none'
         }
     }
+   
 
-    //set attribute and delete element from list if exist in tag container
-    for(let j = 0; j < container.querySelectorAll('p').length; j++) {     
-        if(container.querySelectorAll('p')[j].getAttribute('class') === listItem.getAttribute('class')) {      
-            listItem.style.display = 'none'
-            listItem.setAttribute('show', 'false')
+}
+
+
+function handleOnClickTag(tag, recipe, recipeElement, attribute, recipesAll) {
+    let recipeElementTab = recipeElement.querySelectorAll('li') 
+   
+    if(recipeElementTab.length > 0) {
+        for(let i = 0; i < recipeElementTab.length; i++) {
+            if(recipeElementTab[i].getAttribute('class') === tag.getAttribute('id')) {      
+                recipe.setAttribute(attribute, 'active')
+                break         
+            }else{
+               recipe.removeAttribute(attribute)
+            }
+        }
+    }else{
+        recipeElement = recipeElement.innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        if(recipeElement === tag.getAttribute('id')) {      
+            recipe.setAttribute(attribute, 'active')        
+        }else{
+           recipe.removeAttribute(attribute)
         }
     }
-
-    //delete tag from container and show element in list
-    if(listItem.getAttribute('show')) {
-        createTagButton.addEventListener('click', e => {
-            listItem.style.display = 'block'
-            listItem.removeAttribute('show')
-            createTagHtml.remove()  
-            if(container.querySelectorAll('p').length === 0) {
-                console.log('empty');
-                displayAllRecipes(recipeWrapper)
-                removeAttributeFromRecipe(recipeWrapper, attribute)
-            }     
-        })
-    }
-
-  
-
-    //console.log(attribute, recipeWrapper);
-
    
 }
 
-function test(params) {
-    //console.log(params);
-    console.log(params.querySelector('.ingredient_recipe_list').querySelectorAll('li'));
-    
-}
+
 
