@@ -62,7 +62,8 @@ class RecipeCard{
             //create li for each ingredients (+unit and qt)
             const ingredientsListItem = document.createElement('li')
             const syntaxIngredientClassName = elt.ingredient.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            ingredientsListItem.setAttribute('class', syntaxIngredientClassName)
+            ingredientsListItem.setAttribute('name', syntaxIngredientClassName)
+            ingredientsListItem.setAttribute('class', 'ingredient')
             ingredientsListItem.innerHTML = elt.ingredient  + elt.quantity + elt.unit
             ingredientsList.appendChild(ingredientsListItem)          
         });

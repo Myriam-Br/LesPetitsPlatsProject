@@ -4,7 +4,7 @@ class HomePage {
         this.recipesApi = new RecipesListApi('scripts/data.json')
         this.$wrapper = document.createElement('div')
         this.$wrapper.setAttribute('id', 'recipe_wrapper')
-        this.$sectionItemAdded = document.createElement('div')  
+        this.$sectionItemAdded = document.createElement('ul')  
         this.$sectionItemAdded.setAttribute('id', 'items_added') 
     }
 

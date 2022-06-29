@@ -22,18 +22,13 @@ class MainSearchBar{
                 for (let i = 0; i < recipes.length; i++) {
                    const recipeName = recipes[i].querySelector('.name_recipe').innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                    if(recipeName.includes(elt)){
-                    recipes[i].setAttribute('nameFilter', 'active')
-                    let ingredientInRecipe = recipes[i].querySelector('.ingredient_recipe_list').querySelectorAll('li')
-                    handleDisplayListItem(ingredientInRecipe, ingredientList)    
-                   
+                    recipes[i].setAttribute('nameFilter', 'active')  
                    }
                    else{          
                     recipes[i].removeAttribute('nameFilter')
                    
                    }
-                }
-
-              
+                }  
             }
             else{
                 const attributeName = 'nameFilter'

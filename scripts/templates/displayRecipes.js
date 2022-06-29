@@ -88,7 +88,6 @@ const ustensilFitler =  recipe.querySelectorAll('div[ustensilFilter = active]')
     
 }
 
-
 function displayAllRecipes(recipe) {
     console.log(recipe);
     const recipeList = recipe.querySelectorAll('div[class = recipe_card]')
@@ -139,17 +138,12 @@ function displayAllRecipes(recipe) {
         else{
           
             recipeList[i].style.display = 'none'
-        }
-        
+        }    
     }
-
-
-    //gestion display list item
 }
 
 //remove attribute when input cleared
 function removeAttributeFromRecipe(recipe, attribute) {
-    console.log(recipe);
     let recipes = recipe.querySelectorAll(`div[${attribute} = active]`)
     for (let i = 0; i < recipes.length; i++) {
         if(recipes[i].getAttribute(`${attribute}`)) {
@@ -161,104 +155,7 @@ function removeAttributeFromRecipe(recipe, attribute) {
 }
 
 
-function handleItemList(input, list) {
-    for(let i = 0; i < list.length; i++) { 
-        const item = list[i].getAttribute('class')
-        if(item.includes(input)) {
-            list[i].style.display = 'block'
-            //break
-        } else{
-            //list[i].style.display = 'none'
-        }          
-    }
-}
 
-function displayFullItemList(list) {
-    for(let i = 0; i < list.length; i++) {
-     list[i].style.display = 'block'
-    }
-}
 
-function handleDisplayListItem(itemsFromRecipe, itemsFromList) {
-    for(let i = 0; i < itemsFromRecipe.length; i++) {
-        handleItemList(itemsFromRecipe[i].getAttribute('class'), itemsFromList.querySelectorAll('li') )
-    }
-}
 
-//gestion affichage item
-function demo(recipe) {
-    console.log(recipe);
-    const listIngredient = document.getElementById('ingredients_list').querySelectorAll('li')
-    const list = recipe.querySelector('.ingredient_recipe_list').querySelectorAll('li')
-    let match = false
-  //  let idMatch = j
-    for(let i = 0; i < listIngredient.length; i++) {
-        match = false
-        for(let j = 0; j < list.length; j++) {
-          
-
-            if(list[j].getAttribute('class') === listIngredient[i].getAttribute('id')) {
-                //listIngredient[j].style.display = 'block'
-                match = true         
-                //break
-            }       
-            else{
-              // listIngredient[j].style.display='none'
-               match = false
-            }           
-        }
-        if(!match) {
-            listIngredient[i].style.display = 'none'
-        }
-        else{
-            listIngredient[i].style.display = 'block'
-        }
-        
-    }
-}
-
-function setAttribute(recipes, tag) {
-    tag = tag.getAttribute('id')
-    for(let i = 0; i < recipes.querySelectorAll('ul[class=ingredient_recipe_list]').length; i++) {
-        const ingredientTab = recipes.querySelectorAll('ul[class=ingredient_recipe_list]')[i].querySelectorAll('li')
-        for(let j = 0; j < ingredientTab.length; j++) {
-            const ingredient = ingredientTab[j]
-            if(tag === ingredient.getAttribute('class')) {
-                ingredient.setAttribute('selected', 'active')   
-            }
-        }
-    }
-    
- 
-}
-
-function getAttribute(recipes, recipesList, tag, attribute, container) {
-    tag = tag.getAttribute('id')
-    console.log(container.querySelectorAll('p'));
-    for(let i = 0; i < recipesList.length; i++) {
-        var filterActif = 0
-        const ingredientTab = recipesList[i].querySelector('.ingredient_recipe_list').querySelectorAll('li')
-        for(let j = 0; j < ingredientTab.length; j++) {    
-            if(ingredientTab[j].getAttribute('selected')) {
-                filterActif++               
-            }                
-        }
-      
-        // check if recipe filter = recipe active page
-        if(filterActif === container.querySelectorAll('p').length) {
-            recipesList[i].setAttribute(attribute, 'active')
-        }
-        else{
-           recipesList[i].removeAttribute(attribute)
-        }
-
-       
-    }  
-
-    test(recipes)
-}
-
-function test(recipes) {
-    console.log(recipes);
-}
 

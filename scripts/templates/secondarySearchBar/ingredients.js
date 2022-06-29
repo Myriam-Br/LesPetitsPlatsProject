@@ -10,65 +10,41 @@ class Ingredients{
 
     handleIngredient(button, icone, list) {
         //console.log(list.querySelectorAll('li'));
+       
         const input = this.$wrapper.querySelector('#input_ingredients')
+
         input.addEventListener('keyup', e => {
-            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-         
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
-            const listIngredient = list.querySelectorAll('li')
-            if(elt.length >= 3) {            
-                for(let i = 0; i < recipes.length; i++) {
-                    const ingredientList = recipes[i].querySelector('.ingredient_recipe_list').querySelectorAll('li')
-                 
-                   for(let j = 0; j < ingredientList.length; j++) {
-                    let ingredient = ingredientList[j].getAttribute('class')
-                        if(ingredient.includes(elt)) {
-                            recipes[i].setAttribute('ingredientFilter', 'active')
-                            
-                            break
-                        }
-                        else{
-                            recipes[i].removeAttribute('ingredientFilter')                    
-                        }
-                   }
-                }
-                handleItemList(elt, listIngredient)
+            if(elt.length >= 3) {   
+                handleAttributeIngredientInput(this.$recipe, elt)
             }
             else{
                 const attributeName = 'ingredientFilter'
-                removeAttributeFromRecipe(this.$recipe, attributeName)    
-                displayFullItemList(listIngredient)
-            } 
-         
+                removeAttributeFromRecipe(this.$recipe, attributeName)
+            }     
         })
 
-
-        input.addEventListener('click', e => {
+        input.addEventListener('click', e => { 
             input.value = ' ' 
             list.style.display = "block"
             dropDownList(button, icone, list)         
         })
 
-
-        //HANDLE TAGS ON CLICK
+        //HANDLE TAGS ON CLICK 
+        //create tag for each element selected from list 
+        const attributeName = 'ingredientFilter'
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
-                const attributeName = 'ingredientFilter'
-                const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-                
-                createHTMLTag(this.$tagContainer, list, tag, this.$recipe)  
-               
-                setAttribute(this.$recipe, tag)
-                getAttribute(this.$recipe, recipes, tag, attributeName, this.$tagContainer)
-               
-                /*
-                for(let i = 0; i < recipes.length; i++) {
-                    handleOnClickTag( tag,recipes[i], recipes[i].querySelector('.ingredient_recipe_list'), attributeName, this.$recipe)
-                } */
-                displayRecipes(this.$recipe)   
-            })
-        }
+                createHTMLTag(this.$tagContainer,tag)   
+                handleAttributeIngredientTag(this.$recipe,tag, this.$tagContainer)   
+                handleAttributeRecipe(this.$recipe, this.$tagContainer) 
+                displayRecipes(this.$recipe)    
+            })  
+            
+            
+        } 
+     
     }
 
 
@@ -78,6 +54,7 @@ class Ingredients{
         })
     }
 
+ 
 
     createSearchBar (){
         const that = this
@@ -143,8 +120,8 @@ class Ingredients{
         //console.log(uniqueIngredientTab);
         uniqueIngredientTab.forEach(element => {
             const ingredientItem = document.createElement('li')   
-            ingredientItem.setAttribute('class', element)
-            ingredientItem.setAttribute('id', element)        
+            ingredientItem.setAttribute('name', element)
+            ingredientItem.setAttribute('class', 'ingredient_from_list')  
             const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             ingredientItem.innerHTML= elementSyntax  
             ingredientsSection.appendChild(ingredientItem) 
@@ -152,8 +129,9 @@ class Ingredients{
         });
     
        
-       that.handleIngredient(btnDropDown, iconBtnDropDown, ingredientsSection)
+        that.handleIngredient(btnDropDown, iconBtnDropDown, ingredientsSection)
         that.handleDropDown(btnDropDown, iconBtnDropDown,ingredientsSection)
+        
         return that.$wrapper
     }
 

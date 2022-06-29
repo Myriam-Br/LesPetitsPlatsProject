@@ -46,15 +46,15 @@ class Appareils{
             tag.addEventListener('click', e => {
                 const attributeName = 'applianceFilter'
                 const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-                createHTMLTag(this.$tagContainer, list, tag, this.$recipe)
-              
+                createHTMLTag(this.$tagContainer, list, tag, this.$recipe)        
                 for(let i = 0; i < recipes.length; i++) {
                     //console.log(recipes[i].querySelector('.appliance_recipe'));        
-                    handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.appliance_recipe'), attributeName, this.$recipe) 
+                   // handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.appliance_recipe'), attributeName, this.$recipe) 
                 }
-                displayRecipes(this.$recipe)   
-                
+                displayRecipes(this.$recipe)             
             })
+
+            
 
         }
     }

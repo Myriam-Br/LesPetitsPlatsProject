@@ -52,7 +52,7 @@ class Ustensiles{
             const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
             createHTMLTag(this.$tagContainer, list, tag, this.$recipe)
             for(let i = 0; i < recipes.length; i++) {
-                handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.ustensil_list'), attributeName, this.$recipe)
+               // handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.ustensil_list'), attributeName, this.$recipe)
             } 
             displayRecipes(this.$recipe)       
         })
