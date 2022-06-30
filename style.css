@@ -113,10 +113,12 @@ input:focus{
 #secondary_search_bar button i{
     color: white;
 }
-#items_added{
-   background-color: rgb(207, 255, 215);
-   height: 100px;
-   margin: 0px 20px;
+#tags_container{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(207, 255, 215);
+    height: 100px;
+    margin: 0px 20px;
 }
 #input_ingredients{
     background-color: rgb(50, 139, 255);

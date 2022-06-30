@@ -4,8 +4,14 @@ class HomePage {
         this.recipesApi = new RecipesListApi('scripts/data.json')
         this.$wrapper = document.createElement('div')
         this.$wrapper.setAttribute('id', 'recipe_wrapper')
-        this.$sectionItemAdded = document.createElement('ul')  
-        this.$sectionItemAdded.setAttribute('id', 'items_added') 
+        this.$tagContainer = document.createElement('article') 
+        this.$tagContainer.setAttribute('id','tags_container') 
+        this.$ingredientTags = document.createElement('ul')  
+        this.$ingredientTags.setAttribute('id', 'ingredients_added') 
+        this.$ustensilTags = document.createElement('ul')  
+        this.$ustensilTags.setAttribute('id', 'ustensils_added') 
+        this.$tagContainer.appendChild(this.$ingredientTags)
+        this.$tagContainer.appendChild(this.$ustensilTags)
     }
 
     async main () {
@@ -29,7 +35,7 @@ class HomePage {
         this.$mainWrapper.appendChild(
             TemplateMainSearchBar.createSearchBar()
         )
-        this.$mainWrapper.appendChild(this.$sectionItemAdded)
+        this.$mainWrapper.appendChild(this.$tagContainer)
         
         this.$mainWrapper.appendChild(
             TemplateSecondarySearchBar.createSearchBar()

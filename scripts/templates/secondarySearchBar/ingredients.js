@@ -4,7 +4,7 @@ class Ingredients{
         this.$wrapper.setAttribute('id', 'ingredients_search_bar')
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-        this.$tagContainer = document.getElementById('items_added')
+        this.$tagContainerIngredients = document.getElementById('ingredients_added')
     }
 
 
@@ -12,7 +12,6 @@ class Ingredients{
         //console.log(list.querySelectorAll('li'));
        
         const input = this.$wrapper.querySelector('#input_ingredients')
-
         input.addEventListener('keyup', e => {
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
             if(elt.length >= 3) {   
@@ -32,13 +31,12 @@ class Ingredients{
 
         //HANDLE TAGS ON CLICK 
         //create tag for each element selected from list 
-        const attributeName = 'ingredientFilter'
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
-                createHTMLTag(this.$tagContainer,tag)   
-                handleAttributeIngredientTag(this.$recipe,tag, this.$tagContainer)   
-                handleAttributeRecipe(this.$recipe, this.$tagContainer) 
+                createHTMLTag(this.$tagContainerIngredients, tag)   
+                handleAttributeIngredientTag(this.$recipe, tag, this.$tagContainerIngredients)   
+                handleAttributeRecipe(this.$recipe, this.$tagContainerIngredients) 
                 displayRecipes(this.$recipe)    
             })  
             
@@ -60,7 +58,6 @@ class Ingredients{
         const that = this
         
         // CREATE INGREDIENTS SEARCH BAR DOM
-
         // input
         const labelInputIngredients = document.createElement('label')
         labelInputIngredients.setAttribute('for', 'input_ingredients')

@@ -80,7 +80,8 @@ class RecipeCard{
            // console.log(elt);
             const ustensilsRecipe = document.createElement('li')
             const syntaxUstensilClassName = elt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            ustensilsRecipe.setAttribute('class', syntaxUstensilClassName)
+            ustensilsRecipe.setAttribute('name', syntaxUstensilClassName)
+            ustensilsRecipe.setAttribute('class', 'ustensil')
             ustensilsRecipe.innerHTML = elt
             ustensilList.appendChild(ustensilsRecipe)
         })

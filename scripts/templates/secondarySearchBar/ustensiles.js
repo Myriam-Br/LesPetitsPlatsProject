@@ -4,7 +4,7 @@ class Ustensiles{
         this.$wrapper.setAttribute('id', 'ustensiles_search_bar') 
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-        this.$tagContainer = document.getElementById('items_added')
+        this.$tagContainerUstensils = document.getElementById('ustensils_added')
     }
 
     handleUstensils(button, icone, list) {
@@ -13,27 +13,11 @@ class Ustensiles{
             const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
             const listUstensiles = list.querySelectorAll('li')
-            console.log(listUstensiles); 
-            if(elt.length >= 3) {
-                for(let i = 0; i < recipes.length; i++) {
-                    const ustensilList = recipes[i].querySelector('.ustensil_list').querySelectorAll('li')
-                    console.log(ustensilList);
-                   for(let j = 0; j < ustensilList.length; j++) {
-                    let ustensil = ustensilList[j].getAttribute('class')
-                        if(ustensil.includes(elt)) {
-                            recipes[i].setAttribute('ustensilFilter', 'active')
-                            break
-                        }
-                        else{
-                            recipes[i].removeAttribute('ustensilFilter')
-                        }
-                   }
-                } 
-               handleItemList(elt, listUstensiles)        
+            if(elt.length >= 3) {     
             }
             else{
                 const attributeName = 'ustensilFilter'
-                removeAttributeFromRecipe(this.$recipe, attributeName) 
+                //removeAttributeFromRecipe(this.$recipe, attributeName) 
             }
         })
 
@@ -45,19 +29,18 @@ class Ustensiles{
         })
 
         //HANDLE TAGS ON CLICK
+        //create tag for each element selected from list 
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
-        let tag = list.querySelectorAll('li')[i]  
-        tag.addEventListener('click', e => {
-            const attributeName = 'ustensilFilter'
-            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-            createHTMLTag(this.$tagContainer, list, tag, this.$recipe)
-            for(let i = 0; i < recipes.length; i++) {
-               // handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.ustensil_list'), attributeName, this.$recipe)
-            } 
-            displayRecipes(this.$recipe)       
-        })
+            let tag = list.querySelectorAll('li')[i]  
+            tag.addEventListener('click', e => {
+                createHTMLTag(this.$tagContainerUstensils,tag)   
+                handleAttributeUstensilTag(this.$recipe,tag, this.$tagContainerUstensils)
+                handleAttributeRecipeU(this.$recipe, this.$tagContainerUstensils)
+                displayRecipes(this.$recipe)    
+            })          
+        } 
     }
-    }
+
 
     handleDropDown(button, icone, list) {
         button.addEventListener('click', e => {
@@ -116,8 +99,8 @@ class Ustensiles{
         uniqueUstensilTab.forEach(element => {
             //console.log(element);
             const ustensiltItem = document.createElement('li')   
-            ustensiltItem.setAttribute('class', element)
-            ustensiltItem.setAttribute('id', element)        
+            ustensiltItem.setAttribute('class', 'ustensils_from_list')
+            ustensiltItem.setAttribute('name', element)        
             const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             ustensiltItem.innerHTML= elementSyntax  
             ustensilesSection.appendChild(ustensiltItem) 

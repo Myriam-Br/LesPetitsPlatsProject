@@ -47,33 +47,39 @@ function createHTMLTag(container, tag) {
 
 }
 
-//FUNCTION SET/REMOVE ATTRIBUTE INGREDIENT TAG
+
+
+
+////////////////////////INGREDIENTS///////////////////////////////
+//FUNCTION SET/REMOVE ATTRIBUTE TAG
 function handleAttributeIngredientTag(recipes, tag, container) {
     const ingredientsTab = recipes.querySelectorAll('li[class=ingredient]')
     for(let i = 0; i < ingredientsTab.length; i++) {
         let ingredient = ingredientsTab[i]    
         if(tag.getAttribute('name') === ingredient.getAttribute('name')) {
             ingredient.setAttribute('ingredient','selected')        
-        }    
+        }  
     }
    
     const ingredientsSelectedTab = recipes.querySelectorAll('li[ingredient=selected]')
     for(let j = 0; j < container.querySelectorAll('li').length; j++) {
         let getTag = container.querySelectorAll('li')[j]
         let btn_close_tag = getTag.querySelector('button')
+          
         btn_close_tag.addEventListener('click', e => {
-            console.log(ingredientsSelectedTab);
             for(let k = 0; k < ingredientsSelectedTab.length; k++) {
                 let ingredient = ingredientsSelectedTab[k]
                 if(getTag.getAttribute('name') === ingredient.getAttribute('name')) {
                     ingredient.removeAttribute('ingredient')
                 }      
             }
+            handleAttributeRecipe(recipes, container) 
+            displayRecipes(recipes)   
         })
-    }      
+    }  
 }
 
-// FUNCTION HANDLE ATTRIBUTE INGREDIENT INPUT
+// FUNCTION HANDLE ATTRIBUTE INPUT
 function handleAttributeIngredientInput(recipes, input) {
     recipes = recipes.querySelectorAll('div[class=recipe_card]')
     for(let i = 0; i < recipes.length; i++) {
@@ -92,15 +98,17 @@ function handleAttributeIngredientInput(recipes, input) {
     }
 }
 
-//FUNCTION SET/REMOVE ATTRIBUTE RECIPE
+
+
+//FUNCTION SET/REMOVE ATTRIBUTE RECIPE -> check all filters than setAttribute or remove
 function handleAttributeRecipe(recipes, container) {
     var numberOfFilters = container.querySelectorAll('li').length
     //check number of filters per recipe in ingredient list
     for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
         const recipe = recipes.querySelectorAll('div[class=recipe_card]')[i]
         const ingredientList = recipe.querySelector('.ingredient_recipe_list').querySelectorAll('li')
-       
         var numberFilterRecipe = 0 
+
         for(let j = 0; j < ingredientList.length; j++) {  
             let ingredient = ingredientList[j]
             if(ingredient.getAttribute('ingredient')==='selected') {
@@ -108,17 +116,97 @@ function handleAttributeRecipe(recipes, container) {
             }      
         }
 
+        //if filters active in recipe = filter active -> set attribute
         if(numberFilterRecipe === numberOfFilters) {
             recipe.setAttribute('ingredientFilter','active')     
         }else{
             recipe.removeAttribute('ingredientFilter')
         }
+
     }
 }
 
 
 
 
+
+
+
+////////////////////////USTENSILS///////////////////////////////
+//FUNCTION SET/REMOVE ATTRIBUTE TAG
+function handleAttributeUstensilTag(recipes, tag, container) {
+    const ustensileTab = recipes.querySelectorAll('li[class=ustensil]')
+    for(let i = 0; i < ustensileTab.length; i++) {
+        let ustensil = ustensileTab[i]    
+        if(tag.getAttribute('name') === ustensil.getAttribute('name')) {
+            ustensil.setAttribute('ustensil','selected')        
+        }  
+    }
+   
+    const ustensilSelectedTab = recipes.querySelectorAll('li[ustensil=selected]')
+    for(let j = 0; j < container.querySelectorAll('li').length; j++) {
+        let getTag = container.querySelectorAll('li')[j]
+        let btn_close_tag = getTag.querySelector('button')
+          
+        btn_close_tag.addEventListener('click', e => {
+            for(let k = 0; k < ustensilSelectedTab.length; k++) {
+                let ustensil = ustensilSelectedTab[k]
+                if(getTag.getAttribute('name') === ustensil.getAttribute('name')) {
+                    ustensil.removeAttribute('ustensil')
+                }      
+            }
+            handleAttributeRecipeU(recipes, container) 
+            displayRecipes(recipes)   
+        })
+    }  
+}
+
+// FUNCTION HANDLE ATTRIBUTE INPUT
+function handleAttributeUstensilInput(recipes, input) {
+    recipes = recipes.querySelectorAll('div[class=recipe_card]')
+    for(let i = 0; i < recipes.length; i++) {
+        const recipe = recipes[i]
+        const ustensilsList = recipe.querySelector('.ustensil_list').querySelectorAll('li')      
+        for(let j = 0; j < ustensilsList.length; j++) {
+            let ustensil = ustensilsList[j].getAttribute('name')    
+            if(ustensil.includes(input)) {
+                recipe.setAttribute('ustensilFilter', 'active')
+                break
+            }
+            else{
+                recipe.removeAttribute('ustensilFilter')
+            }
+        }    
+    }
+}
+
+
+
+//FUNCTION SET/REMOVE ATTRIBUTE RECIPE -> check all filters than setAttribute or remove
+function handleAttributeRecipeU(recipes, container) {
+    var numberOfFilters = container.querySelectorAll('li').length
+    //check number of filters per recipe in ingredient list
+    for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
+        const recipe = recipes.querySelectorAll('div[class=recipe_card]')[i]
+        const ustensilList = recipe.querySelector('.ustensil_list').querySelectorAll('li')
+        var numberFilterRecipe = 0 
+
+        for(let j = 0; j < ustensilList.length; j++) {  
+            let ustensil = ustensilList[j]
+            if(ustensil.getAttribute('ustensil')==='selected') {
+                numberFilterRecipe++   
+            }      
+        }
+
+        //if filters active in recipe = filter active -> set attribute
+        if(numberFilterRecipe === numberOfFilters) {
+            recipe.setAttribute('ustensilFilter','active')     
+        }else{
+            recipe.removeAttribute('ustensilFilter')
+        }
+
+    }
+}
 
 
 
