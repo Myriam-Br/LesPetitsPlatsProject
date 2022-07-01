@@ -9,31 +9,14 @@ class MainSearchBar{
      
        // const recipes = this.$recipes.querySelectorAll('.recipe_card')
         const input = this.$wrapper.querySelector('#input_main_search_bar')
-     
-
         input.addEventListener('keyup', e => { 
-            const ingredientList = document.getElementById('ingredients_list')  
-            const recipes = this.$recipes.querySelectorAll('div[class = recipe_card')  
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            console.log(ingredientList);
-
             if(elt.length >= 3) {         
-                 //console.log(recipes);
-                for (let i = 0; i < recipes.length; i++) {
-                   const recipeName = recipes[i].querySelector('.name_recipe').innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                   if(recipeName.includes(elt)){
-                    recipes[i].setAttribute('nameFilter', 'active')  
-                   }
-                   else{          
-                    recipes[i].removeAttribute('nameFilter')
-                   
-                   }
-                }  
+                handleAttributeNameInput(this.$recipes, elt)          
             }
             else{
                 const attributeName = 'nameFilter'
                 removeAttributeFromRecipe(this.$recipes, attributeName)
-                displayFullItemList(ingredientList.querySelectorAll('li'))                
             }
            
             

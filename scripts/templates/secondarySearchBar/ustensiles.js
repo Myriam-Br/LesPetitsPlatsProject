@@ -35,7 +35,7 @@ class Ustensiles{
             tag.addEventListener('click', e => {
                 createHTMLTag(this.$tagContainerUstensils,tag)   
                 handleAttributeUstensilTag(this.$recipe,tag, this.$tagContainerUstensils)
-                handleAttributeRecipeU(this.$recipe, this.$tagContainerUstensils)
+                handleAttributeRecipe(this.$recipe)
                 displayRecipes(this.$recipe)    
             })          
         } 

@@ -4,33 +4,20 @@ class Appareils{
         this.$wrapper.setAttribute('id', 'appareils_search_bar')      
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
+        this.$tagContainerAppareils = document.getElementById('appareils_added')
     }
 
     handleAppareil(button, icone, list) {
       
         const input = this.$wrapper.querySelector('#input_appareils')
         input.addEventListener('keyup', e => {
-            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card]')
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-           
-           // console.log(recipes);
             if(elt.length >= 3) {
-                console.log(elt); 
-                for(let i = 0; i < recipes.length; i++) {
-                   
-                    const applianceRecipe = recipes[i].querySelector('.appliance_recipe').innerHTML.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                    console.log(applianceRecipe);
-                    if(applianceRecipe.includes(elt)){
-                        console.log(recipes[i]);
-                        recipes[i].setAttribute('applianceFilter', 'active')
-                    }else{
-                        recipes[i].removeAttribute('applianceFilter')
-                    }
-                }       
+                handleAttributeApplianceInput(this.$recipe, elt)       
             }
             else{
                 const attributeName = 'applianceFilter'
-                removeAttributeFromRecipe(recipes, attributeName) 
+                removeAttributeFromRecipe(this.$recipe, attributeName) 
             }
         })
 
@@ -40,23 +27,17 @@ class Appareils{
             dropDownList(button, icone, list)
         })
 
-         //HANDLE TAGS ON CLICK
-         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
+        //HANDLE TAGS ON CLICK
+        //create tag for each element selected from list 
+        for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
-                const attributeName = 'applianceFilter'
-                const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
-                createHTMLTag(this.$tagContainer, list, tag, this.$recipe)        
-                for(let i = 0; i < recipes.length; i++) {
-                    //console.log(recipes[i].querySelector('.appliance_recipe'));        
-                   // handleOnClickTag(list, tag, this.$tagContainer, recipes[i], recipes[i].querySelector('.appliance_recipe'), attributeName, this.$recipe) 
-                }
-                displayRecipes(this.$recipe)             
-            })
-
-            
-
-        }
+                createHTMLTag(this.$tagContainerAppareils,tag)   
+                handleAttributeAppareilTag(this.$recipe,tag, this.$tagContainerAppareils)
+                handleAttributeRecipe(this.$recipe)
+                displayRecipes(this.$recipe)    
+            })          
+        } 
     }
 
     handleDropDown(button, icone, list) {
@@ -114,8 +95,8 @@ class Appareils{
         uniqueAppareilsTab.forEach(element => {
             //console.log(element);
             const appareilItem = document.createElement('li')   
-            appareilItem.setAttribute('class', element)
-            appareilItem.setAttribute('id', element)        
+            appareilItem.setAttribute('class', 'appareils_from_list')
+            appareilItem.setAttribute('name', element)        
             const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             appareilItem.innerHTML= elementSyntax  
             appareilsSection.appendChild(appareilItem) 

@@ -9,16 +9,17 @@ class Ingredients{
 
 
     handleIngredient(button, icone, list) {
-        //console.log(list.querySelectorAll('li'));
-       
+        //console.log(list.querySelectorAll('li')); 
         const input = this.$wrapper.querySelector('#input_ingredients')
         input.addEventListener('keyup', e => {
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
             if(elt.length >= 3) {   
+                displayListIngredient(elt)
                 handleAttributeIngredientInput(this.$recipe, elt)
             }
             else{
                 const attributeName = 'ingredientFilter'
+                displayListIngredientFull(this.$tagContainerIngredients)
                 removeAttributeFromRecipe(this.$recipe, attributeName)
             }     
         })
@@ -26,23 +27,32 @@ class Ingredients{
         input.addEventListener('click', e => { 
             input.value = ' ' 
             list.style.display = "block"
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
+            if(elt.length >= 3) {   
+                handleAttributeIngredientInput(this.$recipe, elt)
+            }
+            else{
+                const attributeName = 'ingredientFilter'
+                removeAttributeFromRecipe(this.$recipe, attributeName)
+            }   
             dropDownList(button, icone, list)         
         })
 
         //HANDLE TAGS ON CLICK 
+        console.log(document.getElementById('ingredients_list'));
         //create tag for each element selected from list 
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
-            tag.addEventListener('click', e => {
+            tag.addEventListener('click', e => { 
+                console.log(document.getElementById('ingredients_list'));      
                 createHTMLTag(this.$tagContainerIngredients, tag)   
                 handleAttributeIngredientTag(this.$recipe, tag, this.$tagContainerIngredients)   
-                handleAttributeRecipe(this.$recipe, this.$tagContainerIngredients) 
-                displayRecipes(this.$recipe)    
-            })  
-            
-            
-        } 
-     
+                handleAttributeRecipe(this.$recipe)  
+                displayRecipes(this.$recipe)  
+                displayIngredients(this.$recipe)                         
+            }) 
+                 
+        }   
     }
 
 

@@ -210,10 +210,10 @@ input:focus{
     grid-template-columns: auto auto auto auto;
 }
 
-.text_section .ustensil_list {
+.text_section .ustensil_recipe_list {
     display: none;
 }
-.text_section .appliance_recipe {
+.text_section .appliance {
     display: none;
 }
 

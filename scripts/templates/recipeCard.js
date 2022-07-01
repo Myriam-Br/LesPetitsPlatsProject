@@ -23,8 +23,11 @@ class RecipeCard{
         //name
         const nameRecipe = document.createElement('h2')
         nameRecipe.setAttribute('class', 'name_recipe')
+        const recipeName = this._recipe.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        nameRecipe.setAttribute('name', recipeName)
         nameRecipe.innerHTML = this._recipe.name
 
+        
 
         // duration
         const durationIcone = document.createElement('i')
@@ -75,7 +78,7 @@ class RecipeCard{
 
         // HANDLE USTENSIL LIST (DISPLAY NONE)
         const ustensilList = document.createElement('ul')
-        ustensilList.setAttribute('class', 'ustensil_list')
+        ustensilList.setAttribute('class', 'ustensil_recipe_list')
         this._recipe.ustensils.forEach(elt => {
            // console.log(elt);
             const ustensilsRecipe = document.createElement('li')
@@ -90,7 +93,8 @@ class RecipeCard{
        //console.log(this._recipe.appliance);
        const applianceRecipe = document.createElement('h4')
        const syntaxApplianceClassName = this._recipe.appliance.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-       applianceRecipe.setAttribute('class', 'appliance_recipe' + ' ' + syntaxApplianceClassName)
+       applianceRecipe.setAttribute('name',  syntaxApplianceClassName)
+       applianceRecipe.setAttribute('class',  'appliance')
        applianceRecipe.innerHTML = this._recipe.appliance
 
 
