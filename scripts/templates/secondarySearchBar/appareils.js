@@ -33,9 +33,10 @@ class Appareils{
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
                 createHTMLTag(this.$tagContainerAppareils,tag)   
-                handleAttributeAppareilTag(this.$recipe,tag, this.$tagContainerAppareils)
+                handleAttributeAppareilTag(this.$recipe, tag, this.$tagContainerAppareils)
                 handleAttributeRecipe(this.$recipe)
-                displayRecipes(this.$recipe)    
+                displayRecipes(this.$recipe) 
+                displayItemCategory(this.$recipe)    
             })          
         } 
     }

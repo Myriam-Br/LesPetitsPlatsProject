@@ -64,6 +64,7 @@ class HomePage {
             input.addEventListener('keyup', e => {
                 if(input.value.length >= 3) {
                     displayRecipes(this.$wrapper)
+                    displayItemCategory(this.$wrapper)
                 }  
                 else {
                     console.log('cleared');

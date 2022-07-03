@@ -34,11 +34,11 @@ class Ustensiles{
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
-                createHTMLTag(this.$tagContainerUstensils,tag)   
-                handleAttributeUstensilTag(this.$recipe,tag, this.$tagContainerUstensils)
+                createHTMLTag(this.$tagContainerUstensils, tag)   
+                handleAttributeUstensilTag(this.$recipe, tag, this.$tagContainerUstensils)
                 handleAttributeRecipe(this.$recipe)
                 displayRecipes(this.$recipe)    
-                displayUstensil(this.$recipe, this.$tagContainerUstensils)
+                displayItemCategory(this.$recipe)    
             })          
         } 
     }
@@ -106,8 +106,7 @@ class Ustensiles{
             const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             ustensiltItem.innerHTML= elementSyntax  
             ustensilesSection.appendChild(ustensiltItem) 
-           // that.handleIngredients(element)   
-                
+              
         });
 
     

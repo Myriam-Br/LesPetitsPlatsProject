@@ -42,13 +42,12 @@ class Ingredients{
         //create tag for each element selected from list 
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
-            tag.addEventListener('click', e => { 
-                console.log(document.getElementById('ingredients_list'));      
+            tag.addEventListener('click', e => {       
                 createHTMLTag(this.$tagContainerIngredients, tag)   
                 handleAttributeIngredientTag(this.$recipe, tag, this.$tagContainerIngredients)   
                 handleAttributeRecipe(this.$recipe)  
                 displayRecipes(this.$recipe)  
-                displayIngredients(this.$recipe, this.$tagContainerIngredients)                         
+                displayItemCategory(this.$recipe)                         
             }) 
                  
         }   

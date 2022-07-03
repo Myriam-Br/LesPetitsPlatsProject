@@ -89,7 +89,7 @@ function handleAttributeIngredientTag(recipes, tag, container) {
             }
             handleAttributeRecipe(recipes) 
             displayRecipes(recipes) 
-            displayIngredients(recipes, container)
+            displayItemCategory(recipes)
         })
     }  
 }
@@ -116,50 +116,8 @@ function handleAttributeIngredientInput(recipes, input) {
 
 }
 
-function displayIngredients(recipes, container) { 
-    const ingredientTab = []
-    for(let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {     
-        //get visible recipes
-        if(recipes.querySelectorAll('div[class=recipe_card]')[i].style.display === 'block') {   
-            let recipe = recipes.querySelectorAll('div[class=recipe_card]')[i]
-            let ingredientList = recipe.querySelector('.ingredient_recipe_list').querySelectorAll('li')
-            for(let j = 0; j < ingredientList.length; j++) {
-                ingredientTab.push(ingredientList[j].getAttribute('name'))
-            }
-        }      
-    } 
 
-    //supprimer doublons
-    let ingredientListUnique = [... new Set(ingredientTab)]
-    let list = document.getElementById('ingredients_list')
-    list.innerHTML = ' '
-    for(let k = 0; k < ingredientListUnique.length; k++) {
-        let createIngredient = document.createElement('li')
-        createIngredient.setAttribute('name', ingredientListUnique[k])
-        createIngredient.setAttribute('class', 'ingredient_from_list')
-        createIngredient.innerHTML = ingredientListUnique[k].charAt(0).toUpperCase() + ingredientListUnique[k].slice(1)
-        createIngredient.addEventListener('click', e => {     
-            createHTMLTag(container, createIngredient)   
-            handleAttributeIngredientTag(recipes, createIngredient, container)   
-            handleAttributeRecipe(recipes)  
-            displayRecipes(recipes)  
-            displayIngredients(recipes, container)                         
-        }) 
-      
-        list.appendChild(createIngredient)   
-    }
 
-    //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
-    for(let l = 0; l < document.querySelectorAll('li[ingredient=selected]').length; l++) {
-        for(let m = 0; m < list.querySelectorAll('li').length; m++) {
-            if(list.querySelectorAll('li')[m].getAttribute('name') === document.querySelectorAll('li[ingredient=selected]')[l].getAttribute('name')) {
-                list.querySelectorAll('li')[m].style.display = 'none'
-            }
-            else{
-            }
-        }     
-    }      
-}
 
 function displayListIngredient(input) {
     const ingredientList = document.getElementById('ingredients_list').querySelectorAll('li')
@@ -217,7 +175,7 @@ function handleAttributeUstensilTag(recipes, tag, container) {
             }
             handleAttributeRecipe(recipes) 
             displayRecipes(recipes)   
-            displayUstensil(recipes, container)
+            displayItemCategory(recipes)
         })
     }  
 }
@@ -238,51 +196,6 @@ function handleAttributeUstensilInput(recipes, input) {
             }
         }    
     }
-}
-
-function displayUstensil(recipes, container) { 
-    const ustensilTab = []
-    for(let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {     
-        //get visible recipes
-        if(recipes.querySelectorAll('div[class=recipe_card]')[i].style.display === 'block') {   
-            let recipe = recipes.querySelectorAll('div[class=recipe_card]')[i]
-            let ustensilList = recipe.querySelector('.ustensil_recipe_list').querySelectorAll('li')
-            for(let j = 0; j < ustensilList.length; j++) {
-                ustensilTab.push(ustensilList[j].getAttribute('name'))
-            }
-        }      
-    } 
-
-    //supprimer doublons
-    let ustensilListUnique = [... new Set(ustensilTab)]
-    let list = document.getElementById('ustensiles_list')
-    list.innerHTML = ' '
-    for(let k = 0; k < ustensilListUnique.length; k++) {
-        let createUstensil = document.createElement('li')
-        createUstensil.setAttribute('name', ustensilListUnique[k])
-        createUstensil.setAttribute('class', 'ustensils_from_list')
-        createUstensil.innerHTML = ustensilListUnique[k].charAt(0).toUpperCase() + ustensilListUnique[k].slice(1)
-        createUstensil.addEventListener('click', e => {     
-            createHTMLTag(container, createUstensil)   
-            handleAttributeIngredientTag(recipes, createUstensil, container)   
-            handleAttributeRecipe(recipes)  
-            displayRecipes(recipes)  
-            displayUstensil(recipes, container)                         
-        }) 
-      
-        list.appendChild(createUstensil)   
-    }
-
-    //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
-    for(let l = 0; l < document.querySelectorAll('li[ustensil=selected]').length; l++) {
-        for(let m = 0; m < list.querySelectorAll('li').length; m++) {
-            if(list.querySelectorAll('li')[m].getAttribute('name') === document.querySelectorAll('li[ustensil=selected]')[l].getAttribute('name')) {
-                list.querySelectorAll('li')[m].style.display = 'none'
-            }
-            else{
-            }
-        }     
-    }      
 }
 
 function displayListUstensil(input) {
@@ -343,7 +256,8 @@ function handleAttributeAppareilTag(recipes, tag, container) {
                 }      
             }
             handleAttributeRecipe(recipes) 
-            displayRecipes(recipes)   
+            displayRecipes(recipes) 
+            displayItemCategory(recipes)   
         })
     }
 }
@@ -368,15 +282,16 @@ function handleAttributeApplianceInput(recipes, input) {
 
 
 //FUNCTION SET/REMOVE ATTRIBUTE RECIPE -> check all filters than setAttribute or remove
-function handleAttributeRecipe(recipes, input) {
+function handleAttributeRecipe(recipes) {
 
-   // var numberOfNameFilters = document.querySelectorAll('div[nameFilter=active]').length
+  
 
     var numberOfIngredientFilters = document.getElementById('ingredients_added').querySelectorAll('li').length
     var numberOfUstensilsFilters = document.getElementById('ustensils_added').querySelectorAll('li').length
     var numberOfAppliancesFilters = document.getElementById('appareils_added').querySelectorAll('li').length
-    var numberOfFilters = numberOfIngredientFilters + numberOfUstensilsFilters + numberOfAppliancesFilters
+    var numberOfFilters = numberOfIngredientFilters + numberOfUstensilsFilters + numberOfAppliancesFilters 
  
+
 
     //check number of filters per recipe in ingredient list
     for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
@@ -389,7 +304,6 @@ function handleAttributeRecipe(recipes, input) {
         var numberActiveIngredient = 0
         var numberActiveUstensils = 0
         var numberActiveAppliance = 0
-        var numberActiveName = 0
       
         //verifier si numbre filtre actif d'une catégorie = numbre filtre de la catégorie dans le site -> +1 count
         // INGREDIENT
@@ -401,8 +315,8 @@ function handleAttributeRecipe(recipes, input) {
         }
     
         // USTENSILS
-        for(let k = 0; k < ustensilList.length; k++) {  
-            let ustensil = ustensilList[k]
+        for(let j = 0; j < ustensilList.length; j++) {  
+            let ustensil = ustensilList[j]
             if(ustensil.getAttribute('ustensil')==='selected') {
                 numberActiveUstensils++   
             }      
@@ -413,19 +327,13 @@ function handleAttributeRecipe(recipes, input) {
             numberActiveAppliance++   
         }    
         
-        /*
-        if(recipeName.includes(input)) {
-            numberActiveName++
-           //   
-        }*/
       
         
-   
-        var numberFilterRecipe = numberActiveIngredient + numberActiveUstensils + numberActiveAppliance
-
+        var numberFilterRecipe = numberActiveIngredient + numberActiveUstensils + numberActiveAppliance 
         //if filters active category in recipe = filter active category && total filters recipe === total filters active -> set attribute to recipe
         if(numberActiveIngredient === numberOfIngredientFilters && numberFilterRecipe === numberOfFilters) {
-            recipe.setAttribute('ingredientFilter','active')     
+            recipe.setAttribute('ingredientFilter','active')  
+            //displayIngredients(recipes, containerIngredient)   
         }
         else{
             recipe.removeAttribute('ingredientFilter')
@@ -440,20 +348,12 @@ function handleAttributeRecipe(recipes, input) {
         }
 
         if(numberActiveAppliance === numberOfAppliancesFilters && numberFilterRecipe === numberOfFilters) {
-            recipe.setAttribute('applianceFilter','active')     
+            recipe.setAttribute('applianceFilter','active')   
+            //displayUstensil(recipes, containerUstensil)  
         }
         else{
             recipe.removeAttribute('applianceFilter')
         }
-
-        /*
-        if(numberActiveName === 1 && numberFilterRecipe === numberOfFilters) {
-            recipe.setAttribute('nameFilter', 'active')     
-        }
-        else{
-            recipe.removeAttribute('nameFilter')
-        }*/
- 
     }
 
 
@@ -461,7 +361,130 @@ function handleAttributeRecipe(recipes, input) {
 }
 
 
+//PUT ALL THE CATEGORIES HERE SO IT'S EASIER TO MANAGE
+function displayItemCategory(recipes) { 
+    const ingredientTab = []
+    const ustensilTab = []
+    const appareilTab = []
+    for(let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {     
+        //get visible recipes
+        if(recipes.querySelectorAll('div[class=recipe_card]')[i].style.display === 'block') {   
+            let recipe = recipes.querySelectorAll('div[class=recipe_card]')[i]
+            let ingredientList = recipe.querySelector('.ingredient_recipe_list').querySelectorAll('li')
+            let ustensilList = recipe.querySelector('.ustensil_recipe_list').querySelectorAll('li')
+            let appareil = recipe.querySelector('.appliance')
+            for(let j = 0; j < ingredientList.length; j++) {
+                ingredientTab.push(ingredientList[j].getAttribute('name'))
+            }
+            for(let j = 0; j < ustensilList.length; j++) {
+                ustensilTab.push(ustensilList[j].getAttribute('name'))
+            }
+            
+            appareilTab.push(appareil.getAttribute('name'))
+  
+        }      
+    } 
 
+    //supprimer doublons
+    let ingredientListUnique = [... new Set(ingredientTab)]
+    let ustensilListUnique = [... new Set(ustensilTab)]
+    let appareilListUnique = [... new Set(appareilTab)]
+
+
+    //gérer creation tag
+    //INGREDIENTS
+    const containerIngredient = document.getElementById('ingredients_added')
+    let listIngredients = document.getElementById('ingredients_list')
+    listIngredients.innerHTML = ' '
+    for(let i = 0; i < ingredientListUnique.length; i++) {
+        let createIngredient = document.createElement('li')
+        createIngredient.setAttribute('name', ingredientListUnique[i])
+        createIngredient.setAttribute('class', 'ingredient_from_list')
+        createIngredient.innerHTML = ingredientListUnique[i].charAt(0).toUpperCase() + ingredientListUnique[i].slice(1)
+        createIngredient.addEventListener('click', e => {     
+            createHTMLTag(containerIngredient, createIngredient)   
+            handleAttributeIngredientTag(recipes, createIngredient, containerIngredient)   
+            handleAttributeRecipe(recipes)  
+            displayRecipes(recipes)  
+            displayItemCategory(recipes)                         
+        }) 
+      
+        listIngredients.appendChild(createIngredient)   
+    }
+
+    //USTENSILS
+    const containerUstensil = document.getElementById('ustensils_added')
+    let listUstensil = document.getElementById('ustensiles_list')
+    listUstensil.innerHTML = ' '
+    for(let i = 0; i < ustensilListUnique.length; i++) {
+        let createUstensil = document.createElement('li')
+        createUstensil.setAttribute('name', ustensilListUnique[i])
+        createUstensil.setAttribute('class', 'ustensils_from_list')
+        createUstensil.innerHTML = ustensilListUnique[i].charAt(0).toUpperCase() + ustensilListUnique[i].slice(1)
+        createUstensil.addEventListener('click', e => {     
+            createHTMLTag(containerUstensil, createUstensil)   
+            handleAttributeIngredientTag(recipes, createUstensil, containerUstensil)   
+            handleAttributeRecipe(recipes)  
+            displayRecipes(recipes)  
+            displayItemCategory(recipes)                         
+        }) 
+      
+        listUstensil.appendChild(createUstensil)   
+    }
+  
+    //APPAREILS
+    const containerAppareil = document.getElementById('appareils_added')
+    let listAppareil = document.getElementById('appareils_list')
+    listAppareil.innerHTML = ' '
+ 
+    for(let i = 0; i < appareilListUnique.length; i++) {
+        let createAppareil = document.createElement('li')
+        createAppareil.setAttribute('name', appareilListUnique[i])
+        createAppareil.setAttribute('class', 'appareils_from_list')
+        createAppareil.innerHTML = appareilListUnique[i].charAt(0).toUpperCase() + appareilListUnique[i].slice(1)
+        createAppareil.addEventListener('click', e => {     
+            createHTMLTag(containerAppareil, createAppareil)   
+            handleAttributeIngredientTag(recipes, createAppareil, containerAppareil)   
+            handleAttributeRecipe(recipes)  
+            displayRecipes(recipes)  
+            displayItemCategory(recipes)                         
+        }) 
+      
+        listAppareil.appendChild(createAppareil)   
+    }
+
+
+    //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
+    for(let i = 0; i < document.querySelectorAll('li[ingredient=selected]').length; i++) {
+        for(let j = 0; j < listIngredients.querySelectorAll('li').length; j++) {
+            if(listIngredients.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[ingredient=selected]')[i].getAttribute('name')) {
+                listIngredients.querySelectorAll('li')[j].style.display = 'none'
+            }
+            else{
+            }
+        }     
+    }      
+
+    for(let i = 0; i < document.querySelectorAll('li[ustensil=selected]').length; i++) {
+        for(let j = 0; j < listUstensil.querySelectorAll('li').length; j++) {
+            if(listUstensil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[ustensil=selected]')[i].getAttribute('name')) {
+                listUstensil.querySelectorAll('li')[j].style.display = 'none'
+            }
+            else{
+            }
+        }     
+    }   
+
+    for(let i = 0; i < document.querySelectorAll('li[appareil=selected]').length; i++) {
+        for(let j = 0; j < listAppareil.querySelectorAll('li').length; j++) {
+            if(listAppareil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[appareil=selected]')[i].getAttribute('name')) {
+                listAppareil.querySelectorAll('li')[j].style.display = 'none'
+            }
+            else{
+            }
+        }     
+    }      
+}
 
 
 
