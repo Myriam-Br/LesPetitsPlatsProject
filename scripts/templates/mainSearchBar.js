@@ -12,7 +12,8 @@ class MainSearchBar{
         input.addEventListener('keyup', e => { 
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             if(elt.length >= 3) {         
-                handleAttributeNameInput(this.$recipes, elt)          
+                handleAttributeNameInput(this.$recipes, elt) 
+                //handleAttributeRecipe(this.$recipes, elt)         
             }
             else{
                 const attributeName = 'nameFilter'

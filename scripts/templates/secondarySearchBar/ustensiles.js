@@ -10,14 +10,15 @@ class Ustensiles{
     handleUstensils(button, icone, list) {
         const input = this.$wrapper.querySelector('#input_ustensiles')      
         input.addEventListener('keyup', e => {
-            const recipes = this.$recipe.querySelectorAll('div[class = recipe_card')
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
-            const listUstensiles = list.querySelectorAll('li')
-            if(elt.length >= 3) {     
+            if(elt.length >= 3) {  
+                displayListUstensil(elt)  
+                handleAttributeUstensilInput(this.$recipe, elt) 
             }
             else{
                 const attributeName = 'ustensilFilter'
-                //removeAttributeFromRecipe(this.$recipe, attributeName) 
+                displayListUstensilFull(this.$tagContainerUstensils)  
+                removeAttributeFromRecipe(this.$recipe, attributeName) 
             }
         })
 
@@ -37,6 +38,7 @@ class Ustensiles{
                 handleAttributeUstensilTag(this.$recipe,tag, this.$tagContainerUstensils)
                 handleAttributeRecipe(this.$recipe)
                 displayRecipes(this.$recipe)    
+                displayUstensil(this.$recipe, this.$tagContainerUstensils)
             })          
         } 
     }

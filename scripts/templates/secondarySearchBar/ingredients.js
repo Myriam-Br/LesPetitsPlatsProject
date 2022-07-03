@@ -39,7 +39,6 @@ class Ingredients{
         })
 
         //HANDLE TAGS ON CLICK 
-        console.log(document.getElementById('ingredients_list'));
         //create tag for each element selected from list 
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
@@ -49,7 +48,7 @@ class Ingredients{
                 handleAttributeIngredientTag(this.$recipe, tag, this.$tagContainerIngredients)   
                 handleAttributeRecipe(this.$recipe)  
                 displayRecipes(this.$recipe)  
-                displayIngredients(this.$recipe)                         
+                displayIngredients(this.$recipe, this.$tagContainerIngredients)                         
             }) 
                  
         }   
@@ -126,10 +125,11 @@ class Ingredients{
         let uniqueIngredientTab = [...new Set(ingredientsTab)]
         //console.log(uniqueIngredientTab);
         uniqueIngredientTab.forEach(element => {
-            const ingredientItem = document.createElement('li')   
+            const ingredientItem = document.createElement('li')  
+            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1) 
             ingredientItem.setAttribute('name', element)
+            //console.log(element);
             ingredientItem.setAttribute('class', 'ingredient_from_list')  
-            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
             ingredientItem.innerHTML= elementSyntax  
             ingredientsSection.appendChild(ingredientItem) 
                
