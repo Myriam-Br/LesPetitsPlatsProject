@@ -284,14 +284,10 @@ function handleAttributeApplianceInput(recipes, input) {
 //FUNCTION SET/REMOVE ATTRIBUTE RECIPE -> check all filters than setAttribute or remove
 function handleAttributeRecipe(recipes) {
 
-  
-
     var numberOfIngredientFilters = document.getElementById('ingredients_added').querySelectorAll('li').length
     var numberOfUstensilsFilters = document.getElementById('ustensils_added').querySelectorAll('li').length
     var numberOfAppliancesFilters = document.getElementById('appareils_added').querySelectorAll('li').length
     var numberOfFilters = numberOfIngredientFilters + numberOfUstensilsFilters + numberOfAppliancesFilters 
- 
-
 
     //check number of filters per recipe in ingredient list
     for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
@@ -327,13 +323,12 @@ function handleAttributeRecipe(recipes) {
             numberActiveAppliance++   
         }    
         
-      
+    
         
         var numberFilterRecipe = numberActiveIngredient + numberActiveUstensils + numberActiveAppliance 
         //if filters active category in recipe = filter active category && total filters recipe === total filters active -> set attribute to recipe
         if(numberActiveIngredient === numberOfIngredientFilters && numberFilterRecipe === numberOfFilters) {
-            recipe.setAttribute('ingredientFilter','active')  
-            //displayIngredients(recipes, containerIngredient)   
+            recipe.setAttribute('ingredientFilter','active')    
         }
         else{
             recipe.removeAttribute('ingredientFilter')
@@ -349,7 +344,6 @@ function handleAttributeRecipe(recipes) {
 
         if(numberActiveAppliance === numberOfAppliancesFilters && numberFilterRecipe === numberOfFilters) {
             recipe.setAttribute('applianceFilter','active')   
-            //displayUstensil(recipes, containerUstensil)  
         }
         else{
             recipe.removeAttribute('applianceFilter')
@@ -411,6 +405,16 @@ function displayItemCategory(recipes) {
       
         listIngredients.appendChild(createIngredient)   
     }
+    //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
+    for(let i = 0; i < document.querySelectorAll('li[ingredient=selected]').length; i++) {
+        for(let j = 0; j < listIngredients.querySelectorAll('li').length; j++) {
+            if(listIngredients.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[ingredient=selected]')[i].getAttribute('name')) {
+                listIngredients.querySelectorAll('li')[j].style.display = 'none'
+            }
+            else{
+            }
+        }     
+    }   
 
     //USTENSILS
     const containerUstensil = document.getElementById('ustensils_added')
@@ -426,10 +430,20 @@ function displayItemCategory(recipes) {
             handleAttributeIngredientTag(recipes, createUstensil, containerUstensil)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
-            displayItemCategory(recipes)                         
+           displayItemCategory(recipes)                         
         }) 
       
         listUstensil.appendChild(createUstensil)   
+    }
+    //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
+    for(let i = 0; i < document.querySelectorAll('li[ustensil=selected]').length; i++) {
+        for(let j = 0; j < listUstensil.querySelectorAll('li').length; j++) {
+            if(listUstensil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[ustensil=selected]')[i].getAttribute('name')) {
+                listUstensil.querySelectorAll('li')[j].style.display = 'none'
+            }
+            else{
+            }
+        }     
     }
   
     //APPAREILS
@@ -452,29 +466,7 @@ function displayItemCategory(recipes) {
       
         listAppareil.appendChild(createAppareil)   
     }
-
-
     //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
-    for(let i = 0; i < document.querySelectorAll('li[ingredient=selected]').length; i++) {
-        for(let j = 0; j < listIngredients.querySelectorAll('li').length; j++) {
-            if(listIngredients.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[ingredient=selected]')[i].getAttribute('name')) {
-                listIngredients.querySelectorAll('li')[j].style.display = 'none'
-            }
-            else{
-            }
-        }     
-    }      
-
-    for(let i = 0; i < document.querySelectorAll('li[ustensil=selected]').length; i++) {
-        for(let j = 0; j < listUstensil.querySelectorAll('li').length; j++) {
-            if(listUstensil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[ustensil=selected]')[i].getAttribute('name')) {
-                listUstensil.querySelectorAll('li')[j].style.display = 'none'
-            }
-            else{
-            }
-        }     
-    }   
-
     for(let i = 0; i < document.querySelectorAll('li[appareil=selected]').length; i++) {
         for(let j = 0; j < listAppareil.querySelectorAll('li').length; j++) {
             if(listAppareil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[appareil=selected]')[i].getAttribute('name')) {

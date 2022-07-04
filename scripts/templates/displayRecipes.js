@@ -89,7 +89,7 @@ const ustensilFitler =  recipe.querySelectorAll('div[ustensilFilter = active]')
 }
 
 function displayAllRecipes(recipe) {
-    console.log(recipe);
+    //console.log(recipe);
     const recipeList = recipe.querySelectorAll('div[class = recipe_card]')
     const nameFilter = recipe.querySelectorAll('div[nameFilter = active]')
     const ingredientFilter = recipe.querySelectorAll('div[ingredientFilter = active]')
