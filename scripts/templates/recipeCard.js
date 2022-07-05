@@ -14,15 +14,16 @@ class RecipeCard{
         wrapperCard.setAttribute('class', 'recipe_card')
         wrapperCard.setAttribute('id', this._recipe.id)
         // image
-        const imageRecipe = document.createElement('img')
-        imageRecipe.setAttribute('alt', 'name_recipe_img')
-        imageRecipe.setAttribute('src', 'assets/pizza.jpg')
+        const imageRecipe = document.createElement('div')
+        imageRecipe.setAttribute('class', 'image')
+
 
         // text section
         const textSection = document.createElement('div')
         textSection.setAttribute('class', 'text_section')
         //name
         const nameRecipe = document.createElement('h2')
+        nameRecipe.setAttribute('name', this._recipe.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
         nameRecipe.setAttribute('class', 'name_recipe')
         nameRecipe.innerHTML = this._recipe.name
 
@@ -36,31 +37,48 @@ class RecipeCard{
         durationRecipe.innerHTML = this._recipe.time + 'min'
 
 
-        // ingredients list
+
+        // CREATE INGREDIENTS LIST
         const ingredientsList = document.createElement('ul')
         ingredientsList.setAttribute('class', 'ingredient_recipe_list')
-
         const ingredientsListItem = document.createElement('li')
         ingredientsListItem.setAttribute('class', 'ingredient_from_list')
         const ingredientsListItemQte = document.createElement('p')
         ingredientsListItemQte.setAttribute('class', 'ingredient_quantity')
         ingredientsListItem.appendChild(ingredientsListItemQte)
-
         this._recipe.ingredients[0].forEach(elt => {
            // console.log(elt.ingredient);
             const ingredientsListItem = document.createElement('li')
             const syntaxIngredientClassName = elt.ingredient.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            ingredientsListItem.setAttribute('class', syntaxIngredientClassName)
+            ingredientsListItem.setAttribute('name', syntaxIngredientClassName)
+            ingredientsListItem.setAttribute('class', 'ingredient')
             ingredientsListItem.innerHTML = elt.ingredient
-           
-            //console.log(elt.ingredient.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
             ingredientsList.appendChild(ingredientsListItem)          
         });
-      //  console.log(ingredientsList);
         const instructionsRecipe = document.createElement('h4')
         instructionsRecipe.setAttribute('class', 'instructions_repicpe')
         instructionsRecipe.innerHTML = this._recipe.description
      
+        // CREATE USTENSIL LIST (DISPLAY NONE)
+        const ustensilList = document.createElement('ul')
+        ustensilList.setAttribute('class', 'ustensil_recipe_list')
+        this._recipe.ustensils.forEach(elt => {
+        // console.log(elt);
+            const ustensilsRecipe = document.createElement('li')
+            const syntaxUstensilClassName = elt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            ustensilsRecipe.setAttribute('name', syntaxUstensilClassName)
+            ustensilsRecipe.setAttribute('class', 'ustensil')
+            ustensilsRecipe.innerHTML = elt
+            ustensilList.appendChild(ustensilsRecipe)
+        })
+      
+        // CREATE APPAREIL LIST (DISPLAY NONE)
+        const applianceRecipe = document.createElement('h4')
+        const syntaxApplianceClassName = this._recipe.appliance.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        applianceRecipe.setAttribute('name',  syntaxApplianceClassName)
+        applianceRecipe.setAttribute('class',  'appliance')
+        applianceRecipe.innerHTML = this._recipe.appliance
+ 
 
 
         wrapperCard.appendChild(imageRecipe)
@@ -68,6 +86,8 @@ class RecipeCard{
         textSection.appendChild(durationRecipe)
         textSection.appendChild(ingredientsList)
         textSection.appendChild(instructionsRecipe)
+        textSection.appendChild(ustensilList)
+        textSection.appendChild(applianceRecipe)
         wrapperCard.appendChild(textSection)
 
 

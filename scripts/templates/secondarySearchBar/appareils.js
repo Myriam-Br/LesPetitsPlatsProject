@@ -2,31 +2,18 @@ class Appareils{
     constructor(recipes){
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'appareils_search_bar') 
+        this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes = recipes   
     }
 
     
-    dropDownSection() {
-       // console.log(this.$wrapper.querySelector('#drop_down_appareils'));
-        const el = this.$wrapper.querySelector('#drop_down_appareils')
-        //const section = this.$wrapper.querySelector('#appareils_list')
-       // console.log(this.$wrapper.querySelector('i'));
-        const icone = this.$wrapper.querySelector('i')
-        el.addEventListener('click', () => {
-            /*
-            console.log(section.style);      
-            console.log(section.getAttribute('opened'));
-            if(section.getAttribute('opened')){
-                section.style.display='none'
-                section.removeAttribute('opened')      
-                icone.removeAttribute('fa fa-chevron-up')
-                icone.setAttribute('class','fa fa-chevron-down')    
-            } else {
-                section.style.display='block'
-                section.setAttribute('opened', 'true')
-                icone.removeAttribute('fa fa-chevron-down')
-                icone.setAttribute('class','fa fa-chevron-up')
-            }     */
+    handleDropDown(button, icone, list, input) {
+        button.addEventListener('click', e => {
+            dropDownList(button, icone, list)
+        })
+
+        input.addEventListener('click', e =>{
+            dropDownList(button, icone, list)
         })
     }
 
@@ -52,12 +39,41 @@ class Appareils{
         btnDropDown.appendChild(iconBtnDropDown)
        
 
+        const applianceSection = document.createElement('ul')
+        applianceSection.setAttribute('id', 'appliance_list')
+        applianceSection.style.display='none'
+        const appareilTab = []
+        for(let i = 0; i < this._recipes.length; i++) {
+            // console.log(this._recipes[i].ingredients);
+            let appliances = this._recipes[i].appliance     
+          //  console.log(appliances);
+            let appareilToLowerCase = appliances.toLowerCase()
+            let appareilSyntax = appareilToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            appareilTab.push(appareilSyntax)      
+        }
+        let uniqueAppareilsTab = [...new Set(appareilTab)]
+        //console.log(uniqueIngredientTab);
+        uniqueAppareilsTab.forEach(element => {
+            //console.log(element);
+            const appareilItem = document.createElement('li')   
+            appareilItem.setAttribute('class', 'appareils_from_list')
+            appareilItem.setAttribute('name', element)        
+            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
+            appareilItem.innerHTML= elementSyntax  
+            applianceSection.appendChild(appareilItem) 
+           // that.handleIngredients(element)   
+                
+        });
+
+        that.$wrapper.appendChild(applianceSection)
         that.$wrapper.appendChild(labelInputAppareils)
         that.$wrapper.appendChild(inputAppareils)
         that.$wrapper.appendChild(btnDropDown)
+        that.$wrapper.appendChild(applianceSection)
 
-        that.dropDownSection()
 
+        //functions
+        that.handleDropDown(btnDropDown, iconBtnDropDown, applianceSection, inputAppareils)
         return that.$wrapper
     }
 

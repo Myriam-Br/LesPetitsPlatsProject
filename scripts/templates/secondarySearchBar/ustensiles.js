@@ -2,31 +2,18 @@ class Ustensiles{
     constructor(recipes){
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'ustensiles_search_bar') 
+        this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes = recipes   
     }
 
-    dropDownSection() {
-       // console.log(this.$wrapper.querySelector('#drop_down_ustensiles'));
-        const el = this.$wrapper.querySelector('#drop_down_ustensiles')
-        //const section = this.$wrapper.querySelector('#ustensiles_list')
-        const icone = this.$wrapper.querySelector('i')
-        //console.log(this.$wrapper.querySelector('i'));
-        el.addEventListener('click', () => {
-            /*
-            console.log(section.style);      
-            console.log(section.getAttribute('opened'));
-            if(section.getAttribute('opened')){
-                section.style.display='none'
-                section.removeAttribute('opened')    
-                icone.removeAttribute('fa fa-chevron-up')
-                icone.setAttribute('class','fa fa-chevron-down')        
-            } else {
-                section.style.display='block'
-                section.setAttribute('opened', 'true')
-                icone.removeAttribute('fa fa-chevron-down')
-                icone.setAttribute('class','fa fa-chevron-up')
-               
-            }     */
+
+    handleDropDown(button, icone, list, input) {
+        button.addEventListener('click', e => {
+            dropDownList(button, icone, list)
+        })
+
+        input.addEventListener('click', e =>{
+            dropDownList(button, icone, list)
         })
     }
 
@@ -52,15 +39,45 @@ class Ustensiles{
         btnDropDown.appendChild(iconBtnDropDown)
         inputUstensiles.appendChild(btnDropDown)
 
-      
+
+        const ustensilSection = document.createElement('ul')
+        ustensilSection.setAttribute('id', 'ustensil_list')
+        ustensilSection.style.display='none'
+
+        const ustensilsTab = []
+        for(let i = 0; i < this._recipes.length; i++) {
+            // console.log(this._recipes[i].ingredients);
+            let ustensils = this._recipes[i].ustensils      
+            for(let j = 0; j < ustensils.length; j ++ ) {
+              //  console.log(ustensils[j]);
+                let ustensilToLowerCase = ustensils[j].toLowerCase()
+                let ustensilSyntax = ustensilToLowerCase.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                ustensilsTab.push(ustensilSyntax)
+            }
+            
+        }
+        //retirer les doublons du tableau
+        let uniqueUstensilTab = [...new Set(ustensilsTab)]
+        uniqueUstensilTab.forEach(element => {
+            //console.log(element);
+            const ustensiltItem = document.createElement('li')   
+            ustensiltItem.setAttribute('class', 'ustensils_from_list')
+            ustensiltItem.setAttribute('name', element)        
+            const elementSyntax = element.charAt(0).toUpperCase() + element.slice(1)
+            ustensiltItem.innerHTML= elementSyntax  
+            ustensilSection.appendChild(ustensiltItem) 
+            
+        });
+
+        that.$wrapper.appendChild(ustensilSection)
         that.$wrapper.appendChild(labelInputUstensiles)
         that.$wrapper.appendChild(inputUstensiles)
         that.$wrapper.appendChild(btnDropDown)
+        that.$wrapper.appendChild(ustensilSection)
 
-        that.dropDownSection()
 
-      
-
+        //functions
+        that.handleDropDown(btnDropDown, iconBtnDropDown, ustensilSection, inputUstensiles)
         return that.$wrapper
     }
 

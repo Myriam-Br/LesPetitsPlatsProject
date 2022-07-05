@@ -4,9 +4,18 @@ class HomePage {
         this.recipesApi = new RecipesListApi('scripts/data.json')
         this.$wrapper = document.createElement('div')
         this.$wrapper.setAttribute('id', 'recipe_wrapper')
-        this.$sectionItemAdded = document.createElement('div')  
-        this.$sectionItemAdded.setAttribute('id', 'items_added')
-       // console.log(new Recipe());
+         //creation tag containers (for each category)
+         this.$tagContainer = document.createElement('article') 
+         this.$tagContainer.setAttribute('id','tags_container') 
+         this.$ingredientTags = document.createElement('ul')  
+         this.$ingredientTags.setAttribute('id', 'ingredients_added') 
+         this.$ustensilTags = document.createElement('ul')  
+         this.$ustensilTags.setAttribute('id', 'ustensils_added') 
+         this.$appareilTags = document.createElement('ul') 
+         this.$appareilTags.setAttribute('id', 'appareils_added')
+         this.$tagContainer.appendChild(this.$ingredientTags)
+         this.$tagContainer.appendChild(this.$ustensilTags)
+         this.$tagContainer.appendChild(this.$appareilTags)
     }
 
     async main () {
@@ -31,7 +40,7 @@ class HomePage {
         this.$mainWrapper.appendChild(
             TemplateMainSearchBar.createSearchBar()
         )
-        this.$mainWrapper.appendChild(this.$sectionItemAdded)
+        this.$mainWrapper.appendChild(this.$tagContainer)
         
         this.$mainWrapper.appendChild(
             TemplateSecondarySearchBar.createSearchBar()
@@ -43,7 +52,30 @@ class HomePage {
                 TemplateRecipe.createCard()
             )
         });
-  
+
+
+
+        const inputs = document.querySelectorAll('input')
+        inputs.forEach(input => {
+            input.addEventListener('keyup', e => {
+                if(input.value.length >= 3) {
+                    setAttributeRecipeInput(this.$wrapper, input)
+                    displayRecipe(this.$wrapper)
+                    displayItemsCategory(this.$wrapper)
+                    displayItemSelection(this.$wrapper)
+                }  
+                else {
+                    removeAttributeRecipeInput(this.$wrapper, input)
+                    displayRecipe(this.$wrapper)
+                    displayItemsCategory(this.$wrapper)   
+                    displayItemSelection(this.$wrapper)
+                }        
+            })  
+            
+        });   
+        
+        handleTag(this.$wrapper, this.$tagContainer)
+        displayItemSelection(this.$wrapper)
     }
 }
 

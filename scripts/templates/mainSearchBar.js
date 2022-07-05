@@ -5,6 +5,9 @@ class MainSearchBar{
         this.$recipes = document.getElementById('recipe_wrapper')
     }
 
+    handleSearchInput() {
+        
+    }
     createSearchBar () {
 
         // CREATE MAIN SEARCH BAR DOM
