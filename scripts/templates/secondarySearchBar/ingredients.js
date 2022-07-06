@@ -10,11 +10,13 @@ class Ingredients{
 
 
     handleDropDown(button, icone, list, input) {
+
         button.addEventListener('click', e => {
             dropDownList(button, icone, list)
-            displayItemSelection(this.$recipe)
         })
         input.addEventListener('click', e =>{
+            console.log(e);
+            e.target.value = ' '
             dropDownList(button, icone, list)
         })
     }

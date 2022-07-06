@@ -122,9 +122,9 @@ function displayItemsCategory(recipes) {
     })
 
 
-    let ingredientTagContainer = document.getElementById('ingredients_added').querySelectorAll('li')
-    let ustensilTagContainer = document.getElementById('ustensils_added').querySelectorAll('li')
-    let applianceTagContainer = document.getElementById('appareils_added').querySelectorAll('li')
+    let ingredientTagContainer = document.getElementById('tags_container').querySelectorAll('li[class=ingredient_tag]')
+    let ustensilTagContainer = document.getElementById('tags_container').querySelectorAll('li[class=ustensil_tag]')
+    let applianceTagContainer = document.getElementById('tags_container').querySelectorAll('li[class=appliance_tag]')
     //RECUPERER TOUS LES RESULTATS ET LES AFFICHER
     results.forEach(element => {
         element.style.display='block'
@@ -155,64 +155,62 @@ function displayItemsCategory(recipes) {
 
 function displayItemSelection(recipes) {
 
-    var numberIngredientsActive =  document.querySelector('#ingredients_added').querySelectorAll('li').length
-    var numberUstensilsActive =  document.querySelector('#ustensils_added').querySelectorAll('li').length
-    var numberApplianceActive = document.querySelector('#appareils_added').querySelectorAll('li').length
-    var numberTotal = numberIngredientsActive + numberUstensilsActive + numberApplianceActive
-
+    var numberTotal = document.querySelector('#tags_container').querySelectorAll('li').length
+    var numberIngredientTag = document.querySelector('#tags_container').querySelectorAll('li[class=ingredient_tag]').length 
+    var numberUstensilTag = document.querySelector('#tags_container').querySelectorAll('li[class=ustensil_tag]').length 
+    var numberApplianceTag = document.querySelector('#tags_container').querySelectorAll('li[class=appliance_tag]').length 
     
-
-
     recipes.querySelectorAll('div[class=recipe_card]').forEach(recipe => {
 
         let recipeIngredients = recipe.querySelectorAll('li[class=ingredient]')
         let recipeUstensils = recipe.querySelectorAll('li[class=ustensil]')
         let recipeAppliance = recipe.querySelector('h4[class=appliance]')
-
+       // console.log(recipeAppliance);
 
         var numberIngredients = 0
         var numberUstensils = 0
         var numberAppliance = 0
-        var numberActiveTotal = numberIngredients + numberUstensils + numberAppliance
+        var numberActiveTotal = 0
         
         recipeIngredients.forEach(ingredient => {
             if(ingredient.getAttribute('ingredient') === 'selected') {
                 numberIngredients ++
+                numberActiveTotal ++
+
             }
         })
 
         recipeUstensils.forEach(ustensil => {
             if(ustensil.getAttribute('ustensil') === 'selected') {
                 numberUstensils ++
+                numberActiveTotal ++
             }
         })
 
 
+   
         if(recipeAppliance.getAttribute('appliance') === 'selected') {
             numberAppliance ++
+            numberActiveTotal ++
         }
-       
 
-        
 
-        if(numberIngredients === numberIngredientsActive) {
-           // recipe.setAttribute('ingredientFilter', 'active')
-            console.log(recipe);
-            console.log('numberIngredients',numberIngredients);
-            console.log('numberIngredientsActive', numberIngredientsActive);
-
-            console.log('numberUstensils',numberUstensils);
-            console.log('numberUstensilsActive', numberUstensilsActive);
-        
-            console.log('numberAppliance',numberAppliance);
-            console.log('numberApplianceActive', numberApplianceActive);
-            
+        if(numberIngredients === numberIngredientTag && numberActiveTotal === numberTotal) {
+            recipe.setAttribute('ingredientFilter', 'active')
         }else{
-          //  recipe.removeAttribute('ingredientFilter')
-
+            recipe.removeAttribute('ingredientFilter')
         }
-       
-     
+        if(numberUstensils === numberUstensilTag && numberActiveTotal === numberTotal) {
+            recipe.setAttribute('ustensilFilter', 'active')
+        }else{
+            recipe.removeAttribute('ustensilFilter')
+        }
+        if(numberAppliance === numberApplianceTag && numberActiveTotal === numberTotal) {
+            recipe.setAttribute('applianceFilter', 'active')
+        }else{
+            recipe.removeAttribute('applianceFilter')
+        }
+
        
 
     })

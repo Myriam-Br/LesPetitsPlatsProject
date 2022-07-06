@@ -5,28 +5,16 @@ class HomePage {
         this.$wrapper = document.createElement('div')
         this.$wrapper.setAttribute('id', 'recipe_wrapper')
          //creation tag containers (for each category)
-         this.$tagContainer = document.createElement('article') 
+         this.$tagContainer = document.createElement('ul') 
          this.$tagContainer.setAttribute('id','tags_container') 
-         this.$ingredientTags = document.createElement('ul')  
-         this.$ingredientTags.setAttribute('id', 'ingredients_added') 
-         this.$ustensilTags = document.createElement('ul')  
-         this.$ustensilTags.setAttribute('id', 'ustensils_added') 
-         this.$appareilTags = document.createElement('ul') 
-         this.$appareilTags.setAttribute('id', 'appareils_added')
-         this.$tagContainer.appendChild(this.$ingredientTags)
-         this.$tagContainer.appendChild(this.$ustensilTags)
-         this.$tagContainer.appendChild(this.$appareilTags)
     }
 
     async main () {
         
         const recipesData =  await this.recipesApi.getRecipes()
-       // console.log('DATA API', recipesData.recipes);
         const recipesDataTab = recipesData.recipes
 
         const RecipeTab = recipesDataTab.map(recipe => {
-          // console.log(recipe);
-          // console.log(new Recipe(recipe));
            return new Recipe(recipe)
         });
   
@@ -58,7 +46,8 @@ class HomePage {
         const inputs = document.querySelectorAll('input')
         inputs.forEach(input => {
             input.addEventListener('keyup', e => {
-                if(input.value.length >= 3) {
+                if(input.value.length >= 3 && input.value !== ' ') {
+                    filterOnINputSearch(input)
                     setAttributeRecipeInput(this.$wrapper, input)
                     displayRecipe(this.$wrapper)
                     displayItemsCategory(this.$wrapper)
