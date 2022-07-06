@@ -36,11 +36,11 @@ function handleAttributeNameInput(recipes, input) {
 
 
 // FUNCTION CREATE/DELTE TAG DIPLAY BLOCK/NONE INGREDIENT LIST
-function createHTMLTag(container, tag) {
+function createHTMLTag(container, tag, classTag) {
     //create tag 
     let createTagHtml = document.createElement('li')
     createTagHtml.setAttribute('name', tag.getAttribute('name'))
-    createTagHtml.setAttribute('class', 'tag')
+    createTagHtml.setAttribute('class', classTag)
     createTagHtml.innerHTML = tag.getAttribute('name')
     //create button tag
     let createTagButton = document.createElement('button')
@@ -76,8 +76,8 @@ function handleAttributeIngredientTag(recipes, tag, container) {
     }
    
     const ingredientsSelectedTab = recipes.querySelectorAll('li[ingredient=selected]')
-    for(let j = 0; j < container.querySelectorAll('li').length; j++) {
-        let getTag = container.querySelectorAll('li')[j]
+    for(let j = 0; j < container.querySelectorAll('li[class=ingredient_tag]').length; j++) {
+        let getTag = container.querySelectorAll('li[class=ingredient_tag]')[j]
         let btn_close_tag = getTag.querySelector('button')
           
         btn_close_tag.addEventListener('click', e => {
@@ -133,10 +133,11 @@ function displayListIngredient(input) {
 }
 
 function displayListIngredientFull(container){
+    console.log(container);
     const ingredientList = document.getElementById('ingredients_list').querySelectorAll('li')
-    if(container.querySelectorAll('li').length > 0) {
-        for(let i = 0; i < container.querySelectorAll('li').length; i++) {
-            let ingredient = container.querySelectorAll('li')[i].getAttribute('name')
+    if(container.length > 0) {
+        for(let i = 0; i < container.length; i++) {
+            let ingredient = container[i].getAttribute('name')
             for(let j = 0; j < ingredientList.length; j++) {
                 if(ingredient === ingredientList[j].getAttribute('name')) {
                     ingredientList[j].style.display = 'none'
@@ -162,8 +163,8 @@ function handleAttributeUstensilTag(recipes, tag, container) {
     }
 
     const ustensilSelectedTab = recipes.querySelectorAll('li[ustensil=selected]')
-    for(let j = 0; j < container.querySelectorAll('li').length; j++) {
-        let getTag = container.querySelectorAll('li')[j]
+    for(let j = 0; j < container.querySelectorAll('li[class=ustensil_tag]').length; j++) {
+        let getTag = container.querySelectorAll('li[class=ustensil_tag]')[j]
         let btn_close_tag = getTag.querySelector('button')
           
         btn_close_tag.addEventListener('click', e => {
@@ -213,9 +214,9 @@ function displayListUstensil(input) {
 
 function displayListUstensilFull(container){
     const ustensilList = document.getElementById('ustensiles_list').querySelectorAll('li')
-    if(container.querySelectorAll('li').length > 0) {
-        for(let i = 0; i < container.querySelectorAll('li').length; i++) {
-            let ustensil = container.querySelectorAll('li')[i].getAttribute('name')
+    if(container.length > 0) {
+        for(let i = 0; i < container.length; i++) {
+            let ustensil = container[i].getAttribute('name')
             for(let j = 0; j < ustensilList.length; j++) {
                 if(ustensil === ustensilList[j].getAttribute('name')) {
                     ustensilList[j].style.display = 'none'
@@ -244,8 +245,8 @@ function handleAttributeAppareilTag(recipes, tag, container) {
     }
 
     const applianceSelectedTab = recipes.querySelectorAll('h4[appliance=selected]')
-    for(let j = 0; j < container.querySelectorAll('li').length; j++) {
-        let getTag = container.querySelectorAll('li')[j]
+    for(let j = 0; j < container.querySelectorAll('li[class=appliance_tag]').length; j++) {
+        let getTag = container.querySelectorAll('li[class=appliance_tag]')[j]
         let btn_close_tag = getTag.querySelector('button')
           
         btn_close_tag.addEventListener('click', e => {
@@ -284,10 +285,10 @@ function handleAttributeApplianceInput(recipes, input) {
 //FUNCTION SET/REMOVE ATTRIBUTE RECIPE -> check all filters than setAttribute or remove
 function handleAttributeRecipe(recipes) {
 
-    var numberOfIngredientFilters = document.getElementById('ingredients_added').querySelectorAll('li').length
-    var numberOfUstensilsFilters = document.getElementById('ustensils_added').querySelectorAll('li').length
-    var numberOfAppliancesFilters = document.getElementById('appareils_added').querySelectorAll('li').length
-    var numberOfFilters = numberOfIngredientFilters + numberOfUstensilsFilters + numberOfAppliancesFilters 
+    var numberOfIngredientFilters = document.querySelectorAll('li[class=ingredient_tag]').length
+    var numberOfUstensilsFilters = document.querySelectorAll('li[class=ustensil_tag]').length
+    var numberOfAppliancesFilters = document.querySelectorAll('li[class=appliance_tag]').length
+    var numberOfFilters =  document.querySelector('#tags_container').querySelectorAll('li').length
 
     //check number of filters per recipe in ingredient list
     for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
@@ -295,7 +296,6 @@ function handleAttributeRecipe(recipes) {
         const ingredientList = recipe.querySelectorAll('li[class=ingredient]')
         const ustensilList = recipe.querySelectorAll('li[class=ustensil')
         const appliance = recipe.querySelector('h4[class=appliance]')
-        const recipeName =  recipe.querySelector('.name_recipe').innerHTML
 
         var numberActiveIngredient = 0
         var numberActiveUstensils = 0
@@ -393,10 +393,10 @@ function displayItemCategory(recipes) {
     let ustensilListUnique = [... new Set(ustensilTab)]
     let appareilListUnique = [... new Set(appareilTab)]
 
+    const container= document.getElementById('tags_container')
 
     //gérer creation tag
     //INGREDIENTS
-    const containerIngredient = document.getElementById('ingredients_added')
     let listIngredients = document.getElementById('ingredients_list')
     listIngredients.innerHTML = ' '
     for(let i = 0; i < ingredientListUnique.length; i++) {
@@ -405,8 +405,8 @@ function displayItemCategory(recipes) {
         createIngredient.setAttribute('class', 'ingredient_from_list')
         createIngredient.innerHTML = ingredientListUnique[i].charAt(0).toUpperCase() + ingredientListUnique[i].slice(1)
         createIngredient.addEventListener('click', e => {     
-            createHTMLTag(containerIngredient, createIngredient)   
-            handleAttributeIngredientTag(recipes, createIngredient, containerIngredient)   
+            createHTMLTag(container, createIngredient, 'ingredient_tag')   
+            handleAttributeIngredientTag(recipes, createIngredient, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
             displayItemCategory(recipes)                         
@@ -426,7 +426,6 @@ function displayItemCategory(recipes) {
     }   
 
     //USTENSILS
-    const containerUstensil = document.getElementById('ustensils_added')
     let listUstensil = document.getElementById('ustensiles_list')
     listUstensil.innerHTML = ' '
     for(let i = 0; i < ustensilListUnique.length; i++) {
@@ -435,8 +434,8 @@ function displayItemCategory(recipes) {
         createUstensil.setAttribute('class', 'ustensils_from_list')
         createUstensil.innerHTML = ustensilListUnique[i].charAt(0).toUpperCase() + ustensilListUnique[i].slice(1)
         createUstensil.addEventListener('click', e => {     
-            createHTMLTag(containerUstensil, createUstensil)   
-            handleAttributeIngredientTag(recipes, createUstensil, containerUstensil)   
+            createHTMLTag(container, createUstensil, 'ustensil_tag')   
+            handleAttributeIngredientTag(recipes, createUstensil, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
            displayItemCategory(recipes)                         
@@ -456,7 +455,6 @@ function displayItemCategory(recipes) {
     }
   
     //APPAREILS
-    const containerAppareil = document.getElementById('appareils_added')
     let listAppareil = document.getElementById('appareils_list')
     listAppareil.innerHTML = ' '
  
@@ -466,8 +464,8 @@ function displayItemCategory(recipes) {
         createAppareil.setAttribute('class', 'appareils_from_list')
         createAppareil.innerHTML = appareilListUnique[i].charAt(0).toUpperCase() + appareilListUnique[i].slice(1)
         createAppareil.addEventListener('click', e => {     
-            createHTMLTag(containerAppareil, createAppareil)   
-            handleAttributeIngredientTag(recipes, createAppareil, containerAppareil)   
+            createHTMLTag(container, createAppareil, 'appliance_tag')   
+            handleAttributeIngredientTag(recipes, createAppareil, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
             displayItemCategory(recipes)                         

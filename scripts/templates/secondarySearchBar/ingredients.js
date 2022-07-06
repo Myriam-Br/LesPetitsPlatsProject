@@ -4,7 +4,8 @@ class Ingredients{
         this.$wrapper.setAttribute('id', 'ingredients_search_bar')
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-        this.$tagContainerIngredients = document.getElementById('ingredients_added')
+        this.$tagContainer = document.getElementById('tags_container')
+        this.$tagContainerIngredients = this.$tagContainer.querySelectorAll('li[class=ingredient_tag]')
     }
 
 
@@ -40,11 +41,12 @@ class Ingredients{
 
         //HANDLE TAGS ON CLICK 
         //create tag for each element selected from list 
+        let classTab = 'ingredient_tag'
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {       
-                createHTMLTag(this.$tagContainerIngredients, tag)   
-                handleAttributeIngredientTag(this.$recipe, tag, this.$tagContainerIngredients)   
+                createHTMLTag(this.$tagContainer, tag, classTab)   
+                handleAttributeIngredientTag(this.$recipe, tag, this.$tagContainer)   
                 handleAttributeRecipe(this.$recipe)  
                 displayRecipes(this.$recipe)  
                 displayItemCategory(this.$recipe)                         

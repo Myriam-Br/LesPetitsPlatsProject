@@ -4,7 +4,8 @@ class Ustensiles{
         this.$wrapper.setAttribute('id', 'ustensiles_search_bar') 
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-        this.$tagContainerUstensils = document.getElementById('ustensils_added')
+        this.$tagContainer = document.getElementById('tags_container')
+        this.$tagContainerUstensils = this.$tagContainer.querySelectorAll('li[class=ustensil_tag]')
     }
 
     handleUstensils(button, icone, list) {
@@ -31,11 +32,12 @@ class Ustensiles{
 
         //HANDLE TAGS ON CLICK
         //create tag for each element selected from list 
+        let classTag = 'ustensil_tag'
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
-                createHTMLTag(this.$tagContainerUstensils, tag)   
-                handleAttributeUstensilTag(this.$recipe, tag, this.$tagContainerUstensils)
+                createHTMLTag( this.$tagContainer, tag, classTag)   
+                handleAttributeUstensilTag(this.$recipe, tag, this.$tagContainer)
                 handleAttributeRecipe(this.$recipe)
                 displayRecipes(this.$recipe)    
                 displayItemCategory(this.$recipe)    

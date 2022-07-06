@@ -11,17 +11,8 @@ class HomePage {
         this.$wrapper.setAttribute('id', 'recipe_wrapper')
 
         //creation tag containers (for each category)
-        this.$tagContainer = document.createElement('article') 
+        this.$tagContainer = document.createElement('ul') 
         this.$tagContainer.setAttribute('id','tags_container') 
-        this.$ingredientTags = document.createElement('ul')  
-        this.$ingredientTags.setAttribute('id', 'ingredients_added') 
-        this.$ustensilTags = document.createElement('ul')  
-        this.$ustensilTags.setAttribute('id', 'ustensils_added') 
-        this.$appareilTags = document.createElement('ul') 
-        this.$appareilTags.setAttribute('id', 'appareils_added')
-        this.$tagContainer.appendChild(this.$ingredientTags)
-        this.$tagContainer.appendChild(this.$ustensilTags)
-        this.$tagContainer.appendChild(this.$appareilTags)
     }
 
     async main () {

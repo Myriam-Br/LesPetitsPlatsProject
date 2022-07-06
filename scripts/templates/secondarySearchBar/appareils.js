@@ -4,7 +4,8 @@ class Appareils{
         this.$wrapper.setAttribute('id', 'appareils_search_bar')      
         this.$recipe = document.getElementById('recipe_wrapper')
         this._recipes  = recipes
-        this.$tagContainerAppareils = document.getElementById('appareils_added')
+        this.$tagContainer = document.getElementById('tags_container')
+        this.$tagContainerAppareils = this.$tagContainer.querySelectorAll('li[class=appliance_tag]')
     }
 
     handleAppareil(button, icone, list) {
@@ -29,11 +30,12 @@ class Appareils{
 
         //HANDLE TAGS ON CLICK
         //create tag for each element selected from list 
+        let classTab = 'appliance_tag'
         for(let i = 0; i < list.querySelectorAll('li').length; i++) {
             let tag = list.querySelectorAll('li')[i]  
             tag.addEventListener('click', e => {
-                createHTMLTag(this.$tagContainerAppareils, tag)   
-                handleAttributeAppareilTag(this.$recipe, tag, this.$tagContainerAppareils)
+                createHTMLTag(this.$tagContainer, tag, classTab)   
+                handleAttributeAppareilTag(this.$recipe, tag, this.$tagContainer)
                 handleAttributeRecipe(this.$recipe)
                 displayRecipes(this.$recipe) 
                 displayItemCategory(this.$recipe)    
