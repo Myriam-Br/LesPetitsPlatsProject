@@ -292,14 +292,15 @@ function handleAttributeRecipe(recipes) {
     //check number of filters per recipe in ingredient list
     for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
         const recipe = recipes.querySelectorAll('div[class=recipe_card]')[i]
-        const ingredientList = recipe.querySelector('.ingredient_recipe_list').querySelectorAll('li')
-        const ustensilList = recipe.querySelector('.ustensil_recipe_list').querySelectorAll('li')
-        const appliance = recipe.querySelector('.appliance')
+        const ingredientList = recipe.querySelectorAll('li[class=ingredient]')
+        const ustensilList = recipe.querySelectorAll('li[class=ustensil')
+        const appliance = recipe.querySelector('h4[class=appliance]')
         const recipeName =  recipe.querySelector('.name_recipe').innerHTML
 
         var numberActiveIngredient = 0
         var numberActiveUstensils = 0
         var numberActiveAppliance = 0
+        var numberFilterRecipe = 0 
       
         //verifier si numbre filtre actif d'une catégorie = numbre filtre de la catégorie dans le site -> +1 count
         // INGREDIENT
@@ -307,25 +308,30 @@ function handleAttributeRecipe(recipes) {
             let ingredient = ingredientList[j]
             if(ingredient.getAttribute('ingredient')==='selected') {
                 numberActiveIngredient++   
+                numberFilterRecipe++
             }      
         }
     
         // USTENSILS
-        for(let j = 0; j < ustensilList.length; j++) {  
-            let ustensil = ustensilList[j]
+        for(let k = 0; k < ustensilList.length; k++) {  
+            let ustensil = ustensilList[k]
             if(ustensil.getAttribute('ustensil')==='selected') {
-                numberActiveUstensils++   
+                numberActiveUstensils++ 
+                numberFilterRecipe++  
             }      
         }
 
         // APPAREIL
         if(appliance.getAttribute('appliance')==='selected') {
             numberActiveAppliance++   
+            numberFilterRecipe++
         }    
         
     
         
-        var numberFilterRecipe = numberActiveIngredient + numberActiveUstensils + numberActiveAppliance 
+
+        //PROBLEME PEUT VENIR D'ICI!!!
+      
         //if filters active category in recipe = filter active category && total filters recipe === total filters active -> set attribute to recipe
         if(numberActiveIngredient === numberOfIngredientFilters && numberFilterRecipe === numberOfFilters) {
             recipe.setAttribute('ingredientFilter','active')    
@@ -348,6 +354,9 @@ function handleAttributeRecipe(recipes) {
         else{
             recipe.removeAttribute('applianceFilter')
         }
+
+
+        //console.log(numberActiveIngredient);
     }
 
 
