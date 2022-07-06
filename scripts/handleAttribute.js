@@ -66,9 +66,6 @@ function setAttributeRecipeInput(recipes, input) {
             }       
         });
     }
-  
-
-   
 }
 
 function removeAttributeRecipeInput(recipes, input) {
@@ -205,19 +202,19 @@ function handleAttributeItems(recipes, container) {
     let ingredientTags = tagsArray.filter(item =>{
         return item.getAttribute('class') ==='ingredient_tag'
     })
-    //console.log('ingredientTags',ingredientTags);
+
 
     //get all ustensils tags 
     let ustensilTags = tagsArray.filter(item =>{
         return item.getAttribute('class') ==='ustensil_tag'
     })
-   // console.log('ustensilTags',ustensilTags);
+
 
     //get all appliances tags 
     let applianceTags = tagsArray.filter(item =>{
         return item.getAttribute('class') === 'appliance_tag'
     })
-   console.log('applianceTags',applianceTags);
+
 
 
     //SET ATTRIBUTES
