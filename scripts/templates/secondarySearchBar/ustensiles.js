@@ -24,12 +24,21 @@ class Ustensiles{
         })
 
 
-        input.addEventListener('click', e => {
+
+        input.addEventListener('click', e => { 
             input.value = ' ' 
             list.style.display = "block"
-            dropDownList(button, icone, list)        
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
+            if(elt.length >= 3) {   
+                handleAttributeIngredientInput(this.$recipe, elt)
+            }
+            else{
+                const attributeName = 'ustensilFilter'
+                removeAttributeFromRecipe(this.$recipe, attributeName)
+            }   
+            dropDownList(button, icone, list)         
         })
-
+        
         //HANDLE TAGS ON CLICK
         //create tag for each element selected from list 
         let classTag = 'ustensil_tag'

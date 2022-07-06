@@ -14,18 +14,28 @@ class Appareils{
         input.addEventListener('keyup', e => {
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             if(elt.length >= 3) {
+                displayListIngredient(elt)
                 handleAttributeApplianceInput(this.$recipe, elt)       
             }
             else{
                 const attributeName = 'applianceFilter'
+                displayListIngredientFull(this.$tagContainerAppareils)
                 removeAttributeFromRecipe(this.$recipe, attributeName) 
             }
         })
 
-        input.addEventListener('click', e => {
+        input.addEventListener('click', e => { 
             input.value = ' ' 
             list.style.display = "block"
-            dropDownList(button, icone, list)
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
+            if(elt.length >= 3) {   
+                handleAttributeIngredientInput(this.$recipe, elt)
+            }
+            else{
+                const attributeName = 'applianceFilter'
+                removeAttributeFromRecipe(this.$recipe, attributeName)
+            }   
+            dropDownList(button, icone, list)         
         })
 
         //HANDLE TAGS ON CLICK
@@ -46,6 +56,7 @@ class Appareils{
     handleDropDown(button, icone, list) {
         button.addEventListener('click', e => {
             dropDownList(button, icone, list)
+
         })
     }
 

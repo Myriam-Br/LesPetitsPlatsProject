@@ -59,6 +59,7 @@ class Ingredients{
     handleDropDown(button, icone, list) {
         button.addEventListener('click', e => {
             dropDownList(button, icone, list)
+        
         })
     }
 

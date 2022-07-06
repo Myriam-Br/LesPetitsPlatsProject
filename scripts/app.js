@@ -60,11 +60,13 @@ class HomePage {
                 else {
                     console.log('cleared');
                     displayAllRecipes(this.$wrapper)
+                    displayItemCategory(this.$wrapper)
                 }        
             })  
             
         });   
 
+       
 
         //function display recipe click tag
         

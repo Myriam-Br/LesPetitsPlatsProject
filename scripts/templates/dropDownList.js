@@ -235,9 +235,12 @@ function displayListUstensilFull(container){
 ////////////////////////APPAREILS///////////////////////////////
 //FUNCTION SET/REMOVE ATTRIBUTE TAG
 function handleAttributeAppareilTag(recipes, tag, container) {
+    console.log('handle appliance');
     const applianceList = recipes.querySelectorAll('h4[class=appliance]')
     for(let i = 0; i < applianceList.length; i++) {
         let appliance = applianceList[i]    
+        console.log(tag.getAttribute('name'));
+        console.log(appliance.getAttribute('name'));
         if(tag.getAttribute('name') === appliance.getAttribute('name')) {
             appliance.setAttribute('appliance','selected')    
             //console.log(appliance);    
@@ -388,6 +391,11 @@ function displayItemCategory(recipes) {
         }      
     } 
 
+
+    //faire fonction input search match elt 
+    console.log();
+
+    console.log(appareilTab);
     //supprimer doublons
     let ingredientListUnique = [... new Set(ingredientTab)]
     let ustensilListUnique = [... new Set(ustensilTab)]
@@ -435,7 +443,7 @@ function displayItemCategory(recipes) {
         createUstensil.innerHTML = ustensilListUnique[i].charAt(0).toUpperCase() + ustensilListUnique[i].slice(1)
         createUstensil.addEventListener('click', e => {     
             createHTMLTag(container, createUstensil, 'ustensil_tag')   
-            handleAttributeIngredientTag(recipes, createUstensil, container)   
+            handleAttributeUstensilTag(recipes, createUstensil, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
            displayItemCategory(recipes)                         
@@ -465,7 +473,7 @@ function displayItemCategory(recipes) {
         createAppareil.innerHTML = appareilListUnique[i].charAt(0).toUpperCase() + appareilListUnique[i].slice(1)
         createAppareil.addEventListener('click', e => {     
             createHTMLTag(container, createAppareil, 'appliance_tag')   
-            handleAttributeIngredientTag(recipes, createAppareil, container)   
+            handleAttributeAppareilTag(recipes, createAppareil, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
             displayItemCategory(recipes)                         
