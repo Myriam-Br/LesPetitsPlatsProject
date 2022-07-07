@@ -15,18 +15,20 @@ class Ingredients{
         input.addEventListener('keyup', e => {
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
             if(elt.length >= 3) {   
+                displayItemCategory(this.$recipe)                         
                 displayListIngredient(elt)
                 handleAttributeIngredientInput(this.$recipe, elt)
             }
             else{
                 const attributeName = 'ingredientFilter'
+                displayItemCategory(this.$recipe) 
                 displayListIngredientFull(this.$tagContainerIngredients)
                 removeAttributeFromRecipe(this.$recipe, attributeName)
             }     
         })
 
         input.addEventListener('click', e => { 
-            input.value = ' ' 
+            input.value = '' 
             list.style.display = "block"
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
             if(elt.length >= 3) {   

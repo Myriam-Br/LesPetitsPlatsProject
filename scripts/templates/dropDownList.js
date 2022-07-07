@@ -239,8 +239,6 @@ function handleAttributeAppareilTag(recipes, tag, container) {
     const applianceList = recipes.querySelectorAll('h4[class=appliance]')
     for(let i = 0; i < applianceList.length; i++) {
         let appliance = applianceList[i]    
-        console.log(tag.getAttribute('name'));
-        console.log(appliance.getAttribute('name'));
         if(tag.getAttribute('name') === appliance.getAttribute('name')) {
             appliance.setAttribute('appliance','selected')    
             //console.log(appliance);    
@@ -272,8 +270,6 @@ function handleAttributeApplianceInput(recipes, input) {
     for(let i = 0; i < recipes.length; i++) {
         const recipe = recipes[i]
         let appliance = recipe.querySelector('h4[class=appliance]').getAttribute('name') 
-        console.log(appliance);
-        console.log(input);
         if(appliance.includes(input)) {
             recipe.setAttribute('applianceFilter', 'active')   
         }
@@ -395,16 +391,33 @@ function displayItemCategory(recipes) {
     //faire fonction input search match elt 
     console.log();
 
-    console.log(appareilTab);
     //supprimer doublons
     let ingredientListUnique = [... new Set(ingredientTab)]
     let ustensilListUnique = [... new Set(ustensilTab)]
     let appareilListUnique = [... new Set(appareilTab)]
 
     const container= document.getElementById('tags_container')
-
+   
     //gérer creation tag
     //INGREDIENTS
+
+    /*
+    //verifier si input ingredient value match avec element list et push les elements qui match 
+    const inputIngredient = document.getElementById('input_ingredients')
+    if(inputIngredient.value.length >=3) {
+        ingredientListUnique.forEach(ingredient => {
+            ingredientListUnique = []
+            if(ingredient.includes(inputIngredient.value)) {
+                ingredientListUnique.push(ingredient)
+            }
+        })     
+        return ingredientListUnique
+    }
+    else{
+        ingredientListUnique
+    }*/
+
+       
     let listIngredients = document.getElementById('ingredients_list')
     listIngredients.innerHTML = ' '
     for(let i = 0; i < ingredientListUnique.length; i++) {
@@ -417,7 +430,7 @@ function displayItemCategory(recipes) {
             handleAttributeIngredientTag(recipes, createIngredient, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
-            displayItemCategory(recipes)                         
+            displayItemCategory(recipes)                   
         }) 
       
         listIngredients.appendChild(createIngredient)   
@@ -434,6 +447,23 @@ function displayItemCategory(recipes) {
     }   
 
     //USTENSILS
+
+    /*
+    //verifier si input ingredient value match avec element list et push les elements qui match 
+    const inputUstensil = document.getElementById('input_ustensiles')
+    if(inputUstensil.value.length >=3) {
+        ustensilListUnique.forEach(ustensil => {
+            ustensilListUnique = []
+            if(ustensil.includes(inputUstensil.value)) {
+                ustensilListUnique.push(ustensil)
+            }
+        })     
+        return ustensilListUnique
+    }
+    else{
+       ustensilListUnique
+    }*/
+
     let listUstensil = document.getElementById('ustensiles_list')
     listUstensil.innerHTML = ' '
     for(let i = 0; i < ustensilListUnique.length; i++) {
@@ -446,7 +476,7 @@ function displayItemCategory(recipes) {
             handleAttributeUstensilTag(recipes, createUstensil, container)   
             handleAttributeRecipe(recipes)  
             displayRecipes(recipes)  
-           displayItemCategory(recipes)                         
+            displayItemCategory(recipes)                         
         }) 
       
         listUstensil.appendChild(createUstensil)   
@@ -463,6 +493,9 @@ function displayItemCategory(recipes) {
     }
   
     //APPAREILS
+
+    
+
     let listAppareil = document.getElementById('appareils_list')
     listAppareil.innerHTML = ' '
  
@@ -482,15 +515,17 @@ function displayItemCategory(recipes) {
         listAppareil.appendChild(createAppareil)   
     }
     //chercher list tag actif et si new tag contain dans list tag actif (ne rien faire si oui)
-    for(let i = 0; i < document.querySelectorAll('li[appareil=selected]').length; i++) {
+    for(let i = 0; i < document.querySelectorAll('h4[appliance=selected]').length; i++) {
         for(let j = 0; j < listAppareil.querySelectorAll('li').length; j++) {
-            if(listAppareil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('li[appareil=selected]')[i].getAttribute('name')) {
+            if(listAppareil.querySelectorAll('li')[j].getAttribute('name') === document.querySelectorAll('h4[appliance=selected]')[i].getAttribute('name')) {
                 listAppareil.querySelectorAll('li')[j].style.display = 'none'
             }
             else{
             }
         }     
-    }      
+    }  
+    
+    //console.log(document.querySelectorAll('h4[appliance=selected]'));
 }
 
 

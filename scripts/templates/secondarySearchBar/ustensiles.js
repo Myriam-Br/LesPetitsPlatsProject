@@ -12,12 +12,14 @@ class Ustensiles{
         const input = this.$wrapper.querySelector('#input_ustensiles')      
         input.addEventListener('keyup', e => {
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
-            if(elt.length >= 3) {  
+            if(elt.length >= 3) {
+                displayItemCategory(this.$recipe)     
                 displayListUstensil(elt)  
                 handleAttributeUstensilInput(this.$recipe, elt) 
             }
             else{
                 const attributeName = 'ustensilFilter'
+                displayItemCategory(this.$recipe) 
                 displayListUstensilFull(this.$tagContainerUstensils)  
                 removeAttributeFromRecipe(this.$recipe, attributeName) 
             }
@@ -26,7 +28,7 @@ class Ustensiles{
 
 
         input.addEventListener('click', e => { 
-            input.value = ' ' 
+            input.value = '' 
             list.style.display = "block"
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")  
             if(elt.length >= 3) {   
