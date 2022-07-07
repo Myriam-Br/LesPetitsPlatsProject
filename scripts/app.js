@@ -47,7 +47,6 @@ class HomePage {
         inputs.forEach(input => {
             input.addEventListener('keyup', e => {
                 if(input.value.length >= 3 && input.value !== ' ') {
-                    filterOnINputSearch(input)
                     setAttributeRecipeInput(this.$wrapper, input)
                     displayRecipe(this.$wrapper)
                     displayItemsCategory(this.$wrapper)

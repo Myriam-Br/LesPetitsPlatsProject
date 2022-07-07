@@ -53,19 +53,26 @@ function displayItemsCategory(recipes) {
     let ingredientTab = []
     let ustensilTab = []
     let applianceTab = []
+
+    const inputIngredient = document.getElementById('input_ingredients')
+    const inputUstensil =  document.getElementById('input_ustensiles')
+    const inputAppliance =  document.getElementById('input_appareils')
     recipes.querySelectorAll('div[match=true]').forEach(recipe => {
         //INGREDIENTS TAB
-        recipe.querySelectorAll('li[class=ingredient]').forEach(ingredient => {
-            ingredientTab.push(ingredient.getAttribute('name'))
+        recipe.querySelectorAll('li[class=ingredient]').forEach(ingredient => {  
+            ingredientTab.push(ingredient.getAttribute('name'))    
         })
+       
 
         //USTENSIL TAB
+        
         recipe.querySelectorAll('li[class=ustensil]').forEach(ustensil => {
             ustensilTab.push(ustensil.getAttribute('name'))
         })
 
         //APPLIANCE TAB
-        applianceTab.push( recipe.querySelector('h4[class=appliance]').getAttribute('name'))
+       
+        applianceTab.push(recipe.querySelector('h4[class=appliance]').getAttribute('name'))
     })
 
     //INGREDIENTS

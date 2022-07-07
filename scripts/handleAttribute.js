@@ -17,7 +17,9 @@ function setAttributeRecipeInput(recipes, input) {
             let recipeName = recipe.querySelector('.name_recipe').getAttribute('name')      
             if(recipeName.includes(input)) {
                 recipe.setAttribute('nameFilter', 'active')
-            }          
+            }      
+            
+          
         });
     }
 

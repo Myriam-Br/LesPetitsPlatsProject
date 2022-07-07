@@ -16,7 +16,7 @@ class Ingredients{
         })
         input.addEventListener('click', e =>{
             console.log(e);
-            e.target.value = ' '
+            e.target.value = ''
             dropDownList(button, icone, list)
         })
     }
