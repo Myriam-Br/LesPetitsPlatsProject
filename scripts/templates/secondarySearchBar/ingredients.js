@@ -19,6 +19,7 @@ class Ingredients{
             e.target.value = ''
             dropDownList(button, icone, list)
         })
+      
     }
 
 

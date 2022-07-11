@@ -1,46 +1,48 @@
 function setAttributeRecipeInput(recipes, input) {
-  // recipes = recipes.querySelectorAll('h2[class=name_recipe]')
-  // console.log('setAttribute', recipes);
+
 
   // INPUT TO TARGET
   const inputMain = document.getElementById('input_main_search_bar');
   const inputIngredient = document.getElementById('input_ingredients');
   const inputUstensil = document.getElementById('input_ustensiles');
   const inputAppliance = document.getElementById('input_appareils');
+  const recipesList = recipes.querySelectorAll('div[class=recipe_card]');
 
   // HANDLE NAME ATTRIBUTE FILTER
   if (input === inputMain) {
     // set attribute to recipe if match input value
-    const recipesList = recipes.querySelectorAll('div[class=recipe_card]');
+   
     input = input.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     recipesList.forEach((recipe) => {
       const recipeName = recipe.querySelector('.name_recipe').getAttribute('name');
       if (recipeName.includes(input)) {
         recipe.setAttribute('nameFilter', 'active');
+        recipe.removeAttribute('nameMatch');
+      }
+      else{
+        recipe.setAttribute('nameMatch', 'false');
       }
     });
   }
 
   // HANDLE INGREDIENT ATTRIBUTE FILTER
-  if (input === inputIngredient) {
+  else if (input === inputIngredient) {
     // set attribute to recipe if match input value
-    const recipesList = recipes.querySelectorAll('div[class=recipe_card]');
     input = input.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     recipesList.forEach((recipe) => {
       const recipeIngredients = recipe.querySelector('.ingredient_recipe_list').querySelectorAll('li');
       recipeIngredients.forEach((ingredient) => {
         ingredient = ingredient.getAttribute('name');
         if (ingredient.includes(input)) {
-          recipe.setAttribute('ingredientFilter', 'active');
+          recipe.setAttribute('ingredientFilter', 'active');     
         }
       });
     });
   }
 
   // HANDLE USTENSILS ATTRIBUTE FILTER
-  if (input === inputUstensil) {
+  else if (input === inputUstensil) {
     // set attribute to recipe if match input value
-    const recipesList = recipes.querySelectorAll('div[class=recipe_card]');
     input = input.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     recipesList.forEach((recipe) => {
       const recipeUstensils = recipe.querySelector('.ustensil_recipe_list').querySelectorAll('li');
@@ -54,9 +56,8 @@ function setAttributeRecipeInput(recipes, input) {
   }
 
   // HANDLE APPAREIL ATTRIBUTE FILTER
-  if (input === inputAppliance) {
+  else if (input === inputAppliance) {
     // set attribute to recipe if match input value
-    const recipesList = recipes.querySelectorAll('div[class=recipe_card]');
     input = input.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     recipesList.forEach((recipe) => {
       const recipeAppareil = recipe.querySelector('.appliance').getAttribute('name');
@@ -78,9 +79,14 @@ function removeAttributeRecipeInput(recipes, input) {
     input = input.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     // remove attribute to recipe
     const recipesList = recipes.querySelectorAll('div[nameFilter=active]');
-    recipesList.forEach((recipe) => {
+    recipesList.forEach(recipe => {
       recipe.removeAttribute('nameFilter');
     });
+    recipes.querySelectorAll('div[class=recipe_card]').forEach(recipe =>{
+      recipe.removeAttribute('nameMatch');
+
+    })
+
   }
 
   if (input === inputIngredient) {
@@ -111,17 +117,20 @@ function removeAttributeRecipeInput(recipes, input) {
 }
 
 function handleTag(recipes, container) {
+  console.log(document.getElementById('input_ingredients'));
   // INGREDIENT ATTRIBUTE TAG
   const ingredientList = document.getElementById('ingredient_list');
   ingredientList.querySelectorAll('li').forEach((tag) => {
     const classTag = 'ingredient_tag';
     tag.addEventListener('click', (e) => {
       // CREATE TAG
+      document.getElementById('input_ingredients').value = ''
       createTagHTML(tag, container, recipes, classTag);
       handleAttributeItems(recipes, container);
       displayItemSelection(recipes);
       displayRecipe(recipes);
       displayItemsCategory(recipes);
+      
     });
   });
 
@@ -253,3 +262,4 @@ function handleAttributeItems(recipes, container) {
     });
   });
 }
+
