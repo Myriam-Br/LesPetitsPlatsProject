@@ -18,13 +18,14 @@ function dropDownList(button, icone, list) {
 // FUNCTION HANDLE ATTRIBUTE INPUT
 function handleAttributeNameInput(recipes, input) {
   recipes = recipes.querySelectorAll('div[class=recipe_card]');
-
+  //let recipeWrapper = document.getElementById('recipe_wrapper')
   for (let i = 0; i < recipes.length; i++) {
     const recipe = recipes[i];
     const recipeName = recipes[i].querySelector('.name_recipe').getAttribute('name');
     if (recipeName.includes(input)) {
       recipe.setAttribute('nameFilter', 'active');
-    } else {
+    } 
+    else {
       recipe.removeAttribute('nameFilter');
     }
   }

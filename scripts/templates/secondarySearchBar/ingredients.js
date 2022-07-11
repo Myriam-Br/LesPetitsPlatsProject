@@ -79,7 +79,7 @@ class Ingredients {
     const iconBtnDropDown = document.createElement('i');
     iconBtnDropDown.setAttribute('class', 'fa fa-chevron-down');
     btnDropDown.appendChild(iconBtnDropDown);
-
+    inputIngredients.appendChild(btnDropDown)
     // ingredients list
     const ingredientsSection = document.createElement('ul');
     ingredientsSection.setAttribute('id', 'ingredients_list');

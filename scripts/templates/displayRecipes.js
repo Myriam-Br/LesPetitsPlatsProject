@@ -4,6 +4,8 @@ function displayRecipes(recipe) {
   const ingredientFilter = recipe.querySelectorAll('div[ingredientFilter = active]');
   const applianceFilter = recipe.querySelectorAll('div[applianceFilter = active]');
   const ustensilFitler = recipe.querySelectorAll('div[ustensilFilter = active]');
+  
+
   // check filtre actif
   let nombreFiltreActif = 0;
   if (nameFilter.length > 0) {
@@ -64,12 +66,18 @@ function displayRecipes(recipe) {
     /// // CAS MULTIFILTRE
     // compare filter active site and filter active recipe
     if (nombreFiltreActiveRecette) {
+      
       /// /console.log(nombreFiltreActif);
       if (nombreFiltreActiveRecette === nombreFiltreActif) {
         recipes[i].style.display = 'block';
+        
       } else {
         recipes[i].style.display = 'none';
+        
       }
+    }
+    else{  
+     
     }
   }
 }
@@ -115,9 +123,11 @@ function displayAllRecipes(recipe) {
 
     if (nombreFiltreActiveRecette === nombreFiltreActif) {
       recipeList[i].style.display = 'block';
+
     } else {
       recipeList[i].style.display = 'none';
     }
+
   }
 }
 

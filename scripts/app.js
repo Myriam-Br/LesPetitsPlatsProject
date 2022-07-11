@@ -13,6 +13,8 @@ class HomePage {
         //creation tag containers (for each category)
         this.$tagContainer = document.createElement('ul') 
         this.$tagContainer.setAttribute('id','tags_container') 
+        this.$errorMsg = document.createElement('h3')
+        this.$errorMsg.setAttribute('class', 'error_message')
     }
 
     async main () {
@@ -48,6 +50,8 @@ class HomePage {
                 TemplateRecipe.createCard()
             )
         });
+        this.$wrapper.appendChild(this.$errorMsg)
+
 
 
         const inputs = document.querySelectorAll('input')
@@ -55,21 +59,17 @@ class HomePage {
             input.addEventListener('keyup', e => {
                 if(input.value.length >= 3) {
                     displayRecipes(this.$wrapper)
-                    displayItemCategory(this.$wrapper)
+                    errorMessage(this.$wrapper)
+                    displayItemCategory(this.$wrapper)  
                 }  
                 else {
-                    console.log('cleared');
                     displayAllRecipes(this.$wrapper)
                     displayItemCategory(this.$wrapper)
                 }        
             })  
             
         });   
-
-       
-
-        //function display recipe click tag
-        
+   
        
     }
 }

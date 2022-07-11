@@ -11,15 +11,14 @@ class MainSearchBar{
         const input = this.$wrapper.querySelector('#input_main_search_bar')
         input.addEventListener('keyup', e => { 
             const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            if(elt.length >= 3) {         
-                handleAttributeNameInput(this.$recipes, elt)   
-                displayItemCategory(this.$recipes)      
+            if(elt.length >= 3) {             
+                handleAttributeNameInput(this.$recipes, elt)       
+                displayItemCategory(this.$recipes)  
             }
             else{
                 const attributeName = 'nameFilter'
                 removeAttributeFromRecipe(this.$recipes, attributeName)
             }
-           
             
         })
 }
