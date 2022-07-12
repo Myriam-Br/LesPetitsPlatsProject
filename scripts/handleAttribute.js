@@ -117,7 +117,6 @@ function removeAttributeRecipeInput(recipes, input) {
 }
 
 function handleTag(recipes, container) {
-  console.log(document.getElementById('input_ingredients'));
   // INGREDIENT ATTRIBUTE TAG
   const ingredientList = document.getElementById('ingredient_list');
   ingredientList.querySelectorAll('li').forEach((tag) => {
@@ -125,12 +124,11 @@ function handleTag(recipes, container) {
     tag.addEventListener('click', (e) => {
       // CREATE TAG
       document.getElementById('input_ingredients').value = ''
-      createTagHTML(tag, container, recipes, classTag);
+      createTagHTML(tag, container, classTag);
       handleAttributeItems(recipes, container);
       displayItemSelection(recipes);
       displayRecipe(recipes);
       displayItemsCategory(recipes);
-      
     });
   });
 
@@ -141,11 +139,14 @@ function handleTag(recipes, container) {
     const classTag = 'ustensil_tag';
     tag.addEventListener('click', (e) => {
       // CREATE TAG
-      createTagHTML(tag, container, recipes, classTag);
+      document.getElementById('input_ustensiles').value = ''
+      createTagHTML(tag, container,  classTag);
       handleAttributeItems(recipes, container);
       displayItemSelection(recipes);
       displayRecipe(recipes);
       displayItemsCategory(recipes);
+     
+      
     });
   });
 
@@ -156,16 +157,19 @@ function handleTag(recipes, container) {
     const classTag = 'appliance_tag';
     tag.addEventListener('click', (e) => {
       // CREATE TAG
-      createTagHTML(tag, container, recipes, classTag);
+      document.getElementById('input_appareils').value = ''
+      createTagHTML(tag, container, classTag);
       handleAttributeItems(recipes, container);
       displayItemSelection(recipes);
       displayRecipe(recipes);
       displayItemsCategory(recipes);
+   
+     
     });
   });
 }
 
-function createTagHTML(tag, container, recipes, classTag) {
+function createTagHTML(tag, container, classTag) {
   // CREATE TAG
   const createTag = document.createElement('li');
   createTag.setAttribute('name', tag.getAttribute('name'));
@@ -245,6 +249,7 @@ function handleAttributeItems(recipes, container) {
 
   // appliances
   const applianceList = recipes.querySelectorAll('h4[class=appliance]');
+  //console.log(applianceList);
   applianceList.forEach((appliance) => {
     applianceTags.forEach((applianceTag) => {
       if (appliance.getAttribute('name') === applianceTag.getAttribute('name')) {

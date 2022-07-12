@@ -13,6 +13,7 @@ class Appareils{
         })
 
         input.addEventListener('click', e =>{
+            e.target.value = ''
             dropDownList(button, icone, list)
         })
     }

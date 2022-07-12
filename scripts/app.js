@@ -62,13 +62,14 @@ class HomePage {
                 if(input.value.length >= 3) {
                     setAttributeRecipeInput(this.$wrapper, input)
                     displayRecipe(this.$wrapper)
-                    displayItemsCategory(this.$wrapper)
+                    displayItemsCategory(this.$wrapper)              
                     displayMessageError(this.$wrapper)
                 }  
                 else {
                     removeAttributeRecipeInput(this.$wrapper, input)
                     displayRecipe(this.$wrapper)
-                    displayItemsCategory(this.$wrapper)   
+                    displayItemsCategory(this.$wrapper)  
+                   
                 }             
             })  
             
@@ -77,6 +78,8 @@ class HomePage {
         //function display recipe click tag
         handleTag(this.$wrapper, this.$tagContainer)
         displayItemSelection(this.$wrapper)
+       
+      
        
     }
 }

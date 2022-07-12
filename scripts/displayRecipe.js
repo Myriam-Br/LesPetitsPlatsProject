@@ -57,10 +57,6 @@ function displayRecipe(recipes) {
 }
 
 function displayItemsCategory(recipes) {
-
-  const inputIngredient = document.getElementById('input_ingredients');
-  const inputUstensil = document.getElementById('input_ustensiles');
-  const inputAppliance = document.getElementById('input_appareils');
   // remplir tableau elements actifs
   const ingredientTab = [];
   const ustensilTab = [];
@@ -83,10 +79,21 @@ function displayItemsCategory(recipes) {
     applianceTab.push(recipe.querySelector('h4[class=appliance]').getAttribute('name'));
   });
 
+  
+
+  // INGREDIENTS
+  // remplir le tableau et display none element list
   const ingredientList = document.getElementById('ingredient_list').querySelectorAll('li');
   const ingredientListTab = [];
+  const inputIngredient = document.getElementById('input_ingredients');
 
-  if(inputIngredient.value.length >=3) {
+
+  
+
+
+//GESTION LIST REMPLISSAGE INPUT
+  if(inputIngredient.value.length >= 3 && inputIngredient.value !== 'Ingrédients') {
+   
     ingredientList.forEach((ingredient) => {
       if(ingredient.getAttribute('name').includes(inputIngredient.value)) {
         ingredientListTab.push(ingredient);
@@ -94,25 +101,20 @@ function displayItemsCategory(recipes) {
       }else{
         ingredient.style.display = 'none';
       }
-   
     });
-    console.log('INPUT',ingredientListTab);
-    return ingredientListTab
-    
   }
   else{
     ingredientList.forEach((ingredient) => {
       ingredientListTab.push(ingredient);
       ingredient.style.display = 'none';
     });
-
   }
-  // INGREDIENTS
-  // remplir le tableau et display none element list
+
+
   
   // remplir tableau résultat
   const results = [];
-  console.log(ingredientListTab);
+ 
   ingredientTab.forEach((ingredient) => {
     const result = ingredientListTab.filter((ingredientList) => ingredientList.getAttribute('name') === ingredient);
     results.push(result[0]);
@@ -124,28 +126,81 @@ function displayItemsCategory(recipes) {
   // remplir le tableau et display none element list
   const ustensilList = document.getElementById('ustensil_list').querySelectorAll('li');
   const ustensilListTab = [];
+  const inputUstensil = document.getElementById('input_ustensiles');
+
+  
+  if(inputUstensil.value.length >= 3 && inputUstensil.value !== 'Ustensiles') {
+    ustensilList.forEach((ustensil) => {
+      if(ustensil.getAttribute('name').includes(inputUstensil.value)) {
+        ustensilListTab.push(ustensil);
+        ustensil.style.display = 'block';
+      }else{
+        ustensil.style.display = 'none';
+      }
+   
+    });
+    return ustensilListTab 
+  }
+  else{
+    ustensilList.forEach((ustensil) => {
+      ustensilListTab.push(ustensil);
+      ustensil.style.display = 'none';
+    });
+  }
+
+  /*
   ustensilList.forEach((ustensil) => {
     ustensilListTab.push(ustensil);
     ustensil.style.display = 'none';
-  });
-
+  });*/
+  
   // remplir tableau résultat
   ustensilTab.forEach((ustensil) => {
     const result = ustensilListTab.filter((ustensilList) => ustensilList.getAttribute('name') === ustensil);
     results.push(result[0]);
+   
   });
-
-  // USTENSIL
+ 
+  // APPLIANCE
   // remplir le tableau et display none element list
   const applianceList = document.getElementById('appliance_list').querySelectorAll('li');
   const applianceListTab = [];
+  const inputAppliance = document.getElementById('input_appareils');
+
+  console.log(applianceList);
+  if(inputAppliance.value.length >= 3 && inputAppliance.value !== 'Appareils') {
+    applianceList.forEach((appliance) => {
+      if(appliance.getAttribute('name').includes(inputAppliance.value)) {
+        applianceListTab.push(appliance);
+        appliance.style.display = 'block';
+      }else{
+        appliance.style.display = 'none';
+      }
+   
+    });
+    return applianceListTab 
+  }
+  else{
+    applianceList.forEach((appliance) => {
+      applianceListTab.push(appliance);
+      appliance.style.display = 'none';
+    });
+  }
+
+  /*
+  console.log('applianceTab', applianceTab);
+  console.log('applianceList', applianceList);
+  console.log('applianceListTab', applianceListTab);*/
+  
+  /*
   applianceList.forEach((appliance) => {
     applianceListTab.push(appliance);
     appliance.style.display = 'none';
-  });
+  });*/
 
   // remplir tableau résultat
   applianceTab.forEach((appliance) => {
+    console.log(appliance);
     const result = applianceListTab.filter((applianceList) => applianceList.getAttribute('name') === appliance);
     results.push(result[0]);
   });
@@ -156,28 +211,33 @@ function displayItemsCategory(recipes) {
  
   // RECUPERER TOUS LES RESULTATS ET LES AFFICHER
   results.forEach((element) => {
-    element.style.display = 'block';
+    if(element !== undefined) {
+      element.style.display = 'block';
 
-    // check ingredient tag active
-    ingredientTagContainer.forEach((tag) => {
-      if (tag.getAttribute('name') === element.getAttribute('name')) {
-        element.style.display = 'none';
-      }
-    });
+      //DISPLAY NONE RESULTAT CORRESPONDANT AUX TAGS  
+      // check ingredient tag active
+      ingredientTagContainer.forEach((tag) => {
+        if (tag.getAttribute('name') === element.getAttribute('name')) {
+          element.style.display = 'none';
+        }
+      });
+  
+      // check ustensil tag active
+      ustensilTagContainer.forEach((tag) => {
+        if (tag.getAttribute('name') === element.getAttribute('name')) {
+          element.style.display = 'none';
+        }
+      });
+  
+      // check appliance tag active
+      applianceTagContainer.forEach((tag) => {
+        if (tag.getAttribute('name') === element.getAttribute('name')) {
+          element.style.display = 'none';
+        }
+      });
 
-    // check ustensil tag active
-    ustensilTagContainer.forEach((tag) => {
-      if (tag.getAttribute('name') === element.getAttribute('name')) {
-        element.style.display = 'none';
-      }
-    });
-
-    // check appliance tag active
-    applianceTagContainer.forEach((tag) => {
-      if (tag.getAttribute('name') === element.getAttribute('name')) {
-        element.style.display = 'none';
-      }
-    });
+    }
+  
   });
 }
 
