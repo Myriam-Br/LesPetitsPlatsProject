@@ -329,9 +329,10 @@ function handleAttributeRecipe(recipes) {
 
 // PUT ALL THE CATEGORIES HERE SO IT'S EASIER TO MANAGE
 function displayItemCategory(recipes) {
-  const ingredientTab = [];
-  const ustensilTab = [];
-  const appareilTab = [];
+  const container = document.getElementById('tags_container');
+  let ingredientTab = [];
+  let ustensilTab = [];
+  let appareilTab = [];
   for (let i = 0; i < recipes.querySelectorAll('div[class=recipe_card]').length; i++) {
     // get visible recipes
     if (recipes.querySelectorAll('div[class=recipe_card]')[i].style.display === 'block') {
@@ -350,34 +351,28 @@ function displayItemCategory(recipes) {
     }
   }
 
+  // INGREDIENTS
   // faire fonction input search match elt
-  console.log();
-
+  const inputIngredients = document.getElementById('input_ingredients')
+  if(inputIngredients.value.length >= 3 && inputIngredients.value !== 'Ingrédients') {
+   let tabIngredientInput = []
+    for(let i = 0; i < ingredientTab.length; i++) {
+      let ingredient = ingredientTab[i]     
+      console.log(ingredient);
+      if(ingredient.includes(inputIngredients.value)) {
+        console.log(ingredient);
+        tabIngredientInput.push(ingredient)
+      }
+    }
+    ingredientTab = tabIngredientInput
+  }else{
+   
+  }
   // supprimer doublons
   const ingredientListUnique = [...new Set(ingredientTab)];
-  const ustensilListUnique = [...new Set(ustensilTab)];
-  const appareilListUnique = [...new Set(appareilTab)];
 
-  const container = document.getElementById('tags_container');
 
-  // gérer creation tag
-  // INGREDIENTS
 
-  /*
-    //verifier si input ingredient value match avec element list et push les elements qui match
-    const inputIngredient = document.getElementById('input_ingredients')
-    if(inputIngredient.value.length >=3) {
-        ingredientListUnique.forEach(ingredient => {
-            ingredientListUnique = []
-            if(ingredient.includes(inputIngredient.value)) {
-                ingredientListUnique.push(ingredient)
-            }
-        })
-        return ingredientListUnique
-    }
-    else{
-        ingredientListUnique
-    } */
 
   const listIngredients = document.getElementById('ingredients_list');
   listIngredients.innerHTML = ' ';
@@ -408,21 +403,22 @@ function displayItemCategory(recipes) {
 
   // USTENSILS
 
-  /*
-    //verifier si input ingredient value match avec element list et push les elements qui match
-    const inputUstensil = document.getElementById('input_ustensiles')
-    if(inputUstensil.value.length >=3) {
-        ustensilListUnique.forEach(ustensil => {
-            ustensilListUnique = []
-            if(ustensil.includes(inputUstensil.value)) {
-                ustensilListUnique.push(ustensil)
-            }
-        })
-        return ustensilListUnique
+  // faire fonction input search match elt
+  const inputUstensils = document.getElementById('input_ustensiles')
+  if(inputUstensils.value.length >= 3 && inputUstensils.value !== 'Ustensiles') {
+   let tabUstensilInput = []
+    for(let i = 0; i < ustensilTab.length; i++) {
+      let ustensil = ustensilTab[i]     
+      console.log(ustensil);
+      if(ustensil.includes(inputUstensils.value)) {
+        tabUstensilInput.push(ustensil)
+      }
     }
-    else{
-       ustensilListUnique
-    } */
+    ustensilTab = tabUstensilInput
+  }else{
+   
+  }
+  const ustensilListUnique = [...new Set(ustensilTab)];
 
   const listUstensil = document.getElementById('ustensiles_list');
   listUstensil.innerHTML = ' ';
@@ -452,6 +448,23 @@ function displayItemCategory(recipes) {
   }
 
   // APPAREILS
+
+   // faire fonction input search match elt
+   const inputAppliance = document.getElementById('input_appareils')
+   if(inputAppliance.value.length >= 3 && inputAppliance.value !== 'Appareils') {
+    let tabApplianceInput = []
+     for(let i = 0; i < appareilTab.length; i++) {
+       let appliance = appareilTab[i]     
+       if(appliance.includes(inputAppliance.value)) {
+        tabApplianceInput.push(appliance)
+       }
+     }
+     appareilTab = tabApplianceInput
+   }else{
+    
+   }
+   
+  const appareilListUnique = [...new Set(appareilTab)];
 
   const listAppareil = document.getElementById('appareils_list');
   listAppareil.innerHTML = ' ';
