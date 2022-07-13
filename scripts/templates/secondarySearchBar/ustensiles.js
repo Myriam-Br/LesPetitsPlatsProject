@@ -38,11 +38,10 @@ class Ustensiles{
         const iconBtnDropDown = document.createElement('i')
         iconBtnDropDown.setAttribute('class', 'fa fa-chevron-down')
         btnDropDown.appendChild(iconBtnDropDown)
-        inputUstensiles.appendChild(btnDropDown)
-
-
+   
         const ustensilSection = document.createElement('ul')
         ustensilSection.setAttribute('id', 'ustensil_list')
+        ustensilSection.setAttribute('class', 'list')
         ustensilSection.style.display='none'
 
         const ustensilsTab = []
@@ -74,7 +73,7 @@ class Ustensiles{
         that.$wrapper.appendChild(labelInputUstensiles)
         that.$wrapper.appendChild(inputUstensiles)
         that.$wrapper.appendChild(btnDropDown)
-        that.$wrapper.appendChild(ustensilSection)
+       
 
 
         //functions

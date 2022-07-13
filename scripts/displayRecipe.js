@@ -95,7 +95,8 @@ function displayItemsCategory(recipes) {
   if(inputIngredient.value.length >= 3 && inputIngredient.value !== 'Ingrédients') {
    
     ingredientList.forEach((ingredient) => {
-      if(ingredient.getAttribute('name').includes(inputIngredient.value)) {
+      let inputValue = inputIngredient.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      if(ingredient.getAttribute('name').includes(inputValue)) {
         ingredientListTab.push(ingredient);
         ingredient.style.display = 'block';
       }else{
@@ -131,7 +132,8 @@ function displayItemsCategory(recipes) {
   
   if(inputUstensil.value.length >= 3 && inputUstensil.value !== 'Ustensiles') {
     ustensilList.forEach((ustensil) => {
-      if(ustensil.getAttribute('name').includes(inputUstensil.value)) {
+      let inputValue = inputUstensil.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      if(ustensil.getAttribute('name').includes(inputValue)) {
         ustensilListTab.push(ustensil);
         ustensil.style.display = 'block';
       }else{
@@ -148,12 +150,6 @@ function displayItemsCategory(recipes) {
     });
   }
 
-  /*
-  ustensilList.forEach((ustensil) => {
-    ustensilListTab.push(ustensil);
-    ustensil.style.display = 'none';
-  });*/
-  
   // remplir tableau résultat
   ustensilTab.forEach((ustensil) => {
     const result = ustensilListTab.filter((ustensilList) => ustensilList.getAttribute('name') === ustensil);
@@ -170,7 +166,8 @@ function displayItemsCategory(recipes) {
   console.log(applianceList);
   if(inputAppliance.value.length >= 3 && inputAppliance.value !== 'Appareils') {
     applianceList.forEach((appliance) => {
-      if(appliance.getAttribute('name').includes(inputAppliance.value)) {
+      let inputValue = inputAppliance.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      if(appliance.getAttribute('name').includes(inputValue)) {
         applianceListTab.push(appliance);
         appliance.style.display = 'block';
       }else{
@@ -187,16 +184,6 @@ function displayItemsCategory(recipes) {
     });
   }
 
-  /*
-  console.log('applianceTab', applianceTab);
-  console.log('applianceList', applianceList);
-  console.log('applianceListTab', applianceListTab);*/
-  
-  /*
-  applianceList.forEach((appliance) => {
-    applianceListTab.push(appliance);
-    appliance.style.display = 'none';
-  });*/
 
   // remplir tableau résultat
   applianceTab.forEach((appliance) => {

@@ -42,6 +42,7 @@ class Appareils{
 
         const applianceSection = document.createElement('ul')
         applianceSection.setAttribute('id', 'appliance_list')
+        applianceSection.setAttribute('class', 'list')
         applianceSection.style.display='none'
         const appareilTab = []
         for(let i = 0; i < this._recipes.length; i++) {
@@ -70,8 +71,7 @@ class Appareils{
         that.$wrapper.appendChild(labelInputAppareils)
         that.$wrapper.appendChild(inputAppareils)
         that.$wrapper.appendChild(btnDropDown)
-        that.$wrapper.appendChild(applianceSection)
-
+        
 
         //functions
         that.handleDropDown(btnDropDown, iconBtnDropDown, applianceSection, inputAppareils)

@@ -32,8 +32,6 @@ class Ingredients{
         // input
         const labelInputIngredients = document.createElement('label')
         labelInputIngredients.setAttribute('for', 'input_ingredients')
-        
-
         const inputIngredients = document.createElement('input')
         inputIngredients.setAttribute('id', 'input_ingredients')
         inputIngredients.setAttribute('placeholder', 'Rechercher un ingrédient')
@@ -87,11 +85,11 @@ class Ingredients{
             
         });
         
-
+        that.$wrapper.appendChild(ingredientsSection)
         that.$wrapper.appendChild(labelInputIngredients)
         that.$wrapper.appendChild(inputIngredients)
         that.$wrapper.appendChild(btnDropDown)
-        that.$wrapper.appendChild(ingredientsSection)
+       
         
 
         //functions

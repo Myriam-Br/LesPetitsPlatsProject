@@ -90,9 +90,10 @@ input:focus{
 
 #secondary_search_bar article{
     width: 33%;
+    display: flex;
 }
 #secondary_search_bar input{
-    width: 80%;
+    width: 500px;
     height: 40px;  
     padding-left: 20px;
     color: white;
@@ -110,18 +111,50 @@ input:focus{
     bottom: 0;
     border: none;
 }
+
 #secondary_search_bar button i{
     color: white;
 }
+
 #tags_container{
-   background-color: rgb(207, 255, 215);
-   height: 100px;
-   margin: 0px 20px;
    display: flex;
    flex-wrap: wrap;
+   margin: 0px 20px;
 }
+
+#tags_container button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+#tags_container .ingredient_tag {
+    background-color: rgb(50, 139, 255);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    color: white;
+}
+#tags_container .ustensil_tag {
+    background-color: rgb(244, 93, 85);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    color: white;
+}
+
+#tags_container .appliance_tag {
+    background-color: rgb(147, 255, 194);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    color: white;
+}
+
 #input_ingredients{
     background-color: rgb(50, 139, 255);
+    padding-left: 20px;
+    margin-left: 20px;
 }
 #drop_down_ingredients{
     background-color: rgb(50, 139, 255);
@@ -129,6 +162,8 @@ input:focus{
 
 #input_appareils{
     background-color: rgb(147, 255, 194);
+    padding-left: 20px;
+    margin-left: 20px;
 }
 #drop_down_appareils{
     background-color: rgb(147, 255, 194);
@@ -136,19 +171,23 @@ input:focus{
 
 #input_ustensiles{
     background-color: rgb(244, 93, 85);
+    padding-left: 20px;
+    margin-left: 20px;
 }
 #drop_down_ustensiles{
     background-color: rgb(244, 93, 85);
 }
 
 .list{
-    width: 300px;
+    width: 510px;
     height: 300px;
     position: absolute;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     z-index: 6;
     height: fit-content; 
+    margin-top: 42px; 
+    padding-left: 10px;
 }
 
 .list li { 
@@ -161,16 +200,13 @@ input:focus{
 
 #ingredient_list{
     background-color: rgb(50, 139, 255); 
-    position: absolute; 
 }
 
 #appliance_list{
     background-color: rgb(147, 255, 194);
-    position: absolute; 
 }
 #ustensil_list{
     background-color: rgb(244, 93, 85);
-    position: absolute; 
 }
 
 #recipes_section{
@@ -181,11 +217,12 @@ input:focus{
     display: flex;
     flex-wrap: wrap;
     order: 5; 
+    padding-left: 45px;
  
 }
 
 .recipe_card{
-    border: solid black 2px;
+    border: none;
     margin-bottom: 3px;
     width: 30%;
     margin-right: 20px;
@@ -193,6 +230,8 @@ input:focus{
     margin-bottom: 20px;
     background-color: aliceblue;
     position: relative; 
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .recipe_card:hover{
@@ -201,9 +240,10 @@ input:focus{
 }
 
 .recipe_card .image {
-    background-color: rgb(158, 155, 160);
-    width: 100%;
-    height: 130px;
+    background-color: rgb(188, 170, 200);
+    height: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .text_section {
@@ -228,6 +268,10 @@ input:focus{
 
 .recipe_card .instructions_repicpe{
     grid-row: row 2;
+    grid-row: row 2;
+    text-overflow : ellipsis;
+    white-space : nowrap;
+    overflow : hidden;
 }
 .recipe_card .ustensil_recipe_list{
     display: none;
