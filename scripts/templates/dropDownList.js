@@ -358,8 +358,8 @@ function displayItemCategory(recipes) {
    let tabIngredientInput = []
     for(let i = 0; i < ingredientTab.length; i++) {
       let ingredient = ingredientTab[i]     
-      console.log(ingredient);
-      if(ingredient.includes(inputIngredients.value)) {
+      let inputValue = inputIngredients.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      if(ingredient.includes(inputValue)) {
         console.log(ingredient);
         tabIngredientInput.push(ingredient)
       }
@@ -382,6 +382,7 @@ function displayItemCategory(recipes) {
     createIngredient.setAttribute('class', 'ingredient_from_list');
     createIngredient.innerHTML = ingredientListUnique[i].charAt(0).toUpperCase() + ingredientListUnique[i].slice(1);
     createIngredient.addEventListener('click', (e) => {
+      inputIngredients.value = ''
       createHTMLTag(container, createIngredient, 'ingredient_tag');
       handleAttributeIngredientTag(recipes, createIngredient, container);
       handleAttributeRecipe(recipes);
@@ -409,8 +410,8 @@ function displayItemCategory(recipes) {
    let tabUstensilInput = []
     for(let i = 0; i < ustensilTab.length; i++) {
       let ustensil = ustensilTab[i]     
-      console.log(ustensil);
-      if(ustensil.includes(inputUstensils.value)) {
+      let inputValue = inputUstensils.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      if(ustensil.includes(inputValue)) {
         tabUstensilInput.push(ustensil)
       }
     }
@@ -428,6 +429,7 @@ function displayItemCategory(recipes) {
     createUstensil.setAttribute('class', 'ustensils_from_list');
     createUstensil.innerHTML = ustensilListUnique[i].charAt(0).toUpperCase() + ustensilListUnique[i].slice(1);
     createUstensil.addEventListener('click', (e) => {
+      inputUstensils.value = ''
       createHTMLTag(container, createUstensil, 'ustensil_tag');
       handleAttributeUstensilTag(recipes, createUstensil, container);
       handleAttributeRecipe(recipes);
@@ -454,8 +456,9 @@ function displayItemCategory(recipes) {
    if(inputAppliance.value.length >= 3 && inputAppliance.value !== 'Appareils') {
     let tabApplianceInput = []
      for(let i = 0; i < appareilTab.length; i++) {
-       let appliance = appareilTab[i]     
-       if(appliance.includes(inputAppliance.value)) {
+       let appliance = appareilTab[i] 
+       let inputValue = inputAppliance.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')  
+       if(appliance.includes(inputValue)) {
         tabApplianceInput.push(appliance)
        }
      }
@@ -475,6 +478,7 @@ function displayItemCategory(recipes) {
     createAppareil.setAttribute('class', 'appareils_from_list');
     createAppareil.innerHTML = appareilListUnique[i].charAt(0).toUpperCase() + appareilListUnique[i].slice(1);
     createAppareil.addEventListener('click', (e) => {
+      inputAppliance.value = ''
       createHTMLTag(container, createAppareil, 'appliance_tag');
       handleAttributeAppareilTag(recipes, createAppareil, container);
       handleAttributeRecipe(recipes);

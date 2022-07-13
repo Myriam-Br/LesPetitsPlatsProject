@@ -85,7 +85,7 @@ class Ingredients {
     ingredientsSection.setAttribute('id', 'ingredients_list');
     ingredientsSection.setAttribute('class', 'list');
     ingredientsSection.style.display = 'none';
-
+    inputIngredients.appendChild(ingredientsSection)
     const ingredientsTab = [];
 
     for (let i = 0; i < this._recipes.length; i++) {

@@ -91,10 +91,9 @@ input:focus{
 #secondary_search_bar article{
     width: 33%;
     display: flex;
-    justify-content: space-between;
 }
 #secondary_search_bar input{
-    width: 80%;
+    width: 500px;
     height: 40px;  
     padding-left: 20px;
     color: white;
@@ -171,14 +170,14 @@ input:focus{
 }
 
 .list{
-    width: 300px;
+    width: 510px;
     height: 300px;
     position: absolute;
     display: flex;
     flex-direction: column;
     z-index: 6;
     height: fit-content; 
-    margin-top: 42px;  
+    margin-top: 42px; 
     padding-left: 10px;
 }
 
