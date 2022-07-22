@@ -15,6 +15,7 @@ function displayRecipe(recipes) {
 
   recipes = recipes.querySelectorAll('div[class=recipe_card]');
   recipes.forEach((recipe) => {
+    
     let numberActifFilterInRecipe = 0;
     // get recipes filtered by name
     if (recipe.getAttribute('nameFilter') === 'active') {

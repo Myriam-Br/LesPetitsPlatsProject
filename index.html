@@ -7,6 +7,7 @@
     <title>Les Petits Plats</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/7e4732a8a2.js" crossorigin="anonymous"></script>
+    <script src="scripts/api.js"></script>
 </head>
 <body>
     <header>
@@ -14,45 +15,45 @@
             <img src="assets/logo.png" alt="logo les petits plats" id="logo">
         </h1>
     </header>
+
+    
     <main id="main">
 
     </main>
+     <!--TEMPLATES-->
+
+    <!--MAIN SEARCH BAR-->
+    <script src="scripts/templates/mainSearchBar.js"></script>
+
+    <!--MODELS-->
+    <script src="scripts/models/recipe.js"></script>
     
-</body>
+    <!--DECORATORS-->
+    <script src="scripts/decorators/dropDownList.js"></script>
     
+    <!--SECONDARY SEARCH BAR-->
+    <script src="scripts/templates/secondarySearchBar/ingredients.js"></script>
+    <script src="scripts/templates/secondarySearchBar/appareils.js"></script>
+    <script src="scripts/templates/secondarySearchBar/ustensiles.js"></script>
+    <script src="scripts/templates/secondarySearchBar.js"></script>
 
-  
-    <script src="scripts/api.js"></script>
-   
-    <!--TEMPLATES-->
-        <!--MAIN SEARCH BAR-->
-        <script src="scripts/templates/mainSearchBar.js"></script>
+    <!--DISPLAY RECIPES FUNCTION   -->
+    <script src="scripts/displayRecipe.js"></script>
 
-        <!--MODELS-->
-        <script src="scripts/models/recipe.js"></script>
-        
-        <!--DECORATORS-->
-        <script src="scripts/decorators/dropDownList.js"></script>
-       
-        <!--SECONDARY SEARCH BAR-->
-        <script src="scripts/templates/secondarySearchBar/ingredients.js"></script>
-        <script src="scripts/templates/secondarySearchBar/appareils.js"></script>
-        <script src="scripts/templates/secondarySearchBar/ustensiles.js"></script>
-        <script src="scripts/templates/secondarySearchBar.js"></script>
+    <!--ERROR MESSAGE  -->
+    <script src="scripts/handleErrorMessage.js"></script>
 
-        <!--DISPLAY RECIPES FUNCTION   -->
-        <script src="scripts/displayRecipe.js"></script>
-
-        <!--ERROR MESSAGE  -->
-        <script src="scripts/handleErrorMessage.js"></script>
-
-        <!--HANDLE ATTRIBUTE-->
-        <script src="scripts/handleAttribute.js"></script>
-       
-        <!--RECIPE SECTION-->
-        <script src="scripts/templates/recipeCard.js"></script>
+    <!--HANDLE ATTRIBUTE-->
+    <script src="scripts/handleAttribute.js"></script>
+    
+    <!--RECIPE SECTION-->
+    <script src="scripts/templates/recipeCard.js"></script>
 
 
     <!--VIEW-->    
     <script src="scripts/app.js"></script>
+</body>
+
+    
+   
 </html>
