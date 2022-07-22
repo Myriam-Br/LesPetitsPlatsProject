@@ -14,9 +14,8 @@ class RecipeCard{
         wrapperCard.setAttribute('class', 'recipe_card')
         wrapperCard.setAttribute('id', this._recipe.id)
         // image
-        const imageRecipe = document.createElement('img')
-        imageRecipe.setAttribute('alt', 'name_recipe_img')
-        imageRecipe.setAttribute('src', 'assets/pizza.jpg')
+        const imageRecipe = document.createElement('div')
+        imageRecipe.setAttribute('class', 'image')
 
         // text section
         const textSection = document.createElement('div')
