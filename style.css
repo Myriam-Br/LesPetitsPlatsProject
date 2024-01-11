@@ -270,3 +270,49 @@ input:focus{
     overflow : hidden;
 }
 
+@media screen and (max-width: 400px) {
+    #main{
+        margin: auto;
+    }
+
+    #input_main_search_bar{
+        font-size: 20px;
+    }
+    #secondary_search_bar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+
+    #secondary_search_bar article {
+        width: 270px;
+        background-color: rgb(89, 255, 0);
+
+    } 
+
+    #secondary_search_bar .drop_down {
+        position: relative;
+    }
+
+    #secondary_search_bar .list {
+        width: 235px;
+        margin: auto;
+    }
+
+
+    #recipe_wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #recipe_wrapper .recipe_card{
+        width: 90%;
+        height: auto;
+    }
+
+    #recipe_wrapper .recipe_card .text_section{
+        padding: 8px;
+    }
+}
