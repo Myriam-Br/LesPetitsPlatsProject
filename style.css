@@ -212,10 +212,6 @@ input:focus{
 }
 
 .recipe_card{
-<<<<<<< HEAD
-    border: none;
-=======
->>>>>>> algorithm/for
     margin-bottom: 3px;
     width: 30%;
     height: 500px;
@@ -233,11 +229,7 @@ input:focus{
     box-shadow: 0px 2px 8px 2px rgba(102, 102, 102, 0.368);
 }
 
-<<<<<<< HEAD
-.recipe_card .image {
-=======
 .recipe_card .name_recipe_img {
->>>>>>> algorithm/for
     background-color: rgb(188, 170, 200);
     height: 150px;
     border-top-left-radius: 10px;

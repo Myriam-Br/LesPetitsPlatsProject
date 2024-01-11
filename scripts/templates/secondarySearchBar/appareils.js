@@ -8,32 +8,6 @@ class Appareils {
     this.$tagContainerAppareils = this.$tagContainer.querySelectorAll('li[class=appliance_tag]');
   }
 
-<<<<<<< HEAD
-    
-    dropDownSection() {
-       // console.log(this.$wrapper.querySelector('#drop_down_appareils'));
-        const el = this.$wrapper.querySelector('#drop_down_appareils')
-        //const section = this.$wrapper.querySelector('#appareils_list')
-       // console.log(this.$wrapper.querySelector('i'));
-        const icone = this.$wrapper.querySelector('i')
-        el.addEventListener('click', () => {
-            /*
-            console.log(section.style);      
-            console.log(section.getAttribute('opened'));
-            if(section.getAttribute('opened')){
-                section.style.display='none'
-                section.removeAttribute('opened')      
-                icone.removeAttribute('fa fa-chevron-up')
-                icone.setAttribute('class','fa fa-chevron-down')    
-            } else {
-                section.style.display='block'
-                section.setAttribute('opened', 'true')
-                icone.removeAttribute('fa fa-chevron-down')
-                icone.setAttribute('class','fa fa-chevron-up')
-            }     */
-        })
-    }
-=======
   handleAppareil(button, icone, list) {
     const input = this.$wrapper.querySelector('#input_appareils');
     input.addEventListener('keyup', (e) => {
@@ -49,7 +23,6 @@ class Appareils {
         removeAttributeFromRecipe(this.$recipe, attributeName);
       }
     });
->>>>>>> algorithm/for
 
     input.addEventListener('click', (e) => {
       input.value = '';
@@ -88,11 +61,6 @@ class Appareils {
   createSearchBar() {
     const that = this;
 
-<<<<<<< HEAD
-        that.$wrapper.appendChild(labelInputAppareils)
-        that.$wrapper.appendChild(inputAppareils)
-        that.$wrapper.appendChild(btnDropDown)
-=======
     // CREATE INGREDIENTS SEARCH BAR DOM
 
     // input
@@ -102,7 +70,6 @@ class Appareils {
     inputAppareils.setAttribute('id', 'input_appareils');
     inputAppareils.setAttribute('placeholder', 'Rechercher un appareil');
     inputAppareils.setAttribute('value', 'Appareils');
->>>>>>> algorithm/for
 
     // button arrow
     const btnDropDown = document.createElement('button');
@@ -112,9 +79,6 @@ class Appareils {
     iconBtnDropDown.setAttribute('class', 'fa fa-chevron-down');
     btnDropDown.appendChild(iconBtnDropDown);
 
-<<<<<<< HEAD
-        return that.$wrapper
-=======
     // ingredients list
     const appareilsSection = document.createElement('ul');
     appareilsSection.setAttribute('id', 'appareils_list');
@@ -129,7 +93,6 @@ class Appareils {
       const appareilToLowerCase = appliances.toLowerCase();
       const appareilSyntax = appareilToLowerCase.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
       appareilTab.push(appareilSyntax);
->>>>>>> algorithm/for
     }
 
     that.$wrapper.appendChild(appareilsSection);

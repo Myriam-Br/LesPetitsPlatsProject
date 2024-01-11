@@ -27,10 +27,6 @@ class HomePage {
            return new Recipe(recipe)
         });
   
-<<<<<<< HEAD
-=======
-
->>>>>>> algorithm/for
        this.$mainWrapper.appendChild(this.$wrapper)
 
         const TemplateMainSearchBar = new MainSearchBar()
@@ -52,9 +48,6 @@ class HomePage {
                 TemplateRecipe.createCard()
             )
         });
-<<<<<<< HEAD
-  
-=======
         this.$wrapper.appendChild(this.$errorMsg)
 
 
@@ -76,7 +69,6 @@ class HomePage {
         });   
    
        
->>>>>>> algorithm/for
     }
 }
 

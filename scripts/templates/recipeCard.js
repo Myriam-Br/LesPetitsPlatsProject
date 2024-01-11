@@ -15,11 +15,7 @@ class RecipeCard{
         wrapperCard.setAttribute('id', this._recipe.id)
         // image
         const imageRecipe = document.createElement('div')
-<<<<<<< HEAD
-        imageRecipe.setAttribute('class', 'image')
-=======
         imageRecipe.setAttribute('class', 'name_recipe_img')
->>>>>>> algorithm/for
 
         // text section
         const textSection = document.createElement('div')

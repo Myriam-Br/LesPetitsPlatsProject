@@ -2,11 +2,6 @@ class MainSearchBar{
     constructor(){
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'main_search_bar')
-<<<<<<< HEAD
-        this.$recipes = document.getElementById('recipe_wrapper')
-    }
-
-=======
         this.$recipes = document.getElementById('recipe_wrapper')     
     }
 
@@ -29,7 +24,6 @@ class MainSearchBar{
 }
 
 
->>>>>>> algorithm/for
     createSearchBar () {
 
         // CREATE MAIN SEARCH BAR DOM
@@ -54,11 +48,8 @@ class MainSearchBar{
         that.$wrapper.appendChild(inputMainSearchBar)
         that.$wrapper.appendChild(btnSearch)
 
-<<<<<<< HEAD
-=======
         this.handleRecipe()
 
->>>>>>> algorithm/for
         return that.$wrapper
     }
 
