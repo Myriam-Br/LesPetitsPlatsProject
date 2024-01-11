@@ -10,6 +10,7 @@ class SecondarySearchBar{
     createSearchBar(){
         const that = this
       
+       
         const TemplateSearchIngredients = new Ingredients(this._recipes)
         const TemplateSearchAppareils = new Appareils(this._recipes)
         const TemplateSearchUstensiles= new Ustensiles(this._recipes)

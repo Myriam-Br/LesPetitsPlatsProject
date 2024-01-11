@@ -2,9 +2,34 @@ class MainSearchBar{
     constructor(){
         this.$wrapper = document.createElement('article')
         this.$wrapper.setAttribute('id', 'main_search_bar')
+<<<<<<< HEAD
         this.$recipes = document.getElementById('recipe_wrapper')
     }
 
+=======
+        this.$recipes = document.getElementById('recipe_wrapper')     
+    }
+
+    handleRecipe(){
+     
+       // const recipes = this.$recipes.querySelectorAll('.recipe_card')
+        const input = this.$wrapper.querySelector('#input_main_search_bar')
+        input.addEventListener('keyup', e => { 
+            const elt = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            if(elt.length >= 3) {             
+                handleAttributeNameInput(this.$recipes, elt)       
+                displayItemCategory(this.$recipes)  
+            }
+            else{
+                const attributeName = 'nameFilter'
+                removeAttributeFromRecipe(this.$recipes, attributeName)
+            }
+            
+        })
+}
+
+
+>>>>>>> algorithm/for
     createSearchBar () {
 
         // CREATE MAIN SEARCH BAR DOM
@@ -29,6 +54,11 @@ class MainSearchBar{
         that.$wrapper.appendChild(inputMainSearchBar)
         that.$wrapper.appendChild(btnSearch)
 
+<<<<<<< HEAD
+=======
+        this.handleRecipe()
+
+>>>>>>> algorithm/for
         return that.$wrapper
     }
 

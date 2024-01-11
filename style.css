@@ -90,14 +90,16 @@ input:focus{
 
 #secondary_search_bar article{
     width: 33%;
+    display: flex;
 }
 #secondary_search_bar input{
-    width: 80%;
+    width: 500px;
     height: 40px;  
     padding-left: 20px;
     color: white;
     font-size: 15px;
     border: none;
+ 
 }
 
 #secondary_search_bar input::placeholder{
@@ -113,10 +115,38 @@ input:focus{
 #secondary_search_bar button i{
     color: white;
 }
-#items_added{
-   background-color: rgb(207, 255, 215);
-   height: 100px;
-   margin: 0px 20px;
+#tags_container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 20px;
+}
+
+#tags_container button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+#tags_container .ingredient_tag {
+    background-color: rgb(50, 139, 255);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    color: white;
+}
+#tags_container .ustensil_tag {
+    background-color: rgb(244, 93, 85);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    color: white;
+}
+#tags_container .appliance_tag {
+    background-color: rgb(147, 255, 194);
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 5px;
+    color: white;
 }
 #input_ingredients{
     background-color: rgb(50, 139, 255);
@@ -140,14 +170,15 @@ input:focus{
 }
 
 .list{
-    width: 300px;
+    width: 510px;
     height: 300px;
     position: absolute;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     z-index: 6;
     height: fit-content; 
-    margin-top: 42px;  
+    margin-top: 42px; 
+    padding-left: 10px;
 }
 
 .list li { 
@@ -159,10 +190,8 @@ input:focus{
 }
 
 #ingredients_list{
-    background-color: rgb(50, 139, 255);
-    
+    background-color: rgb(50, 139, 255);    
 }
-
 #appareils_list{
     background-color: rgb(147, 255, 194);
 }
@@ -178,26 +207,37 @@ input:focus{
     display: flex;
     flex-wrap: wrap;
     order: 5; 
+    padding-left: 45px;
  
 }
 
 .recipe_card{
+<<<<<<< HEAD
     border: none;
+=======
+>>>>>>> algorithm/for
     margin-bottom: 3px;
     width: 30%;
+    height: 500px;
     margin-right: 20px;
     margin-top: 50px;
     margin-bottom: 20px;
     background-color: aliceblue;
     position: relative; 
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .recipe_card:hover{
-    background-color: rgb(227, 215, 199);
+    background-color: rgb(229, 234, 234);
     box-shadow: 0px 2px 8px 2px rgba(102, 102, 102, 0.368);
 }
 
+<<<<<<< HEAD
 .recipe_card .image {
+=======
+.recipe_card .name_recipe_img {
+>>>>>>> algorithm/for
     background-color: rgb(188, 170, 200);
     height: 150px;
     border-top-left-radius: 10px;
@@ -207,6 +247,13 @@ input:focus{
 .text_section {
     display: grid;
     grid-template-columns: auto auto auto auto;
+}
+
+.text_section .ustensil_recipe_list {
+    display: none;
+}
+.text_section .appliance {
+    display: none;
 }
 
 .recipe_card .duration_recipe{
@@ -226,5 +273,54 @@ input:focus{
 
 .recipe_card .instructions_repicpe{
     grid-row: row 2;
+    text-overflow : ellipsis;
+    white-space : nowrap;
+    overflow : hidden;
 }
 
+@media screen and (max-width: 400px) {
+    #main{
+        margin: auto;
+    }
+
+    #input_main_search_bar{
+        font-size: 20px;
+    }
+    #secondary_search_bar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+
+    #secondary_search_bar article {
+        width: 270px;
+        background-color: rgb(89, 255, 0);
+
+    } 
+
+    #secondary_search_bar .drop_down {
+        position: relative;
+    }
+
+    #secondary_search_bar .list {
+        width: 235px;
+        margin: auto;
+    }
+
+
+    #recipe_wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #recipe_wrapper .recipe_card{
+        width: 90%;
+        height: auto;
+    }
+
+    #recipe_wrapper .recipe_card .text_section{
+        padding: 8px;
+    }
+}
