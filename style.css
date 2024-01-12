@@ -270,14 +270,24 @@ input:focus{
     overflow : hidden;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     #main{
         margin: auto;
+    }
+    header {
+        margin-top: 10px;
+    }
+
+    #logo {
+        text-align: center;
+        width: 250px;
+        margin-bottom: 20px;
     }
 
     #input_main_search_bar{
         font-size: 20px;
     }
+
     #secondary_search_bar{
         display: flex;
         flex-direction: column;
